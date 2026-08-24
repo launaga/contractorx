@@ -5,7 +5,6 @@ import {
   useSpring,
   useTransform,
   useInView,
-  AnimatePresence,
   type Variants,
 } from "framer-motion";
 import {
@@ -13,22 +12,21 @@ import {
   Sun,
   MoonStar,
   Laptop,
-  Hammer,
+  HardHat,
   Ruler,
-  Camera,
-  Wallet,
-  Users,
-  Building2,
-  BookMarked,
-  Send,
   ShieldCheck,
-  Circle,
-  CircleDot,
+  Truck,
+  BadgeCheck,
+  Camera,
+  FileCode2,
+  Palette,
+  Package,
+  Send,
+  ClipboardCheck,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 /* ─────────────────────────────────────────────── */
-/* Small utilities                                 */
+/* Utilities                                       */
 /* ─────────────────────────────────────────────── */
 
 const cn = (...v: (string | false | null | undefined)[]) =>
@@ -50,15 +48,13 @@ function Reveal({
   children,
   className,
   delay = 0,
-  once = true,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  once?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, amount: 0.2, margin: "0px 0px -60px 0px" });
+  const inView = useInView(ref, { once: true, amount: 0.2, margin: "0px 0px -60px 0px" });
   return (
     <motion.div
       ref={ref}
@@ -73,7 +69,6 @@ function Reveal({
   );
 }
 
-/* Animated count-up when in view */
 function useCountUp(target: number, duration = 1400) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -118,7 +113,7 @@ function Counter({
 }
 
 /* ─────────────────────────────────────────────── */
-/* Theme (system → light → dark cycle)             */
+/* Theme                                           */
 /* ─────────────────────────────────────────────── */
 
 type Theme = "system" | "light" | "dark";
@@ -185,19 +180,21 @@ function TopNav() {
       <div className="mx-auto flex max-w-[1240px] items-center justify-between px-6 py-3 md:px-10">
         <a href="#top" className="flex items-baseline gap-2.5">
           <span className="f-mono bg-foreground px-1.5 py-0.5 text-[10px] font-bold tracking-[0.15em] text-background">
-            CX
+            MGL
           </span>
           <span className="f-display text-[17px] font-bold tracking-tight">
-            ContractorX
+            ContractorX <span className="text-muted-foreground font-medium">/ Kit v1</span>
           </span>
         </a>
         <nav className="hidden items-center gap-7 md:flex">
           {[
-            ["Problem", "#problem"],
-            ["Product", "#product"],
-            ["PRD", "#prd"],
-            ["Roadmap", "#roadmap"],
-            ["Metrics", "#metrics"],
+            ["Overview", "#overview"],
+            ["Sitemap", "#sitemap"],
+            ["Sections", "#sections"],
+            ["Direction", "#direction"],
+            ["Spec", "#spec"],
+            ["Timeline", "#timeline"],
+            ["Distro", "#distro"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -214,7 +211,7 @@ function TopNav() {
             href="#cta"
             className="hidden md:inline-flex items-center gap-1.5 bg-foreground px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-background f-mono hover:bg-accent hover:text-accent-foreground transition-colors"
           >
-            Launch <ArrowUpRight className="h-3 w-3" />
+            Ship it <ArrowUpRight className="h-3 w-3" />
           </a>
         </div>
       </div>
@@ -222,12 +219,11 @@ function TopNav() {
   );
 }
 
-/* Meta strip under nav */
 function MetaStrip() {
   const cells = [
-    ["Sheet", "00 / 09"],
-    ["Project", "ContractorX Web"],
-    ["Author", "Naga · Studio"],
+    ["Sheet", "01 / 12"],
+    ["Brand", "MGL Website Kits"],
+    ["Product", "ContractorX Kit"],
     ["Rev", "A · 2026·08·24"],
   ];
   return (
@@ -258,10 +254,9 @@ function MetaStrip() {
 /* ─────────────────────────────────────────────── */
 
 function Hero() {
-  const words = ["The", "site", "office", "in", "your", "pocket,"];
+  const words = ["The", "website", "kit", "contractors", "would"];
   return (
     <section className="relative overflow-hidden border-b border-border/70">
-      {/* Background: blueprint grid + spotlight + beam */}
       <div className="absolute inset-0 -z-10 bp-grid opacity-70 [mask-image:radial-gradient(ellipse_at_50%_30%,black_35%,transparent_85%)]" />
       <div className="absolute inset-0 -z-10 spotlight" />
       <div className="beam absolute inset-0 -z-10 overflow-hidden">
@@ -278,7 +273,7 @@ function Hero() {
               className="mb-6 flex items-center gap-3 f-mono text-[11px] uppercase tracking-[0.16em] text-accent"
             >
               <span className="h-px w-6 bg-accent" />
-              Sheet 00 · Cover
+              Brief · ContractorX Kit · $39
             </motion.div>
 
             <h1 className="f-display text-[clamp(44px,7.8vw,104px)] font-bold leading-[0.94] tracking-[-0.035em] text-balance">
@@ -290,7 +285,7 @@ function Hero() {
               >
                 {words.map((w, i) => (
                   <motion.span key={i} variants={fadeUp} className="inline-block mr-[0.22em]">
-                    {w === "site" ? (
+                    {w === "website" ? (
                       <span className="border-b-[3px] border-foreground pb-1">
                         {w}
                       </span>
@@ -307,9 +302,9 @@ function Hero() {
                 transition={{ delay: 0.55, duration: 0.6, ease }}
                 className="block"
               >
-                not in your{" "}
+                actually{" "}
                 <em className="text-accent font-medium italic" style={{ fontVariationSettings: "'opsz' 96" }}>
-                  truck.
+                  buy.
                 </em>
               </motion.span>
             </h1>
@@ -318,12 +313,13 @@ function Hero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85, duration: 0.55, ease }}
-              className="mt-7 max-w-[48ch] text-[17px] leading-[1.55] text-foreground/75"
+              className="mt-7 max-w-[52ch] text-[17px] leading-[1.55] text-foreground/75"
             >
-              ContractorX is the operating system for independent contractors
-              and small construction firms — quote to invoice, one thread. Built
-              for the mandor who runs three sites, a WhatsApp group of 40, and a
-              client who wants a weekly progress photo before sundown.
+              <strong className="font-semibold">MGL Website Kits</strong> —
+              premium ready-to-launch templates for real-world businesses. This
+              brief specs ContractorX v1: seven pages, twenty-plus sections,
+              Bootstrap 5 + SCSS, built for construction firms who are tired of
+              looking like a 2014 boxed theme. Four days end-to-end.
             </motion.p>
 
             <motion.div
@@ -333,17 +329,17 @@ function Hero() {
               className="mt-8 flex flex-wrap gap-3"
             >
               <a
-                href="#prd"
+                href="#sitemap"
                 className="group f-mono inline-flex items-center gap-2 bg-foreground px-5 py-3.5 text-[11px] uppercase tracking-[0.14em] text-background transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_hsl(var(--accent))]"
               >
-                Read the spec
+                Read the brief
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
-                href="#product"
+                href="#timeline"
                 className="group f-mono inline-flex items-center gap-2 border border-foreground px-5 py-3.5 text-[11px] uppercase tracking-[0.14em] text-foreground transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0_hsl(var(--foreground))]"
               >
-                See the product
+                4-day plan
               </a>
             </motion.div>
           </div>
@@ -360,25 +356,26 @@ function Hero() {
             <span className="tc-br" />
             <div className="mb-3 flex justify-between border-b border-border pb-2.5">
               <span className="f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                Doc · Rev A
+                Product · Rev A
               </span>
               <span className="f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                CX-PRD-001
+                MGL-KIT-001
               </span>
             </div>
             <ul className="space-y-0">
               {[
-                ["Product", "ContractorX Web + PWA"],
-                ["Segment", "Kontraktor 5 – 100 crew"],
-                ["Market", "Indonesia · SEA"],
-                ["Stack", "Next 15 · Supabase"],
-                ["Team", "1 PM · 2 Eng · 1 Design"],
-                ["Runway", "22 wks to v1.0"],
-                ["Pricing", "Rp 199k / user / mo"],
+                ["Product", "ContractorX Kit v1"],
+                ["Category", "Contractor · Construction"],
+                ["Price", "$39 · Bundle $79"],
+                ["Channels", "Store · Gumroad · Codester"],
+                ["Stack", "HTML5 · Bootstrap 5"],
+                ["Pages", "7 + docs"],
+                ["Sections", "20+ (15 master · 7 kit)"],
+                ["Timeline", "Day 08 – 11 · 4 days"],
               ].map(([k, v]) => (
                 <li
                   key={k}
-                  className="grid grid-cols-[90px_1fr] gap-3 border-b border-dashed border-border/70 py-2 f-mono text-[11px]"
+                  className="grid grid-cols-[95px_1fr] gap-3 border-b border-dashed border-border/70 py-2 f-mono text-[11px]"
                 >
                   <span className="uppercase tracking-[0.1em] text-muted-foreground">
                     {k}
@@ -386,7 +383,7 @@ function Hero() {
                   <span>{v}</span>
                 </li>
               ))}
-              <li className="grid grid-cols-[90px_1fr] gap-3 py-2 f-mono text-[11px]">
+              <li className="grid grid-cols-[95px_1fr] gap-3 py-2 f-mono text-[11px]">
                 <span className="uppercase tracking-[0.1em] text-muted-foreground">
                   Status
                 </span>
@@ -414,16 +411,16 @@ function Hero() {
 
 function Marquee() {
   const items = [
-    "Renovasi rumah 2 lantai",
-    "Bedah dapur",
-    "Interior apartemen studio",
-    "Konstruksi ruko",
-    "Kamar mandi upgrade",
-    "Fasad + landscape",
-    "Kantor 120 m²",
-    "Villa 1 tingkat",
-    "Renovasi kamar tidur utama",
-    "Loteng jadi kamar",
+    "General contracting",
+    "Civil works",
+    "MEP",
+    "Renovation",
+    "Fit-out",
+    "Site preparation",
+    "Design-build",
+    "Infrastructure",
+    "Industrial construction",
+    "Structural steel",
   ];
   const track = [...items, ...items];
   return (
@@ -495,10 +492,7 @@ function Section({
   return (
     <section
       id={id}
-      className={cn(
-        "border-b border-border/70 py-20 md:py-28",
-        className,
-      )}
+      className={cn("border-b border-border/70 py-20 md:py-28", className)}
     >
       <div className="mx-auto max-w-[1240px] px-6 md:px-10">{children}</div>
     </section>
@@ -506,771 +500,52 @@ function Section({
 }
 
 /* ─────────────────────────────────────────────── */
-/* Problem — asymmetric bento                      */
+/* §01 Positioning                                 */
 /* ─────────────────────────────────────────────── */
 
-function ProblemBento() {
-  const cells = [
+function Positioning() {
+  const rows = [
     {
-      big: true,
-      qty: <><Counter to={73} suffix="%" /></>,
-      sub: "of quotes lose money",
+      title: "The line",
       body:
-        "Quotes are built from memory or a two-year-old Excel; margins evaporate before the first pour of concrete. The BOQ nobody keeps up-to-date is where profit goes to die.",
+        "\"Premium ready-to-launch website kits for real-world businesses.\"",
+      mono: false,
     },
     {
-      qty: <><Counter to={21} suffix="d" /></>,
-      sub: "avg. time-to-first-invoice",
+      title: "Who buys this kit",
       body:
-        "Progress claims sit in a notebook until Sunday. Cashflow stalls; workers get paid from personal savings.",
+        "Freelance devs and small agencies serving contractor / construction clients — plus contractor owners hiring their first serious website.",
     },
     {
-      qty: <><Counter to={4} decimals={1} suffix=" tools" /></>,
-      sub: "used per active project",
+      title: "Why it wins the niche",
       body:
-        "WhatsApp, Excel, Google Photos, printed BOQ, sometimes Trello. No single source of truth — disputes are word-vs-word.",
+        "Every generic contractor theme skips the sections that actually convert a tender: certifications, equipment fleet, safety record, past projects. This kit ships with them by default.",
     },
     {
-      qty: <>0</>,
-      sub: "clients happy with visibility",
+      title: "Not for",
       body:
-        "Owners get a weekly voice note. They pay tens of millions of rupiah on faith and blurry screenshots.",
+        "Not for landing-page micro-sites, single-page brochures, or clients that need a headless CMS. Static HTML kit, buyer edits in-place.",
     },
   ];
   return (
-    <div className="grid grid-cols-1 gap-[1px] bg-border md:grid-cols-3 md:grid-rows-2">
-      {cells.map((c, i) => (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {rows.map((r, i) => (
         <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 14 }}
+          key={r.title}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ delay: i * 0.06, duration: 0.5, ease }}
-          className={cn(
-            "group relative overflow-hidden bg-card p-6 md:p-8",
-            c.big && "md:col-span-1 md:row-span-2",
-          )}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bp-grid-sm opacity-0 transition-opacity duration-500 group-hover:opacity-40"
-          />
-          <div className="relative">
-            <div className="f-display text-[44px] md:text-[54px] font-bold leading-none tracking-[-0.03em] text-accent">
-              {c.qty}
-            </div>
-            <div className="mt-2 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-              {c.sub}
-            </div>
-            <p className="mt-4 text-[14px] leading-[1.55] text-foreground/80">
-              {c.body}
-            </p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Product bento                                   */
-/* ─────────────────────────────────────────────── */
-
-type Feat = {
-  id: string;
-  title: string;
-  tag: string;
-  Icon: React.ComponentType<{ className?: string }>;
-  desc: string;
-  span?: string;
-  visual: React.ReactNode;
-};
-
-/* Little inline mocks used inside feature tiles */
-function BOQMock() {
-  const rows = [
-    ["Pas. batako 20×10×40", "230 m²", "Rp 78.000", "6.240k"],
-    ["Plester + acian", "230 m²", "Rp 62.000", "4.960k"],
-    ["Cat interior 2 lapis", "230 m²", "Rp 41.000", "3.280k"],
-    ["Kusen alumunium", "12 unit", "Rp 850.000", "10.200k"],
-  ];
-  return (
-    <div className="relative mt-6 border border-border bg-background/60 p-3 shadow-[3px_3px_0_hsl(var(--foreground)/0.1)]">
-      <div className="mb-2 flex items-center justify-between f-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-        <span>BOQ · Kamar utama</span>
-        <span className="text-accent">margin +18%</span>
-      </div>
-      <div className="space-y-1">
-        {rows.map(([n, q, r, t], i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: i * 0.07, duration: 0.4, ease }}
-            className="grid grid-cols-[1fr_60px_74px_60px] items-center gap-2 border-b border-dashed border-border/60 py-1.5 f-mono text-[10px] last:border-b-0"
-          >
-            <span className="truncate">{n}</span>
-            <span className="text-right text-muted-foreground">{q}</span>
-            <span className="text-right text-muted-foreground">{r}</span>
-            <span className="text-right font-medium">{t}</span>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function TimelineMock() {
-  const gates = [
-    { label: "Pondasi", w: 12, done: true },
-    { label: "Struktur", w: 22, done: true },
-    { label: "Atap", w: 18, done: false },
-    { label: "Finishing", w: 26, done: false },
-    { label: "Serah terima", w: 22, done: false },
-  ];
-  return (
-    <div className="mt-6 space-y-3">
-      {gates.map((g, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <div className="w-24 f-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground">
-            {g.label}
-          </div>
-          <div className="relative flex-1 h-4 border border-border bg-background/60">
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: `${g.w * 3}%` }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ delay: i * 0.1, duration: 0.7, ease }}
-              className={cn(
-                "h-full",
-                g.done ? "bg-accent" : "bg-foreground/30",
-              )}
-              style={{ maxWidth: "100%" }}
-            />
-          </div>
-          <div className="w-14 text-right f-mono text-[10px] text-muted-foreground num-tabular">
-            {g.done ? "✓" : ""} {g.w}%
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function InvoiceMock() {
-  return (
-    <div className="relative mt-6 border border-border bg-background/60 p-4 shadow-[3px_3px_0_hsl(var(--foreground)/0.1)]">
-      <div className="mb-3 flex justify-between border-b border-border pb-2 f-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-        <span>INV/2026/08/017</span>
-        <span className="text-accent">DIBAYAR</span>
-      </div>
-      <div className="space-y-1.5 f-mono text-[11px]">
-        <div className="flex justify-between"><span>Progress gate 2</span><span>Rp 42.500.000</span></div>
-        <div className="flex justify-between text-muted-foreground"><span>PPN 11%</span><span>Rp 4.675.000</span></div>
-        <div className="flex justify-between text-muted-foreground"><span>Retensi 5%</span><span>–Rp 2.125.000</span></div>
-        <div className="mt-2 flex justify-between border-t border-border pt-2 text-[13px] font-bold text-accent">
-          <span>Terbayar</span><span className="num-tabular">Rp 45.050.000</span>
-        </div>
-      </div>
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1, ease }}
-        style={{ transformOrigin: "left" }}
-        className="mt-3 h-0.5 bg-accent"
-      />
-    </div>
-  );
-}
-
-function PhotoLogMock() {
-  return (
-    <div className="mt-6 grid grid-cols-3 gap-1.5">
-      {[
-        ["hsl(35 45% 55%)", "hsl(200 40% 30%)"],
-        ["hsl(20 55% 45%)", "hsl(0 0% 20%)"],
-        ["hsl(45 40% 50%)", "hsl(210 40% 25%)"],
-        ["hsl(10 60% 40%)", "hsl(30 15% 40%)"],
-        ["hsl(200 30% 35%)", "hsl(180 20% 30%)"],
-        ["hsl(50 60% 50%)", "hsl(20 30% 25%)"],
-      ].map((g, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ delay: i * 0.05, duration: 0.4, ease }}
-          className="relative aspect-square border border-border"
-          style={{
-            background: `linear-gradient(135deg, ${g[0]}, ${g[1]})`,
-          }}
-        >
-          <div className="absolute bottom-1 right-1 f-mono text-[8px] text-white/90 bg-black/40 px-1">
-            {`0${i + 1}·8${i + 20}`}
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-function PayrollMock() {
-  const rows = [
-    ["Adi", "Mandor", "6d", "1.500k"],
-    ["Ujang", "Tukang", "6d", "1.020k"],
-    ["Iwan", "Tukang", "5d", "850k"],
-    ["Rudi", "Kenek", "6d", "720k"],
-  ];
-  return (
-    <div className="mt-6 border border-border bg-background/60">
-      <div className="grid grid-cols-4 border-b border-border bg-muted/50 px-3 py-1.5 f-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
-        <span>Nama</span><span>Peran</span><span>Hari</span><span className="text-right">Bayar</span>
-      </div>
-      {rows.map((r, i) => (
-        <div key={i} className="grid grid-cols-4 border-b border-border/60 px-3 py-2 f-mono text-[11px] last:border-b-0">
-          <span>{r[0]}</span>
-          <span className="text-muted-foreground">{r[1]}</span>
-          <span className="text-muted-foreground">{r[2]}</span>
-          <span className="text-right font-medium num-tabular">{r[3]}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function PortalMock() {
-  return (
-    <div className="relative mt-6 mx-auto w-full max-w-[260px] rounded-[24px] border-2 border-foreground bg-background p-3 shadow-[6px_6px_0_hsl(var(--foreground)/0.15)]">
-      <div className="mb-2 h-1 w-14 mx-auto rounded-full bg-foreground/30" />
-      <div className="f-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">Ibu Sari · Renovasi 2 lt</div>
-      <div className="mt-2 f-display text-[15px] font-bold leading-tight">Gate 2 · Struktur</div>
-      <div className="mt-3 border border-border p-2">
-        <div className="flex items-center justify-between f-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
-          <span>Progress</span><span>72%</span>
-        </div>
-        <div className="mt-1 h-1.5 bg-muted">
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "72%" }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.9, ease }}
-            className="h-full bg-accent"
-          />
-        </div>
-      </div>
-      <div className="mt-2 grid grid-cols-3 gap-1">
-        {["hsl(20 45% 45%)", "hsl(210 30% 30%)", "hsl(35 45% 50%)"].map((c, i) => (
-          <div key={i} className="aspect-square" style={{ background: c }} />
-        ))}
-      </div>
-      <div className="mt-3 flex gap-1.5">
-        <div className="flex-1 border border-foreground bg-foreground px-2 py-1.5 text-center f-mono text-[9px] uppercase tracking-[0.12em] text-background">Approve gate</div>
-        <div className="border border-border px-2 py-1.5 f-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">Nanti</div>
-      </div>
-    </div>
-  );
-}
-
-function TemplateMock() {
-  const items = [
-    "Renovasi rumah 2 lantai",
-    "Bedah dapur",
-    "Interior apartemen studio",
-    "Kamar mandi upgrade",
-    "Fasad + landscape",
-  ];
-  return (
-    <div className="mt-6 space-y-1.5">
-      {items.map((t, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -8 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: i * 0.06, duration: 0.4, ease }}
-          className="flex items-center justify-between border border-border bg-background/60 px-3 py-2 f-mono text-[11px]"
-        >
-          <span>{t}</span>
-          <span className="text-muted-foreground text-[10px]">use →</span>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
-const features: Feat[] = [
-  {
-    id: "F-01",
-    title: "Quote & BOQ Builder",
-    tag: "Core · v1.0",
-    Icon: Ruler,
-    desc: "Drag rooms and scopes on a canvas; pull unit rates from your own library or the seeded SNI reference. Every line has a live margin badge.",
-    span: "md:col-span-2 md:row-span-2",
-    visual: <BOQMock />,
-  },
-  {
-    id: "F-02",
-    title: "Timeline & Gates",
-    tag: "Core · v1.0",
-    Icon: Building2,
-    desc: "Stripped-down Gantt with milestone gates. Approval unlocks the invoice draft — 72h auto-approve if the client goes quiet.",
-    span: "md:col-span-2",
-    visual: <TimelineMock />,
-  },
-  {
-    id: "F-04",
-    title: "Progress Invoicing",
-    tag: "Core · v1.0",
-    Icon: Wallet,
-    desc: "Gate approved → invoice drafted at the agreed percentage. One tap sends it via WhatsApp with a Xendit link.",
-    span: "md:col-span-2",
-    visual: <InvoiceMock />,
-  },
-  {
-    id: "F-03",
-    title: "Daily Site Log",
-    tag: "Core · v1.0",
-    Icon: Camera,
-    desc: "Snap 6 photos, tick the crew count, note weather. Works offline. Client sees a curated feed.",
-    span: "md:col-span-2",
-    visual: <PhotoLogMock />,
-  },
-  {
-    id: "F-05",
-    title: "Crew & Payroll",
-    tag: "v1.0",
-    Icon: Users,
-    desc: "Day- or scope-rates, auto-calc from attendance, batch bank transfer.",
-    span: "md:col-span-2",
-    visual: <PayrollMock />,
-  },
-  {
-    id: "F-06",
-    title: "Client Portal",
-    tag: "Core · v1.0",
-    Icon: ShieldCheck,
-    desc: "Magic-link web view for owners. Timeline, gate approvals, photo feed, invoices. No login friction.",
-    span: "md:col-span-2",
-    visual: <PortalMock />,
-  },
-  {
-    id: "F-07",
-    title: "Playbook Templates",
-    tag: "v1.1",
-    Icon: BookMarked,
-    desc: "Ship with 12 curated BOQ + timeline templates. First-sent-quote in under 15 minutes.",
-    span: "md:col-span-2",
-    visual: <TemplateMock />,
-  },
-];
-
-function FeatureBento() {
-  return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:auto-rows-[minmax(240px,auto)]">
-      {features.map((f, i) => (
-        <motion.article
-          key={f.id}
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ delay: (i % 4) * 0.06, duration: 0.55, ease }}
-          className={cn(
-            "group tick-corners relative overflow-hidden border border-foreground bg-card p-6 md:p-7 transition-shadow hover:shadow-[6px_6px_0_hsl(var(--accent)/0.35)]",
-            f.span,
-          )}
-        >
-          <span className="tc-bl" />
-          <span className="tc-br" />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bp-grid-sm opacity-0 transition-opacity duration-500 group-hover:opacity-30"
-          />
-          <div className="relative flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <div className="flex items-center gap-2 f-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-                <span>{f.id}</span>
-                <span className="text-muted-foreground">·</span>
-                <span className="text-muted-foreground">{f.tag}</span>
-              </div>
-              <h3 className="mt-3 f-display text-[22px] md:text-[26px] font-semibold leading-[1.1] tracking-[-0.015em]">
-                {f.title}
-              </h3>
-              <p className="mt-2 text-[14px] leading-[1.55] text-foreground/75">
-                {f.desc}
-              </p>
-            </div>
-            <div className="shrink-0 border border-border p-2 text-muted-foreground group-hover:text-accent group-hover:border-accent transition-colors">
-              <f.Icon className="h-4 w-4" />
-            </div>
-          </div>
-          <div className="relative">{f.visual}</div>
-        </motion.article>
-      ))}
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Personas                                        */
-/* ─────────────────────────────────────────────── */
-
-const personas = [
-  {
-    name: "Rian, 34",
-    role: "Primary · Contractor",
-    initials: "R",
-    color: "from-[hsl(16_82%_51%)] to-[hsl(30_60%_40%)]",
-    facts: [
-      ["Runs", "Small renovation firm, 8 – 15 crew, Bandung. 4 – 6 active projects."],
-      ["Job", "Look as organised as the big firms so I can quote bigger jobs and stop losing margin."],
-      ["Stack", "WhatsApp, Excel, printed BOQs, personal bank account."],
-      ["Wins if", "Sends a branded quote in <20 min, gets paid within 5 days of gate approval."],
-    ],
-  },
-  {
-    name: "Adi, 28",
-    role: "Secondary · Mandor Lapangan",
-    initials: "A",
-    color: "from-[hsl(210_50%_35%)] to-[hsl(200_60%_25%)]",
-    facts: [
-      ["Runs", "Foreman on site — 6 – 20 workers per project. Android mid-range, spotty 4G."],
-      ["Job", "Report progress in under 3 minutes so I can get back to actual work."],
-      ["Stack", "WhatsApp voice notes, phone camera, a notebook."],
-      ["Wins if", "Log takes 90 seconds, works when signal drops, no re-login every time."],
-    ],
-  },
-  {
-    name: "Ibu Sari, 42",
-    role: "Tertiary · Client",
-    initials: "S",
-    color: "from-[hsl(40_50%_50%)] to-[hsl(20_40%_35%)]",
-    facts: [
-      ["Runs", "Homeowner mid-renovation. Paying Rp 240jt for a two-storey extension."],
-      ["Job", "Know what my money is buying, without phoning the contractor at 9pm."],
-      ["Stack", "WhatsApp updates from Rian, some blurry photos."],
-      ["Wins if", "Opens a link once a week and sees progress, next gate, next payment."],
-    ],
-  },
-];
-
-function Personas() {
-  return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      {personas.map((p, i) => (
-        <motion.article
-          key={p.name}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ delay: i * 0.08, duration: 0.55, ease }}
-          whileHover={{ y: -4 }}
           className="tick-corners relative border border-border bg-card p-6"
         >
           <span className="tc-bl" />
           <span className="tc-br" />
-          <div className="mb-4 flex items-start justify-between border-b border-border pb-4">
-            <div>
-              <div className="f-display text-[20px] font-semibold leading-tight tracking-tight">
-                {p.name}
-              </div>
-              <div className="mt-1 f-mono text-[10px] uppercase tracking-[0.14em] text-accent">
-                {p.role}
-              </div>
-            </div>
-            <div
-              className={cn(
-                "flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br text-background f-display text-[18px] font-bold shadow-inner",
-                p.color,
-              )}
-            >
-              {p.initials}
-            </div>
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+            {r.title}
           </div>
-          <dl className="space-y-3 text-[13.5px] leading-[1.55]">
-            {p.facts.map(([k, v]) => (
-              <div key={k}>
-                <dt className="f-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-                  {k}
-                </dt>
-                <dd className="mt-1">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </motion.article>
-      ))}
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Golden path — horizontal-scroll timeline        */
-/* ─────────────────────────────────────────────── */
-
-const flow = [
-  { step: "01", title: "Create project from lead", actor: "Rian · Web" },
-  { step: "02", title: "Build BOQ from template", actor: "Rian · Web" },
-  { step: "03", title: "Send quote via WA link", actor: "Rian → Sari" },
-  { step: "04", title: "Sari e-signs, DP unlocked", actor: "Sari · Portal" },
-  { step: "05", title: "Adi files first daily log", actor: "Adi · Mobile" },
-  { step: "06", title: "Gate 1 approved by Sari", actor: "Sari · Portal" },
-  { step: "07", title: "Invoice paid via Xendit", actor: "System" },
-];
-
-function GoldenPath() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  const width = useTransform(progress, [0, 1], ["0%", "100%"]);
-  return (
-    <div ref={ref} className="border border-border bg-card p-4 md:p-6">
-      <div className="mb-4 flex items-center justify-between f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-        <span>Target · seven steps ≤ 7 days, median</span>
-        <span className="text-accent">Golden path</span>
-      </div>
-
-      <div className="relative">
-        <div className="absolute left-0 right-0 top-[38px] h-px bg-border" />
-        <motion.div
-          style={{ width }}
-          className="absolute left-0 top-[38px] h-px bg-accent"
-        />
-
-        <div className="grid grid-cols-7 gap-2 min-w-[720px] overflow-x-auto">
-          {flow.map((s, i) => (
-            <motion.div
-              key={s.step}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.06, duration: 0.4, ease }}
-              className="flex flex-col"
-            >
-              <div className="mb-2 flex justify-center">
-                <div className="flex h-9 w-9 items-center justify-center border border-foreground bg-background f-mono text-[11px] font-bold">
-                  {s.step}
-                </div>
-              </div>
-              <div className="border border-border bg-background p-3 min-h-[110px] flex flex-col">
-                <div className="f-display text-[13.5px] font-semibold leading-tight tracking-tight">
-                  {s.title}
-                </div>
-                <div className="mt-auto pt-2 f-mono text-[9px] uppercase tracking-[0.12em] text-accent">
-                  {s.actor}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Scope — in / out                                */
-/* ─────────────────────────────────────────────── */
-
-function Scope() {
-  const in_ = [
-    ["Multi-project workspace", "Org · projects · roles (owner, PM, mandor, sub, client)"],
-    ["Quote & BOQ builder with templates", "PDF export, e-sign, version history"],
-    ["Timeline with milestone gates", "Gate approval flow tied to invoicing"],
-    ["Daily site log (PWA, offline)", "Photo, weather, crew count, voice notes"],
-    ["Progress invoicing + payments", "Xendit + Midtrans; retensi + PPN"],
-    ["Crew & sub-contractor payroll (basic)", "Day- and scope-rates, weekly batch"],
-    ["Client portal (magic-link)", "Read-only timeline, photo feed, gate approvals"],
-    ["Notifications", "WhatsApp Business API + email + push"],
-  ];
-  const out = [
-    ["Full accounting / GL", "Users export to Jurnal or Accurate; we integrate later"],
-    ["Procurement marketplace", "Different business model — v2 conversation"],
-    ["Government e-tender integration", "Different segment (mid/large contractors)"],
-    ["Native iOS/Android app", "PWA covers 90% at 20% of the cost"],
-    ["Multi-currency", "IDR only until we cross a border"],
-    ["In-app chat", "WhatsApp is where the conversation already lives"],
-    ["AI-generated BOQ from photo", "After templates prove usage"],
-  ];
-  return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-      {[
-        { label: "In scope · v1.0", items: in_, mark: "check" },
-        { label: "Non-goals · v1.0", items: out, mark: "cross" },
-      ].map((col) => (
-        <div key={col.label}>
-          <div className="mb-4 flex items-center justify-between border-b-2 border-foreground pb-2 f-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-            <span>{col.label}</span>
-            <span>{col.mark === "check" ? "Ship" : "Defer"}</span>
-          </div>
-          <ul className="divide-y divide-dashed divide-border">
-            {col.items.map(([k, v], i) => (
-              <motion.li
-                key={k}
-                initial={{ opacity: 0, x: -8 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: i * 0.04, duration: 0.35, ease }}
-                className="flex gap-4 py-3.5"
-              >
-                <div className="mt-1 shrink-0">
-                  {col.mark === "check" ? (
-                    <div className="h-4 w-4 border-[1.5px] border-accent bg-accent/10 flex items-center justify-center text-accent text-[10px]">✓</div>
-                  ) : (
-                    <div className="relative h-4 w-4 border-[1.5px] border-muted-foreground">
-                      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_46%,hsl(var(--muted-foreground))_46%_54%,transparent_54%)]" />
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <div className="text-[15px] font-medium">{k}</div>
-                  <div className="text-[12.5px] text-muted-foreground mt-0.5">{v}</div>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Architecture                                    */
-/* ─────────────────────────────────────────────── */
-
-const layers = [
-  ["Client", "Next.js 15 · React Server Components"],
-  ["Mobile", "PWA · Service Worker · IndexedDB queue"],
-  ["API", "Route Handlers · tRPC · Zod"],
-  ["Auth", "Supabase · phone-OTP · magic-link"],
-  ["Data", "Supabase Postgres · Row-Level Security"],
-  ["Storage", "Supabase Storage · WebP compressor"],
-  ["Jobs", "Trigger.dev · nightly rollups · nudges"],
-  ["Payments", "Xendit primary · Midtrans failover"],
-  ["Comms", "WhatsApp Cloud API · Resend · Web Push"],
-  ["Ops", "Vercel · Sentry · PostHog · Grafana"],
-];
-
-const stack = [
-  ["Data model — first cut",
-    "orgs · users · memberships · projects · scopes · line_items · quotes · quote_versions · gates · logs · log_photos · invoices · payments · payouts · crew_members · attendance"],
-  ["Auth",
-    "phone-OTP for contractor + mandor · magic-link for client · RLS scoped by org_id + role"],
-  ["Offline",
-    "daily-log form → IndexedDB draft; photos → resumable uploads; sync on foreground"],
-  ["Payments",
-    "Xendit (VA + e-wallet + QRIS); Midtrans failover if success-rate <92% for 24h"],
-  ["Cost envelope · steady",
-    "≈ Rp 3.8M / mo at 500 active orgs (Supabase + Vercel + Trigger + WA + fees)"],
-  ["Compliance",
-    "UU PDP alignment · encryption at rest · signed audit log for gates + payments"],
-];
-
-function Architecture() {
-  const [hover, setHover] = useState<number | null>(null);
-  return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-[1.05fr_1fr]">
-      <div className="border border-border bg-card p-5">
-        <div className="mb-3 flex justify-between f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>System layers</span><span>hover to inspect</span>
-        </div>
-        <div className="space-y-2">
-          {layers.map(([name, tech], i) => (
-            <motion.div
-              key={name}
-              onMouseEnter={() => setHover(i)}
-              onMouseLeave={() => setHover(null)}
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.04, duration: 0.35, ease }}
-              className={cn(
-                "flex items-center justify-between border px-3.5 py-2.5 f-mono text-[12px] transition-all",
-                hover === i
-                  ? "border-accent bg-accent/5 translate-x-1"
-                  : "border-foreground bg-background",
-              )}
-            >
-              <span className="font-bold uppercase tracking-[0.1em]">{name}</span>
-              <span className="text-muted-foreground">{tech}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-      <div className="border border-border bg-card p-5">
-        <div className="mb-3 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground border-b border-border pb-2">
-          Stack details · CX-ARCH-001
-        </div>
-        <dl className="space-y-4">
-          {stack.map(([k, v]) => (
-            <div key={k}>
-              <dt className="f-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground border-b border-dashed border-border pb-1">
-                {k}
-              </dt>
-              <dd className="mt-2 f-mono text-[12.5px] leading-[1.55]">{v}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
-/* Roadmap                                         */
-/* ─────────────────────────────────────────────── */
-
-const roadmap = [
-  { ms: "M0 · Foundation", wk: "Wk 01 – 04", w: "Design system, auth, org & project scaffolding", d: "Tokens, PWA shell, RLS policies, staging on Vercel", pct: 100, status: "ship" },
-  { ms: "M1 · Quote & Log", wk: "Wk 05 – 10", w: "BOQ builder, timeline w/ gates, mobile daily log", d: "First real quotes sent; first real logs from site", pct: 55, status: "build" },
-  { ms: "M2 · Money", wk: "Wk 11 – 16", w: "Progress invoicing, payments, client portal", d: "Golden path lands end-to-end; first paid invoice", pct: 10, status: "plan" },
-  { ms: "M3 · Beta", wk: "Wk 17 – 22", w: "Payroll, notifications, templates, polish", d: "Closed beta with 15 contractors · pricing test", pct: 0, status: "plan" },
-  { ms: "v1.1+", wk: "Wk 23 →", w: "Playbook library, offline hardening, Jurnal export", d: "Retention plays after activation numbers land", pct: 0, status: "plan" },
-] as const;
-
-function Roadmap() {
-  const statusChip: Record<string, string> = {
-    ship: "text-[hsl(140_45%_40%)] border-[hsl(140_45%_40%)]",
-    build: "text-[hsl(38_75%_45%)] border-[hsl(38_75%_45%)]",
-    plan: "text-muted-foreground border-muted-foreground",
-  };
-  const statusLabel: Record<string, string> = { ship: "Ready", build: "In build", plan: "Planned" };
-  return (
-    <div className="border-t-2 border-foreground">
-      {roadmap.map((r, i) => (
-        <motion.div
-          key={r.ms}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ delay: i * 0.06, duration: 0.45, ease }}
-          className="grid grid-cols-1 gap-3 border-b border-border py-5 md:grid-cols-[150px_110px_1fr_120px_90px] md:items-center md:gap-6"
-        >
-          <div className="f-mono text-[11.5px] font-bold uppercase tracking-[0.1em] text-accent">{r.ms}</div>
-          <div className="f-mono text-[11px] text-muted-foreground">{r.wk}</div>
-          <div>
-            <div className="f-display text-[16px] font-medium leading-tight tracking-tight">{r.w}</div>
-            <div className="mt-1 text-[13px] text-foreground/65">{r.d}</div>
-          </div>
-          <div className="hidden md:block">
-            <div className="h-1.5 bg-muted">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${r.pct}%` }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.9, ease, delay: 0.1 }}
-                className="h-full bg-accent"
-              />
-            </div>
-            <div className="mt-1 f-mono text-[10px] text-muted-foreground text-right num-tabular">{r.pct}%</div>
-          </div>
-          <div className={cn("border px-2 py-1 text-center f-mono text-[10px] uppercase tracking-[0.12em] w-fit md:w-auto", statusChip[r.status])}>
-            {statusLabel[r.status]}
-          </div>
+          <p className={cn("mt-3 text-[16px] leading-[1.5]", r.mono && "f-mono text-[14px]")}>
+            {r.body}
+          </p>
         </motion.div>
       ))}
     </div>
@@ -1278,19 +553,639 @@ function Roadmap() {
 }
 
 /* ─────────────────────────────────────────────── */
-/* Metrics — animated                              */
+/* §02 Sitemap                                     */
 /* ─────────────────────────────────────────────── */
 
-function Metrics() {
+const pages = [
+  { code: "P-01", name: "Home", note: "Hero · Stats · Services teaser · Featured projects · Certifications · Clients · CTA" },
+  { code: "P-02", name: "About", note: "Story · Team · Values · Milestones · Certifications · Awards" },
+  { code: "P-03", name: "Services", note: "All service offerings, categorised · Compare table · Tender CTA" },
+  { code: "P-04", name: "Service Detail", note: "Deep-dive template — used by all 6 services (dynamic-ready)" },
+  { code: "P-05", name: "Projects", note: "Filterable portfolio · By sector · By year · Featured strip" },
+  { code: "P-06", name: "Project Detail", note: "Case study — brief, scope, timeline, gallery, testimonial, spec table" },
+  { code: "P-07", name: "Contact", note: "Form · Office locations · Tender submission CTA · Emergency line" },
+];
+
+function Sitemap() {
+  return (
+    <div className="border border-border bg-card">
+      <div className="grid grid-cols-[70px_180px_1fr] border-b border-border bg-muted/50 px-4 py-2 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span>Code</span>
+        <span>Page</span>
+        <span>Contents</span>
+      </div>
+      {pages.map((p, i) => (
+        <motion.div
+          key={p.code}
+          initial={{ opacity: 0, x: -8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ delay: i * 0.05, duration: 0.4, ease }}
+          className="grid grid-cols-[70px_180px_1fr] items-baseline border-b border-border/60 px-4 py-4 last:border-b-0 hover:bg-accent/5 transition-colors"
+        >
+          <span className="f-mono text-[11px] text-accent">{p.code}</span>
+          <span className="f-display text-[17px] font-semibold tracking-tight">{p.name}</span>
+          <span className="f-mono text-[12px] leading-[1.55] text-foreground/75">{p.note}</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §03 Sections library                            */
+/* ─────────────────────────────────────────────── */
+
+const masterSections = [
+  "Navbar", "Hero", "Logo Cloud", "Statistics", "About block",
+  "Services grid", "Portfolio", "Process", "Testimonials", "CTA band",
+  "FAQ", "Team", "Pricing", "Blog cards", "Contact form", "Footer",
+];
+
+const kitSections = [
+  { name: "Certifications wall", body: "ISO, safety cert, association logos in a monochrome grid — reads at a glance during procurement review." },
+  { name: "Equipment fleet", body: "Cards for cranes, excavators, formwork, batching plant. Real numbers (units, capacity, year) build trust." },
+  { name: "Safety record", body: "LTIR / TRIR stats, safety programme, PPE policy, incident-free days counter." },
+  { name: "Ongoing projects", body: "Live map + progress bars — signals capacity and current pipeline to prospective clients." },
+  { name: "Client logo strip", body: "Named clients across sectors (industrial, commercial, government) — the fastest trust signal." },
+  { name: "Tender CTA", body: "Dedicated section for tender / RFP submission — separate flow from general contact." },
+  { name: "Awards & press", body: "Industry awards, press mentions, project of the year — earned media stacked visually." },
+];
+
+function SectionsLibrary() {
+  return (
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_1.2fr]">
+      <div>
+        <div className="mb-3 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>Master library · reusable</span>
+          <span>16</span>
+        </div>
+        <div className="grid grid-cols-2 gap-1.5">
+          {masterSections.map((s, i) => (
+            <motion.div
+              key={s}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: i * 0.03, duration: 0.35, ease }}
+              className="f-mono border border-border bg-card px-3 py-2 text-[11px] tracking-tight"
+            >
+              <span className="text-muted-foreground mr-1.5 text-[9px]">M·{String(i + 1).padStart(2, "0")}</span>
+              {s}
+            </motion.div>
+          ))}
+        </div>
+        <div className="mt-4 f-mono text-[10.5px] uppercase tracking-[0.1em] text-muted-foreground">
+          → Pulled from <span className="text-accent">MGL Business Kit Starter</span>. Same source across ContractorX, Eventra, Swift Auto.
+        </div>
+      </div>
+
+      <div>
+        <div className="mb-3 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>Kit-specific · contractor only</span>
+          <span>7</span>
+        </div>
+        <ul className="space-y-2.5">
+          {kitSections.map((s, i) => (
+            <motion.li
+              key={s.name}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.05, duration: 0.4, ease }}
+              className="border border-border bg-card p-4"
+            >
+              <div className="flex items-baseline gap-3">
+                <span className="f-mono text-[10px] text-accent">K·{String(i + 1).padStart(2, "0")}</span>
+                <span className="f-display text-[15px] font-semibold leading-tight tracking-tight">{s.name}</span>
+              </div>
+              <p className="mt-1.5 text-[13px] leading-[1.5] text-foreground/75">{s.body}</p>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §04 Art direction                               */
+/* ─────────────────────────────────────────────── */
+
+function Swatch({ hex, name, role }: { hex: string; name: string; role: string }) {
+  return (
+    <div className="border border-border bg-card overflow-hidden">
+      <div className="aspect-[3/2]" style={{ background: hex }} />
+      <div className="p-3">
+        <div className="f-display text-[14px] font-semibold tracking-tight">{name}</div>
+        <div className="f-mono mt-0.5 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{role}</div>
+        <div className="f-mono mt-1 text-[11px]">{hex}</div>
+      </div>
+    </div>
+  );
+}
+
+function ArtDirection() {
+  const swatches = [
+    { hex: "#0F1519", name: "Steel Ink", role: "Base · Text" },
+    { hex: "#F4F1EA", name: "Bone", role: "Paper · Ground" },
+    { hex: "#E85A1A", name: "Safety Orange", role: "Accent · CTA" },
+    { hex: "#1B3A5C", name: "Draft Blue", role: "Secondary" },
+    { hex: "#C7C2B8", name: "Concrete", role: "Neutral · Rules" },
+    { hex: "#F5C518", name: "Hi-Vis Yellow", role: "Warning · Highlight" },
+  ];
+  return (
+    <div className="space-y-8">
+      <div>
+        <div className="mb-3 f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground border-b border-border pb-2">
+          Palette · 6 tokens
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
+          {swatches.map((s, i) => (
+            <motion.div
+              key={s.hex}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: i * 0.05, duration: 0.4, ease }}
+            >
+              <Swatch {...s} />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="border border-border bg-card p-5">
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground border-b border-border pb-2">Type pairing</div>
+          <div className="mt-3">
+            <div className="f-display text-[38px] font-bold leading-none tracking-[-0.03em]">Ag</div>
+            <div className="f-mono mt-2 text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground">Display · Bricolage Grotesque</div>
+          </div>
+          <div className="mt-4">
+            <div className="text-[26px] leading-none">Ag</div>
+            <div className="f-mono mt-2 text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground">Body · Geist</div>
+          </div>
+          <div className="mt-4">
+            <div className="f-mono text-[22px] leading-none">Ag</div>
+            <div className="f-mono mt-2 text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground">Data · JetBrains Mono</div>
+          </div>
+        </div>
+
+        <div className="border border-border bg-card p-5">
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground border-b border-border pb-2">Photography</div>
+          <ul className="mt-3 space-y-2 text-[13.5px]">
+            <li className="flex gap-2"><span className="text-accent">✓</span> Real construction — steel, concrete, cranes, sites at dusk</li>
+            <li className="flex gap-2"><span className="text-accent">✓</span> Wide, industrial, uncropped — the scale is the story</li>
+            <li className="flex gap-2"><span className="text-accent">✓</span> High-contrast grade with warm midtones</li>
+            <li className="flex gap-2 text-muted-foreground"><span className="text-destructive">✕</span> No stock handshakes, no white-collar shots</li>
+            <li className="flex gap-2 text-muted-foreground"><span className="text-destructive">✕</span> No aerial city shots divorced from real projects</li>
+          </ul>
+        </div>
+
+        <div className="border border-border bg-card p-5">
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground border-b border-border pb-2">Motion & density</div>
+          <ul className="mt-3 space-y-2 text-[13.5px]">
+            <li className="flex gap-2"><span className="text-accent">✓</span> GSAP for hero reveal + numbers count-up only</li>
+            <li className="flex gap-2"><span className="text-accent">✓</span> Dense grids — trust signals stack visually</li>
+            <li className="flex gap-2"><span className="text-accent">✓</span> Blueprint-inspired dimension lines as dividers</li>
+            <li className="flex gap-2 text-muted-foreground"><span className="text-destructive">✕</span> No parallax hero, no bouncy micro-animations</li>
+            <li className="flex gap-2 text-muted-foreground"><span className="text-destructive">✕</span> No rounded-2xl gradient cards — this isn't a SaaS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §05 Tech spec                                   */
+/* ─────────────────────────────────────────────── */
+
+const techRows = [
+  ["Markup", "Semantic HTML5 · WAI-ARIA where needed · WCAG 2.1 AA target"],
+  ["CSS framework", "Bootstrap 5.3 grid + utilities · custom overrides via SCSS"],
+  ["SCSS", "Tokens in _variables.scss · partials per section · 1 output CSS"],
+  ["JavaScript", "Vanilla JS · Bootstrap JS bundle · GSAP optional (hero + counters)"],
+  ["Forms", "Contact form UI + client validation · no backend (buyer wires Formspree / own)"],
+  ["Responsive", "Mobile-first · 320 · 768 · 1024 · 1440 breakpoints"],
+  ["SEO", "OG tags · Twitter cards · JSON-LD LocalBusiness · sitemap.xml · robots.txt"],
+  ["Performance", "Lighthouse Perf ≥ 90 · LCP < 2.0s · CLS < 0.05 · JS < 80kb"],
+  ["Accessibility", "Skip link · focus states · alt text · axe-clean"],
+  ["Assets", "AVIF + WebP · SVG icons via sprite · fonts self-hosted with preload"],
+  ["Figma", "Light + dark artboards · shared styles · component-linked · Figma-ready"],
+  ["Docs", "getting-started, folder-structure, colors, fonts, images, nav, pages, SCSS, GSAP, form, deploy"],
+];
+
+function TechSpec() {
+  return (
+    <div className="border-t-2 border-foreground">
+      {techRows.map(([k, v], i) => (
+        <motion.div
+          key={k}
+          initial={{ opacity: 0, x: -8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ delay: i * 0.03, duration: 0.35, ease }}
+          className="grid grid-cols-[120px_1fr] items-baseline gap-4 border-b border-border/60 py-3.5 md:grid-cols-[180px_1fr]"
+        >
+          <div className="f-mono text-[10.5px] uppercase tracking-[0.14em] text-accent">{k}</div>
+          <div className="f-mono text-[13px] leading-[1.55]">{v}</div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §06 Copy starter                                */
+/* ─────────────────────────────────────────────── */
+
+const copyBlocks = [
+  {
+    label: "Hero headline (EN)",
+    text: "Built to last. Priced to bid competitively.",
+  },
+  {
+    label: "Hero sub (EN)",
+    text: "Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.",
+  },
+  {
+    label: "Hero headline (ID)",
+    text: "Dibangun untuk tahan lama. Dihargai untuk menang tender.",
+  },
+  {
+    label: "Hero sub (ID)",
+    text: "Kontraktor umum untuk proyek komersial, industri, dan residensial di Indonesia. 18 tahun, 240+ proyek selesai, tanpa keterlambatan.",
+  },
+  {
+    label: "Services",
+    text: "General Contracting · Civil Works · Mechanical, Electrical & Plumbing · Renovation · Interior Fit-out · Site Preparation",
+  },
+  {
+    label: "Stats band",
+    text: "18 years in business · 240+ projects delivered · 1.2M m² built · 96% on-time · 0 lost-time incidents in 2025",
+  },
+  {
+    label: "Tender CTA",
+    text: "Have an RFP? Send us the docs — you'll get a full technical proposal within 5 business days.",
+  },
+  {
+    label: "Footer promise",
+    text: "One contractor, from ground-breaking to hand-over.",
+  },
+];
+
+function CopyStarter() {
+  return (
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      {copyBlocks.map((c, i) => (
+        <motion.div
+          key={c.label}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ delay: i * 0.04, duration: 0.4, ease }}
+          className="border border-border bg-card p-5"
+        >
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-accent">{c.label}</div>
+          <p className="mt-2 f-display text-[17px] leading-[1.35] tracking-tight">{c.text}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §07 Deliverables & §08 QA                       */
+/* ─────────────────────────────────────────────── */
+
+const deliverables = [
+  ["ZIP package (dist + src)", "clean folder, README at root, license included"],
+  ["Hosted live demo", "/demo/contractor on own store · linked from product page"],
+  ["Figma file", "light + dark artboards · shared styles · handoff-ready"],
+  ["6 marketing screenshots", "hero · services · projects · project detail · about · contact"],
+  ["Product page copy", "own store + Gumroad + Codester variants (each tuned to channel)"],
+  ["Cover image", "1600×900 · niche-obvious visual · optimized for marketplace thumbnail"],
+  ["Documentation", "HTML docs + PDF export · covers 12 topics (Day 06)"],
+];
+
+const qaChecks = [
+  ["Chrome + Safari desktop", "no console errors · no layout shifts"],
+  ["iOS Safari · Android Chrome", "375 · 414 · 768 viewports"],
+  ["Tablet portrait + landscape", "no hidden overflow"],
+  ["All internal links", "no 404s · anchors land on correct section"],
+  ["Contact form", "client-side validation · disabled-state on submit"],
+  ["Lighthouse", "Perf ≥ 90 · A11y ≥ 95 · Best Prac ≥ 95 · SEO 100"],
+  ["HTML validity", "no unclosed tags · no duplicate IDs · alt text on every img"],
+  ["Cross-check with sitemap", "every page present · every kit-section rendered in demo"],
+];
+
+function DeliverablesQA() {
+  return (
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+      <div>
+        <div className="mb-4 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>Deliverables · Day 10</span>
+          <span>Ship</span>
+        </div>
+        <ul className="space-y-3">
+          {deliverables.map(([k, v], i) => (
+            <motion.li
+              key={k}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ delay: i * 0.04, duration: 0.4, ease }}
+              className="flex gap-3 border-b border-dashed border-border/70 pb-3"
+            >
+              <div className="mt-1 h-4 w-4 border-[1.5px] border-accent bg-accent/10 flex items-center justify-center text-accent text-[10px] shrink-0">✓</div>
+              <div>
+                <div className="text-[14.5px] font-medium">{k}</div>
+                <div className="mt-0.5 text-[12.5px] text-muted-foreground">{v}</div>
+              </div>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div className="mb-4 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+          <span>QA gate · Day 11</span>
+          <span>Verify</span>
+        </div>
+        <ul className="space-y-3">
+          {qaChecks.map(([k, v], i) => (
+            <motion.li
+              key={k}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ delay: i * 0.04, duration: 0.4, ease }}
+              className="flex gap-3 border-b border-dashed border-border/70 pb-3"
+            >
+              <div className="mt-1 h-4 w-4 border-[1.5px] border-foreground bg-transparent shrink-0" />
+              <div>
+                <div className="text-[14.5px] font-medium">{k}</div>
+                <div className="mt-0.5 text-[12.5px] text-muted-foreground">{v}</div>
+              </div>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §09 Timeline — Day 08–11                        */
+/* ─────────────────────────────────────────────── */
+
+const days = [
+  {
+    day: "Day 08",
+    focus: "Struktur",
+    output: "Sitemap + wireframe + art direction",
+    Icon: Ruler,
+    tasks: [
+      "Lock sitemap: 7 pages",
+      "Wireframe home + service detail + project detail",
+      "Art direction moodboard (30-min timebox)",
+      "Copy starter (this doc)",
+      "Asset shortlist (photos + logos)",
+    ],
+  },
+  {
+    day: "Day 09",
+    focus: "Build",
+    output: "All 7 pages built + responsive",
+    Icon: FileCode2,
+    tasks: [
+      "Home + Services + Contact (master sections)",
+      "About + Projects + Project Detail",
+      "Service Detail template (reusable across 6)",
+      "Kit-specific sections wired to real content",
+      "Responsive from the start — not last",
+    ],
+  },
+  {
+    day: "Day 10",
+    focus: "Polish & package",
+    output: "Marketplace-ready package",
+    Icon: Package,
+    tasks: [
+      "Micro-animation pass (GSAP hero + counters)",
+      "Figma-ready layout + docs + metadata",
+      "6 marketing screenshots + cover image",
+      "ZIP with clean folder + README + license",
+      "Write product copy for 3 channels",
+    ],
+  },
+  {
+    day: "Day 11",
+    focus: "QA",
+    output: "ContractorX passes gate",
+    Icon: ClipboardCheck,
+    tasks: [
+      "Chrome + Safari + iOS + Android",
+      "Tablet + mobile + desktop viewports",
+      "Links + typos + HTML validity + console",
+      "Lighthouse ≥ 90/95/95/100",
+      "One outside eye clicks through demo blind",
+    ],
+  },
+];
+
+function Timeline() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const width = useTransform(progress, [0, 1], ["0%", "100%"]);
+  return (
+    <div ref={ref}>
+      <div className="mb-4 flex items-center justify-between f-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span>Target · 4 working days, mandatory sequence</span>
+        <span className="text-accent">Day 08 → 11</span>
+      </div>
+      <div className="relative border border-border bg-card">
+        {/* progress rail */}
+        <div className="absolute left-0 right-0 top-0 h-[3px] bg-border" />
+        <motion.div style={{ width }} className="absolute left-0 top-0 h-[3px] bg-accent" />
+
+        <div className="grid grid-cols-1 md:grid-cols-4">
+          {days.map((d, i) => (
+            <motion.div
+              key={d.day}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.08, duration: 0.5, ease }}
+              className="border-b border-border md:border-b-0 md:border-r last:border-r-0 p-6 group hover:bg-accent/5 transition-colors"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="f-mono text-[10.5px] uppercase tracking-[0.14em] text-accent">{d.day}</div>
+                  <div className="mt-1 f-display text-[22px] font-bold leading-none tracking-[-0.02em]">{d.focus}</div>
+                </div>
+                <div className="border border-border p-1.5 text-muted-foreground group-hover:text-accent group-hover:border-accent transition-colors">
+                  <d.Icon className="h-4 w-4" />
+                </div>
+              </div>
+              <div className="mt-2 f-mono text-[10.5px] uppercase tracking-[0.1em] text-muted-foreground">
+                → {d.output}
+              </div>
+              <ul className="mt-4 space-y-1.5 text-[13px] leading-[1.5]">
+                {d.tasks.map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 border border-foreground/60" />
+                    <span className="text-foreground/80">{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §10 Distribution                                */
+/* ─────────────────────────────────────────────── */
+
+const channels = [
+  {
+    name: "Own store",
+    tag: "Home base · primary",
+    price: "$39",
+    Icon: BadgeCheck,
+    checks: [
+      "Product page (Day 16 template) linked from Featured Kits",
+      "Live demo at /demo/contractor",
+      "Gumroad checkout embedded — skip account/dashboard build",
+      "Analytics on: visitors → demo → buy click → checkout → sale",
+    ],
+  },
+  {
+    name: "Gumroad",
+    tag: "Mirror · Day 19 optimize",
+    price: "$39",
+    Icon: Send,
+    checks: [
+      "Thumbnail: strong visual of the website itself (not text-heavy)",
+      "Title: niche + format (\"Contractor Website Template · HTML/Bootstrap\")",
+      "Clear buyer, package contents, demo link, license, CTA",
+      "Same live demo URL as own store (single source of truth)",
+    ],
+  },
+  {
+    name: "Codester",
+    tag: "Submit · Day 20",
+    price: "$39",
+    Icon: ShieldCheck,
+    checks: [
+      "ContractorX submitted first — learn the review process",
+      "Complete screenshots, docs, metadata, tags, requirements",
+      "Capture any feedback / rejection reason for Eventra + Swift Auto",
+      "Do not upload Eventra until ContractorX outcome known",
+    ],
+  },
+];
+
+function Distribution() {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      {channels.map((c, i) => (
+        <motion.article
+          key={c.name}
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ delay: i * 0.06, duration: 0.5, ease }}
+          className="tick-corners relative border border-foreground bg-card p-6"
+        >
+          <span className="tc-bl" />
+          <span className="tc-br" />
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="f-display text-[22px] font-bold leading-none tracking-tight">{c.name}</div>
+              <div className="mt-1 f-mono text-[10px] uppercase tracking-[0.14em] text-accent">{c.tag}</div>
+            </div>
+            <div className="border border-border p-2 text-muted-foreground">
+              <c.Icon className="h-4 w-4" />
+            </div>
+          </div>
+          <div className="mt-4 f-display text-[36px] font-bold leading-none tracking-[-0.02em]">
+            {c.price}
+          </div>
+          <ul className="mt-5 space-y-2 text-[13px] leading-[1.5]">
+            {c.checks.map((t) => (
+              <li key={t} className="flex gap-2 border-b border-dashed border-border/70 pb-2">
+                <span className="text-accent">✓</span>
+                <span className="text-foreground/80">{t}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.article>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §11 Marketing angles                            */
+/* ─────────────────────────────────────────────── */
+
+const contentIdeas = [
+  { no: "01", title: "Launch post — Threads + LinkedIn", body: "Story of the niche gap: why contractor sites still look like 2014." },
+  { no: "02", title: "Homepage walkthrough — 45s video", body: "Scroll from hero → certifications → tender CTA with voice-over." },
+  { no: "03", title: "Responsive comparison — carousel", body: "Same page, three devices — proof it holds up on mobile." },
+  { no: "04", title: "Before / after — the transformation", body: "Real contractor site vs ContractorX on the same content." },
+  { no: "05", title: "UI detail zoom — Pinterest pin", body: "Certifications wall close-up · project detail spec table." },
+  { no: "06", title: "Animation clip — 8s hero reel", body: "GSAP reveal + stats counter — shareable, no context needed." },
+  { no: "07", title: "Design process — Threads thread", body: "Why we killed the parallax and how the trust-signal grid replaced it." },
+  { no: "08", title: "Component showcase — Behance case", body: "Every kit section as its own hero shot with a caption." },
+  { no: "09", title: "\"Why we built this\" — LinkedIn essay", body: "Founder POV on why service businesses deserve better templates." },
+  { no: "10", title: "Bundle offer — day-10 post-launch push", body: "\"ContractorX + Eventra + Swift Auto = $79. Save $38.\"" },
+];
+
+function ContentIdeas() {
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {contentIdeas.map((c, i) => (
+        <motion.div
+          key={c.no}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ delay: (i % 3) * 0.05, duration: 0.4, ease }}
+          className="border border-border bg-card p-5 hover:border-accent transition-colors"
+        >
+          <div className="f-mono text-[10px] uppercase tracking-[0.14em] text-accent">C·{c.no}</div>
+          <div className="mt-2 f-display text-[15.5px] font-semibold leading-tight tracking-tight">
+            {c.title}
+          </div>
+          <p className="mt-2 text-[13px] leading-[1.5] text-foreground/75">{c.body}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────── */
+/* §12 Success gate                                */
+/* ─────────────────────────────────────────────── */
+
+function SuccessGate() {
   const items = [
-    { k: "Activation", v: <><Counter to={24} /><span className="text-[22px] ml-1">h</span></>, u: "First project ≤ 24h after signup" },
-    { k: "Time-to-first-invoice", v: <>&lt;<Counter to={7} /><span className="text-[22px] ml-1">d</span></>, u: "Median across new orgs" },
-    { k: "Week-8 retention", v: <><Counter to={60} suffix="%" /></>, u: "Active orgs, cohort basis" },
-    { k: "Projects / org · 90d", v: <><Counter to={3.0} decimals={1} suffix="+" /></>, u: "Habit forms above three" },
-    { k: "Payment success", v: <><Counter to={96} suffix="%" /></>, u: "Xendit + Midtrans combined" },
-    { k: "NPS · contractors", v: <><Counter to={40} suffix="+" /></>, u: "Rolling 30-day" },
-    { k: "Design-partner LOI", v: <><Counter to={15} /></>, u: "Signed before beta cohort" },
-    { k: "Gross margin", v: <><Counter to={78} suffix="%" /></>, u: "After payments processor + infra" },
+    { k: "Finished product", v: <><Counter to={1} /></>, u: "ContractorX packaged" },
+    { k: "Live demos", v: <><Counter to={1} /></>, u: "/demo/contractor active" },
+    { k: "Marketplace listings", v: <><Counter to={2} /></>, u: "Own store + Gumroad" },
+    { k: "Codester submission", v: <>1</>, u: "Submitted for review" },
+    { k: "Content assets", v: <><Counter to={10} /></>, u: "From this kit alone" },
+    { k: "Lighthouse Perf", v: <>≥<Counter to={90} /></>, u: "Non-negotiable" },
+    { k: "Lighthouse A11y", v: <>≥<Counter to={95} /></>, u: "Non-negotiable" },
+    { k: "First sales · 30d", v: <><Counter to={1} suffix="–5" /></>, u: "Target window" },
   ];
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -1317,82 +1212,6 @@ function Metrics() {
 }
 
 /* ─────────────────────────────────────────────── */
-/* Risks                                           */
-/* ─────────────────────────────────────────────── */
-
-const risks = [
-  ["Contractors won't leave WhatsApp for anything", "H", "So we don't ask them. WA is the delivery channel; ContractorX is the source of truth."],
-  ["Mandor mobile UX doesn't clear a 90-second daily log", "H", "Weekly stopwatch tests with real mandors starting week 5."],
-  ["Client portal treated as spam", "M", "Magic-link with named sender + WA delivery; A/B copy from week 12."],
-  ["Payment failure spikes on Xendit", "M", "Midtrans failover with per-project router; monitored per hour."],
-];
-
-const mit = [
-  ["Design-partner cohort locked before M1", "PM", "Wk 04"],
-  ["Field research day, monthly, on-site", "Design", "From Wk 03"],
-  ["Payment monitor with per-hour alerting", "Eng", "Wk 14"],
-  ["Public trust page: uptime + payment stats", "PM", "Wk 20"],
-];
-
-function Risks() {
-  const rank: Record<string, string> = { H: "bg-accent text-accent-foreground", M: "bg-[hsl(38_75%_45%)] text-background" };
-  return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-      <div>
-        <div className="mb-4 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>Risk</span><span>Rank</span>
-        </div>
-        <ul className="space-y-3.5">
-          {risks.map(([r, k, m], i) => (
-            <motion.li
-              key={r}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.05, duration: 0.4, ease }}
-              className="flex gap-4 border-b border-dashed border-border pb-3.5"
-            >
-              <div className={cn("f-mono h-5 w-5 shrink-0 text-center text-[11px] font-bold leading-5", rank[k])}>
-                {k}
-              </div>
-              <div>
-                <div className="text-[14.5px] font-medium">{r}</div>
-                <div className="mt-1 text-[12.5px] text-muted-foreground">{m}</div>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <div className="mb-4 flex justify-between border-b-2 border-foreground pb-2 f-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-          <span>Mitigation</span><span>Owner · When</span>
-        </div>
-        <ul className="space-y-3.5">
-          {mit.map(([m, o, w], i) => (
-            <motion.li
-              key={m}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: i * 0.05, duration: 0.4, ease }}
-              className="flex items-start gap-4 border-b border-dashed border-border pb-3.5"
-            >
-              <div className="mt-1 h-2 w-2 shrink-0 bg-accent rounded-full" />
-              <div className="flex-1">
-                <div className="text-[14.5px] font-medium">{m}</div>
-                <div className="mt-1 f-mono text-[10.5px] uppercase tracking-[0.1em] text-muted-foreground">
-                  {o} · {w}
-                </div>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────── */
 /* Footer                                          */
 /* ─────────────────────────────────────────────── */
 
@@ -1402,11 +1221,10 @@ function Footer() {
       <div className="absolute inset-0 -z-10 bp-grid opacity-40 [mask-image:radial-gradient(ellipse_at_50%_60%,black_30%,transparent_80%)]" />
       <div className="mx-auto max-w-[1240px] px-6 py-24 md:px-10 md:py-28">
         <Reveal>
-          <div className="mx-auto max-w-[24ch] text-center">
-            <p className="f-display text-[clamp(32px,5.5vw,64px)] font-medium leading-[1.05] tracking-[-0.025em] text-balance">
-              Build the tool the{" "}
-              <em className="italic text-accent">mandor</em> can hold in one
-              hand while pouring concrete with the other.
+          <div className="mx-auto max-w-[26ch] text-center">
+            <p className="f-display text-[clamp(30px,5.2vw,58px)] font-medium leading-[1.05] tracking-[-0.025em] text-balance">
+              Selesaikan → package → publish → demo → promote → review data →{" "}
+              <em className="italic text-accent">baru bikin produk berikutnya.</em>
             </p>
           </div>
         </Reveal>
@@ -1416,19 +1234,19 @@ function Footer() {
               href="#top"
               className="f-mono inline-flex items-center gap-2 bg-foreground px-5 py-3.5 text-[11px] uppercase tracking-[0.14em] text-background hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              Kick off week 01 <Send className="h-3.5 w-3.5" />
+              Start Day 08 <Send className="h-3.5 w-3.5" />
             </a>
             <a
-              href="#prd"
+              href="#sitemap"
               className="f-mono inline-flex items-center gap-2 border border-foreground px-5 py-3.5 text-[11px] uppercase tracking-[0.14em] hover:bg-foreground hover:text-background transition-colors"
             >
-              Re-read the spec
+              Re-read the brief
             </a>
           </div>
         </Reveal>
         <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 f-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-          <span>ContractorX · CX-PRD-001 · Rev A</span>
-          <span>© 2026 · Naga Studio · For internal review</span>
+          <span>MGL Website Kits · ContractorX Kit · MGL-KIT-001 · Rev A</span>
+          <span>© 2026 · For internal production use</span>
         </div>
       </div>
     </footer>
@@ -1445,7 +1263,6 @@ export default function App() {
 
   return (
     <div id="top" className="relative min-h-screen bg-background text-foreground">
-      {/* scroll progress bar */}
       <motion.div
         style={{ scaleX, transformOrigin: "0%" }}
         className="fixed left-0 right-0 top-0 z-50 h-[2px] bg-accent"
@@ -1456,99 +1273,109 @@ export default function App() {
       <Hero />
       <Marquee />
 
-      <Section id="problem">
+      <Section id="overview">
         <SectionHead
-          no="§01 · Problem"
-          title="Small contractors run million-rupiah projects on WhatsApp, Excel, and a folded BOQ in the glovebox."
+          no="§01 · Positioning"
+          title="What ContractorX is — and who it's for."
           lede={
             <>
-              The big firms have Procore. Homeowners doing one renovation have
-              nothing but their contractor's word. In between — the 300,000+
-              small contractors that actually build South-East Asia — is a
-              tooling desert. Every number below comes from 34 discovery
-              interviews.
+              ContractorX is kit #1 of three in this MGL Website Kits sprint.
+              Every choice below points at one thing: a template a real
+              contractor or their agency would rather buy than build.
             </>
           }
         />
-        <Reveal>
-          <ProblemBento />
-        </Reveal>
+        <Reveal><Positioning /></Reveal>
       </Section>
 
-      <Section id="product">
+      <Section id="sitemap">
         <SectionHead
-          no="§02 · Product"
-          title={
-            <>
-              One thread from lead to last-payment — every project, every
-              crew, every&nbsp;photo.
-            </>
-          }
-          lede="Seven tools collapsed into one workspace tuned to how a small contractor actually operates: mobile-first for the field, desktop-clean for the office, read-only mirror for the client."
+          no="§02 · Sitemap"
+          title="Seven pages. No filler."
+          lede="The buyer wants to publish and go, not delete unused pages. Every page below earns its place in a construction firm's sales cycle."
         />
-        <FeatureBento />
+        <Reveal><Sitemap /></Reveal>
       </Section>
 
-      <Section id="prd">
+      <Section id="sections">
         <SectionHead
-          no="§03 · Users"
-          title="Three real people the product owes an answer to."
-          lede="Everything is designed backward from these three. If a feature doesn't serve at least one, it doesn't ship in v1."
+          no="§03 · Section library"
+          title="Sixteen sections from the master. Seven built just for this niche."
+          lede="Master sections come from MGL Business Kit Starter (Day 07). Kit-specific sections are the reason a contractor picks this template over a generic multi-purpose theme."
         />
-        <Reveal><Personas /></Reveal>
+        <SectionsLibrary />
       </Section>
 
-      <Section>
+      <Section id="direction">
         <SectionHead
-          no="§04 · Golden path"
-          title="Quote to first-payment in seven steps."
-          lede="Every screen and API is measured against this flow. Time-to-first-invoice under 7 days is a v1 gate."
+          no="§04 · Art direction"
+          title="Steel-ink, safety-orange, blueprint grid — not another SaaS-style landing."
+          lede="Design pulled from the site, not from Dribbble. Photography is real construction. Motion is minimal. Density is high because the buyer scans for trust signals."
         />
-        <Reveal><GoldenPath /></Reveal>
+        <Reveal><ArtDirection /></Reveal>
       </Section>
 
-      <Section>
+      <Section id="spec">
         <SectionHead
-          no="§05 · Scope"
-          title="What v1 is — and what it deliberately is not."
-          lede="Discipline about non-goals is how we ship in 22 weeks. Each non-goal has a reason to wait, not a reason to never build."
+          no="§05 · Tech spec"
+          title="Boring, buyer-editable, marketplace-standards."
+          lede="Every buyer has different hosting and different taste. Ship a kit they can crack open, understand in twenty minutes, and edit without breaking."
         />
-        <Scope />
+        <Reveal><TechSpec /></Reveal>
       </Section>
 
       <Section>
         <SectionHead
-          no="§06 · Architecture"
-          title="Boring stack. Interesting product."
-          lede="The novel work is at the seam between BOQ, gate, and invoice — not in the infrastructure. Every choice optimises for a two-engineer team shipping in 22 weeks."
+          no="§06 · Copy starter"
+          title="First draft of every block. Bilingual."
+          lede="Copy is 60% of what makes a template feel real. Buyers rarely rewrite from scratch — they tune what you gave them. So the starter has to be usable as-is."
         />
-        <Reveal><Architecture /></Reveal>
-      </Section>
-
-      <Section id="roadmap">
-        <SectionHead
-          no="§07 · Roadmap"
-          title="Twenty-two weeks. Four milestones. One beta."
-          lede="Each milestone ends with a demo to the same three design-partner contractors. If they can't run their next real project on it, we don't move on."
-        />
-        <Reveal><Roadmap /></Reveal>
-      </Section>
-
-      <Section id="metrics">
-        <SectionHead
-          no="§08 · Success"
-          title="Numbers we would defend to an investor at week 24."
-          lede="Activation is the north star. Retention, revenue, referrals — all downstream of a first project shipped end-to-end."
-        />
-        <Metrics />
+        <CopyStarter />
       </Section>
 
       <Section>
         <SectionHead
-          no="§09 · Risks"
-          title="What kills this — and what we do about it."
+          no="§07 · Deliverables + §08 · QA gate"
+          title="What ships on Day 10, and what has to be true before it ships."
+          lede="No deliverable in the left column ships unless every check in the right column is green."
         />
-        <Reveal><Risks /></Reveal>
+        <DeliverablesQA />
+      </Section>
+
+      <Section id="timeline">
+        <SectionHead
+          no="§09 · Timeline"
+          title="Four days, four gates. Sequence is mandatory."
+          lede="Day 09 does not start until Day 08 output exists. Day 10 does not start on a page that isn't responsive. Day 11 catches everything else."
+        />
+        <Reveal><Timeline /></Reveal>
+      </Section>
+
+      <Section id="distro">
+        <SectionHead
+          no="§10 · Distribution"
+          title="Three channels. Same demo, three thumbnails."
+          lede="Own store is the home base — the source of truth for demo, price, and case study. Gumroad and Codester are mirrors that funnel traffic back."
+        />
+        <Distribution />
+      </Section>
+
+      <Section>
+        <SectionHead
+          no="§11 · Marketing angles"
+          title="One kit → ten content assets."
+          lede="Day 26 rule: don't ship a kit without also planning the ten pieces of content that will announce it. Below are the ten for ContractorX."
+        />
+        <Reveal><ContentIdeas /></Reveal>
+      </Section>
+
+      <Section>
+        <SectionHead
+          no="§12 · Success gate"
+          title="What has to be true before ContractorX counts as done."
+          lede="These map to the Day 30 scorecard. Kit-level slice — the bundle and 3-kit numbers live in the parent roadmap."
+        />
+        <SuccessGate />
       </Section>
 
       <Footer />
