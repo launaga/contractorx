@@ -1,0 +1,12 @@
+import pw from "/opt/node22/lib/node_modules/playwright/index.js";
+const [,, url, out, sel, w=1440, h=900] = process.argv;
+const b = await pw.chromium.launch();
+const p = await b.newPage({ viewport: { width: +w, height: +h }, deviceScaleFactor: 2 });
+await p.goto(url, { waitUntil: "networkidle" });
+await p.evaluate(async () => { const s = Math.round(innerHeight*0.8); for (let y=0;y<document.body.scrollHeight;y+=s){ window.scrollTo({top:y,behavior:'instant'}); await new Promise(r=>setTimeout(r,110)); } });
+await p.waitForTimeout(900);
+await p.evaluate((sel) => document.querySelector(sel).scrollIntoView({ block: "start", behavior: "instant" }), sel);
+await p.waitForTimeout(700);
+await p.screenshot({ path: out });
+await b.close();
+console.log("shot", out);

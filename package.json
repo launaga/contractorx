@@ -1,0 +1,35 @@
+{
+  "name": "contractorx-kit",
+  "version": "1.0.0",
+  "description": "ContractorX Website Kit v1 — static HTML/SCSS contractor & construction kit",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "assets": "node tools/make-assets.mjs && node tools/make-icons.mjs",
+    "css": "sass src/scss/main.scss dist/css/main.css --style=compressed --no-source-map --quiet",
+    "css:watch": "sass --watch src/scss/main.scss dist/css/main.css --no-source-map",
+    "html": "node tools/build.mjs",
+    "build": "npm run html && npm run css",
+    "start": "npm run build && http-server dist -p 4321 -c-1 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/launaga/contractorx.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/launaga/contractorx/issues"
+  },
+  "homepage": "https://github.com/launaga/contractorx#readme",
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "gsap": "^3.12.5",
+    "lighthouse": "^12.2.1",
+    "sass": "^1.83.0"
+  },
+  "private": true
+}

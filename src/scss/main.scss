@@ -1,0 +1,47 @@
+// ============================================================
+// ContractorX Kit v1 — main stylesheet
+// Compile:  npx sass src/scss/main.scss dist/css/main.css --style=compressed
+// Bootstrap 5.3 grid + utilities are linked separately in the HTML;
+// everything below is the kit's own layer.
+// ============================================================
+@import "variables";
+@import "reset";
+@import "typography";
+@import "layout";
+
+// --- Master sections (16) -----------------------------------
+@import "sections/navbar";
+@import "sections/hero";
+@import "sections/logo-cloud";
+@import "sections/stats";
+@import "sections/about";
+@import "sections/services";
+@import "sections/portfolio";
+@import "sections/process";
+@import "sections/testimonials";
+@import "sections/cta";
+@import "sections/faq";
+@import "sections/team";
+@import "sections/pricing";
+@import "sections/blog";
+@import "sections/contact";
+@import "sections/footer";
+
+// --- Kit-specific sections (7) ------------------------------
+@import "sections/k01-certifications";
+@import "sections/k02-equipment";
+@import "sections/k03-safety";
+@import "sections/k04-ongoing";
+@import "sections/k05-clients";
+@import "sections/k06-tender";
+@import "sections/k07-awards";
+
+// --- Print ---------------------------------------------------
+@import "print";
+
+// --- Motion (GSAP-optional; CSS fallback runs without it) ---
+.reveal { opacity: 1; }
+@include motion-ok {
+  html.js .reveal { opacity: 0; transform: translateY(14px); }
+  html.js .reveal.is-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
+}

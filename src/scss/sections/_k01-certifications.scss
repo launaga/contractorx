@@ -1,0 +1,18 @@
+// K-01 Certifications wall — reads at a glance during procurement review
+.certs { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft);
+  grid-template-columns: 1fr;
+  > * { min-width: 0; }
+  @include up(420px) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-md) { grid-template-columns: repeat(3, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+.cert {
+  background: var(--paper); padding: clamp(1.25rem, 2.4vw, 1.75rem); display: grid; gap: .875rem; align-content: start;
+  min-height: 190px; transition: background .2s ease;
+  &:hover { background: var(--panel); }
+  &__mark { width: 46px; height: 46px; color: var(--ink); }
+  &__code { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
+  h3 { font-size: 1.0625rem; font-family: var(--font-body); font-weight: 600; letter-spacing: 0; }
+  &__body { font-size: .8125rem; color: var(--mute); }
+  &__valid { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); margin-top: auto; padding-top: .5rem; border-top: $hair dashed var(--rule-soft); }
+}

@@ -1,0 +1,16 @@
+// M-05 About block — story, values, milestones
+.about-split { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: start;
+  @include up($bp-lg) { grid-template-columns: 1fr 1fr; }
+}
+.about-copy p { font-size: clamp(1rem, 1.4vw, 1.125rem); }
+// Values / about block (M-05)
+.values { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft); grid-template-columns: 1fr;
+  @include up($bp-md) { grid-template-columns: repeat(3, 1fr); }
+  > div { background: var(--paper); padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: .75rem; align-content: start; }
+}
+.milestones { list-style: none; padding: 0; margin: 0; border-top: $hair solid var(--rule); }
+.milestones li { display: grid; gap: .25rem 2rem; padding: 1.125rem 0; border-bottom: $hair solid var(--rule-soft);
+  @include up($bp-md) { grid-template-columns: 7rem 1fr; }
+  b { font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .08em; }
+  span { color: var(--mute); font-size: .9375rem; }
+}

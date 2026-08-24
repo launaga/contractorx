@@ -1,0 +1,8 @@
+// M-10 CTA band — reversal, one per page
+.cta-band { background: var(--reverse-bg); color: var(--reverse-fg); }
+.cta-band__inner { display: grid; gap: 2rem; align-items: end;
+  @include up($bp-lg) { grid-template-columns: 1.4fr auto; }
+}
+.cta-band h2 { font-size: clamp(2rem, 4.6vw, 3.5rem); max-width: 18ch; }
+.cta-band p { opacity: .75; max-width: 46ch; margin-top: 1rem; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: .75rem; }

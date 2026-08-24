@@ -1,0 +1,58 @@
+// ============================================================
+// Typography — display serif / humanist body / mono data
+// ============================================================
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.02;
+  text-wrap: balance;
+  margin: 0;
+}
+h1, .d1 { font-size: $fs-d1; }
+h2, .d2 { font-size: $fs-d2; }
+h3, .d3 { font-size: $fs-d3; line-height: 1.1; }
+h4, .d4 { font-size: $fs-d4; line-height: 1.2; }
+
+// Italic is reserved for exactly one highlighted word per hero.
+.hilite { font-style: italic; }
+
+p { margin: 0 0 1.1em; max-width: $measure; }
+p:last-child { margin-bottom: 0; }
+
+.lede {
+  font-size: clamp(1.0625rem, 1.6vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--mute);
+  max-width: 54ch;
+}
+
+// Mono data / labels — never used for running copy
+.label, .meta, .mono {
+  font-family: var(--font-mono);
+  font-size: $fs-label;
+  letter-spacing: $track-label;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--mute);
+}
+.label--ink { color: var(--ink); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  font-family: var(--font-mono);
+  font-size: $fs-label;
+  letter-spacing: $track-label;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 1.25rem;
+}
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: $hair;
+  background: var(--rule-soft);
+}

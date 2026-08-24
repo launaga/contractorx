@@ -1,0 +1,424 @@
+<title>ContractorX Day 08</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#FAFAF8; --panel:#F2F2EE; --ink:#0A0A0A; --rule:#111111;
+  --rule-soft:#D6D5D0; --mute:#6B6B66; --reverse-bg:#111111; --reverse-fg:#F6F6F0;
+  --grid:rgba(10,10,10,.07);
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A0A0A; --panel:#151513; --ink:#FAFAF8; --rule:#E8E8E2;
+    --rule-soft:#3A3A36; --mute:#9C9C95; --reverse-bg:#F6F6F0; --reverse-fg:#111111;
+    --grid:rgba(250,250,248,.07);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A0A0A; --panel:#151513; --ink:#FAFAF8; --rule:#E8E8E2;
+  --rule-soft:#3A3A36; --mute:#9C9C95; --reverse-bg:#F6F6F0; --reverse-fg:#111111;
+  --grid:rgba(250,250,248,.07);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px; line-height:1.55; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 120px}
+h1,h2,h3,.disp{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;text-wrap:balance;letter-spacing:-.01em}
+em{font-style:italic}
+.mono,.lbl,th,.num{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute)}
+p{max-width:66ch}
+
+/* ---- masthead ---- */
+.mast{border-bottom:1px solid var(--rule);padding:34px 0 22px;margin-bottom:0}
+.mast-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:baseline}
+.mast h1{font-size:clamp(44px,7vw,92px);line-height:.95;margin:18px 0 14px}
+.mast .sub{color:var(--mute);max-width:58ch}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft);margin-top:34px}
+.meta div{background:var(--paper);padding:12px 14px}
+.meta .v{font-family:"JetBrains Mono",monospace;font-size:13px;margin-top:4px}
+
+/* ---- sections ---- */
+section{padding:64px 0 0;border-top:1px solid var(--rule-soft);margin-top:56px}
+section:first-of-type{border-top:0}
+.shead{display:flex;gap:20px;align-items:baseline;margin-bottom:28px}
+.shead .num{font-size:11px;letter-spacing:.14em;color:var(--mute);padding-top:10px}
+.shead h2{font-size:clamp(28px,3.6vw,44px);margin:0;line-height:1.05}
+.shead .note{margin-left:auto;text-align:right}
+
+/* dimension divider */
+.dim{display:flex;align-items:center;gap:10px;margin:40px 0;color:var(--mute)}
+.dim::before,.dim::after{content:"";height:1px;background:var(--rule-soft);flex:1}
+.dim span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--mute);font-weight:500;padding:10px 12px;border-bottom:1px solid var(--rule)}
+.tbl td{padding:13px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+.tbl td:first-child{font-family:"JetBrains Mono",monospace;font-size:12.5px;white-space:nowrap;color:var(--mute)}
+.tbl tr:hover td{background:var(--panel)}
+.scroll{overflow-x:auto}
+
+/* wireframe plates */
+.plate{border:1px solid var(--rule);background:var(--panel);padding:14px;margin-bottom:14px}
+.plate-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:0 2px 12px;border-bottom:1px dashed var(--rule-soft);margin-bottom:14px}
+.plate-head strong{font-family:"Instrument Serif",serif;font-weight:400;font-size:22px}
+.wf{display:flex;flex-direction:column;gap:8px}
+.blk{border:1px dashed var(--rule-soft);background:var(--paper);padding:12px;position:relative;min-height:52px}
+.blk.solid{border-style:solid}
+.blk.rev{background:var(--reverse-bg);color:var(--reverse-fg);border-color:var(--reverse-bg)}
+.blk.rev .blk-t{color:var(--reverse-fg);opacity:.6}
+.blk-t{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);display:block;margin-bottom:6px}
+.blk-c{font-size:14px;color:var(--ink)}
+.blk.rev .blk-c{color:var(--reverse-fg)}
+.row{display:grid;gap:8px}
+.r2{grid-template-columns:1fr 1fr}
+.r3{grid-template-columns:repeat(3,1fr)}
+.r4{grid-template-columns:repeat(4,1fr)}
+.r64{grid-template-columns:1.6fr 1fr}
+.bar{height:8px;background:var(--rule-soft);margin:5px 0}
+.bar.w70{width:70%}.bar.w45{width:45%}.bar.w90{width:90%}
+.hh{font-family:"Instrument Serif",serif;font-size:clamp(20px,2.6vw,32px);line-height:1.05}
+.tag{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--rule-soft);padding:3px 7px;display:inline-block;margin:2px 3px 2px 0;color:var(--mute)}
+.kchip{border-color:var(--rule);color:var(--ink)}
+
+/* moodboard */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft)}
+.sw{padding:0;background:var(--paper)}
+.sw .chip{height:74px;border-bottom:1px solid var(--rule-soft)}
+.sw .info{padding:10px 12px}
+.sw .info b{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;display:block}
+.sw .info span{font-size:12px;color:var(--mute)}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.frame{border:1px solid var(--rule);aspect-ratio:16/10;position:relative;overflow:hidden;background:var(--panel)}
+.frame figcaption{position:absolute;left:0;bottom:0;right:0;background:var(--reverse-bg);color:var(--reverse-fg);font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:6px 9px}
+.f1{background:
+  linear-gradient(105deg,rgba(10,10,10,.88) 0 18%,rgba(10,10,10,.1) 18.4% 21%,rgba(10,10,10,.72) 21.4% 34%,rgba(10,10,10,.06) 34.4% 39%,rgba(10,10,10,.5) 39.4% 58%,rgba(10,10,10,.12) 58.4% 100%),
+  radial-gradient(120% 80% at 20% 100%,#FAFAF8,#8f8f88)}
+.f2{background:
+  repeating-linear-gradient(90deg,rgba(10,10,10,.75) 0 6px,rgba(250,250,248,.15) 6px 26px),
+  linear-gradient(180deg,#f4f4ef,#2b2b28)}
+.f3{background:
+  conic-gradient(from 210deg at 62% 78%,rgba(10,10,10,.9) 0 12%,rgba(250,250,248,.2) 12% 20%,rgba(10,10,10,.8) 20% 30%,rgba(250,250,248,.1) 30% 42%,rgba(10,10,10,.85) 42% 55%,rgba(250,250,248,.25) 55% 100%),
+  linear-gradient(0deg,#1a1a18,#e9e9e3)}
+.f4{background:
+  repeating-linear-gradient(135deg,rgba(10,10,10,.82) 0 3px,transparent 3px 14px),
+  repeating-linear-gradient(45deg,rgba(10,10,10,.6) 0 3px,transparent 3px 14px),
+  linear-gradient(160deg,#fafaf8,#55554f)}
+.specimen{border:1px solid var(--rule);padding:26px}
+.specimen .big{font-family:"Instrument Serif",serif;font-size:clamp(38px,7vw,86px);line-height:.98;margin:0 0 6px}
+.specimen .scale{display:grid;gap:10px;margin-top:22px;border-top:1px solid var(--rule-soft);padding-top:18px}
+.specimen .scale div{display:flex;gap:16px;align-items:baseline;border-bottom:1px dashed var(--rule-soft);padding-bottom:8px}
+.specimen .scale .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);min-width:130px}
+.rev-band{background:var(--reverse-bg);color:var(--reverse-fg);padding:38px 30px;margin-top:14px}
+.rev-band .lbl{color:var(--reverse-fg);opacity:.62}
+.rev-band .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:22px;margin-top:20px}
+.rev-band .stats b{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(30px,4.6vw,52px);display:block;line-height:1}
+.rev-band .stats span{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px}
+.rules{margin:0;padding:0;list-style:none}
+.rules li{border-bottom:1px dashed var(--rule-soft);padding:11px 0;display:flex;gap:12px}
+.rules li::before{content:"—";color:var(--mute);font-family:"JetBrains Mono",monospace}
+.no li::before{content:"×"}
+footer{border-top:1px solid var(--rule);margin-top:70px;padding-top:22px;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+@media (max-width:720px){
+  .r3,.r4,.r64,.r2{grid-template-columns:1fr}
+  .shead{flex-direction:column;gap:6px}
+  .shead .note{margin-left:0;text-align:left}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="mast-row">
+    <span class="lbl">MGL-KIT-001 · Rev B · Day 08 — Struktur</span>
+    <span class="lbl">Owner: Naga · 2026-08-24</span>
+  </div>
+  <h1>ContractorX Kit —<br><em>structure</em> before surface.</h1>
+  <p class="sub">Day 08 output for approval: locked sitemap, three wireframe plates (Home · Service Detail · Project Detail), the black-and-white art direction, and the asset shortlist. Nothing gets built until this sheet is signed off.</p>
+  <div class="meta">
+    <div><span class="lbl">Pages</span><div class="v">7 + docs</div></div>
+    <div><span class="lbl">Sections</span><div class="v">23 · 16 master + 7 kit</div></div>
+    <div><span class="lbl">Stack</span><div class="v">HTML5 · BS 5.3 · SCSS</div></div>
+    <div><span class="lbl">Palette</span><div class="v">Natural B&amp;W · 0 accents</div></div>
+    <div><span class="lbl">Demo firm</span><div class="v">Rangga Karya Utama</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="shead">
+    <span class="num">01</span>
+    <h2>Sitemap — locked</h2>
+    <span class="note lbl">7 pages · PRD §2</span>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Code</th><th>Page</th><th>File</th><th>Sections in order</th></tr></thead>
+    <tbody>
+      <tr><td>P-01</td><td>Home</td><td>index.html</td><td>Navbar · Hero (reversal) · Stats band (reversal, counters) · Services grid · Featured projects · <b>K-01 Certifications wall</b> · <b>K-05 Client strip</b> · Process · Testimonial · CTA band · Footer</td></tr>
+      <tr><td>P-02</td><td>About</td><td>about.html</td><td>Page head · Story · Milestones · Team · Values · <b>K-03 Safety record</b> · <b>K-01 Certifications</b> · <b>K-07 Awards &amp; press</b> · CTA · Footer</td></tr>
+      <tr><td>P-03</td><td>Services</td><td>services.html</td><td>Page head · Services grid (6, categorised) · Compare table · <b>K-02 Equipment fleet</b> · Process · FAQ · <b>K-06 Tender CTA</b> · Footer</td></tr>
+      <tr><td>P-04</td><td>Service Detail</td><td>service-detail.html ×6</td><td>Breadcrumb · Hero split · Scope list · Spec/capability table · <b>K-02 Fleet (filtered)</b> · Process timeline · Related projects · Testimonial · <b>K-06 Tender CTA</b> · Footer</td></tr>
+      <tr><td>P-05</td><td>Projects</td><td>projects.html</td><td>Page head · Featured strip · Filter bar (sector / year) · Portfolio grid · <b>K-04 Ongoing projects</b> · <b>K-05 Client strip</b> · CTA · Footer</td></tr>
+      <tr><td>P-06</td><td>Project Detail</td><td>project-detail.html</td><td>Case-study hero · Fact rail · Brief · Scope · Timeline · Gallery · Spec table · Testimonial · Next project · Footer</td></tr>
+      <tr><td>P-07</td><td>Contact</td><td>contact.html</td><td>Page head · Form + validation · Office locations · Emergency line · <b>K-06 Tender CTA</b> · Map block · Footer</td></tr>
+      <tr><td>DOC</td><td>Documentation</td><td>docs/index.html</td><td>12 topics: install · folder shape · SCSS compile · tokens · fonts · images · navigation · adding pages · sections · GSAP · form wiring · deploy</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="dim"><span>Section library — 16 master reused, 7 kit-specific built properly</span></div>
+  <div class="cols2">
+    <div>
+      <span class="lbl">Master (16) — shared with Eventra &amp; Swift Auto</span>
+      <p style="margin-top:10px">
+        <span class="tag">Navbar</span><span class="tag">Hero</span><span class="tag">Logo cloud</span><span class="tag">Statistics</span><span class="tag">About block</span><span class="tag">Services grid</span><span class="tag">Portfolio</span><span class="tag">Process</span><span class="tag">Testimonials</span><span class="tag">CTA band</span><span class="tag">FAQ</span><span class="tag">Team</span><span class="tag">Pricing</span><span class="tag">Blog cards</span><span class="tag">Contact form</span><span class="tag">Footer</span>
+      </p>
+    </div>
+    <div>
+      <span class="lbl">Kit-specific (7) — the reason this kit exists</span>
+      <p style="margin-top:10px">
+        <span class="tag kchip">K-01 Certifications wall</span><span class="tag kchip">K-02 Equipment fleet</span><span class="tag kchip">K-03 Safety record</span><span class="tag kchip">K-04 Ongoing projects</span><span class="tag kchip">K-05 Client logo strip</span><span class="tag kchip">K-06 Tender CTA</span><span class="tag kchip">K-07 Awards &amp; press</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead">
+    <span class="num">02</span>
+    <h2>Wireframe plates</h2>
+    <span class="note lbl">Desktop 1440 shown · mobile stacking noted per block</span>
+  </div>
+
+  <div class="plate">
+    <div class="plate-head"><strong>P-01 · Home</strong><span class="lbl">Two reversal blocks only: hero + stats</span></div>
+    <div class="wf">
+      <div class="blk solid"><span class="blk-t">Navbar · sticky, 72px</span><div class="blk-c">Wordmark · Services / Projects / About / Contact · <b>Request a tender pack</b></div></div>
+      <div class="blk rev" style="padding:26px">
+        <span class="blk-t">Hero · full-bleed duotone site photo · GSAP reveal</span>
+        <div class="hh">Built to last. Priced to bid <em>competitively</em>.</div>
+        <div class="bar w70" style="opacity:.35"></div><div class="bar w45" style="opacity:.35"></div>
+        <div class="blk-c" style="margin-top:8px">Two CTAs · scroll cue · mono meta row (est. 2008 · 240+ sites · SEA)</div>
+      </div>
+      <div class="blk rev"><span class="blk-t">Stats band · counter run-up on scroll</span><div class="blk-c">18 years · 240+ projects · 1.2M m² · 96% on-time · 0 LTI in 2025</div></div>
+      <div class="row r3">
+        <div class="blk"><span class="blk-t">Services 1–2</span><div class="bar w90"></div><div class="bar w45"></div></div>
+        <div class="blk"><span class="blk-t">Services 3–4</span><div class="bar w90"></div><div class="bar w45"></div></div>
+        <div class="blk"><span class="blk-t">Services 5–6</span><div class="bar w90"></div><div class="bar w45"></div></div>
+      </div>
+      <div class="row r64">
+        <div class="blk" style="min-height:150px"><span class="blk-t">Featured project · large plate</span><div class="blk-c">Meranti Logistics Hub — 42,000 m² warehouse, Cikarang</div></div>
+        <div class="blk"><span class="blk-t">Featured 2 + 3 stacked</span><div class="bar w70"></div><div class="bar w70"></div></div>
+      </div>
+      <div class="blk"><span class="blk-t">K-01 Certifications wall · 4×2 monochrome grid, hairline cells</span><div class="blk-c">ISO 9001 · ISO 45001 · ISO 14001 · SMK3 · LPJK Grade 7 · OHSAS · K3 Gold · Green Building Council</div></div>
+      <div class="blk"><span class="blk-t">K-05 Client strip · marquee off, static grid</span><div class="blk-c">8 named clients, sector label under each</div></div>
+      <div class="row r4">
+        <div class="blk"><span class="blk-t">Process 01</span></div><div class="blk"><span class="blk-t">02</span></div><div class="blk"><span class="blk-t">03</span></div><div class="blk"><span class="blk-t">04</span></div>
+      </div>
+      <div class="blk"><span class="blk-t">Testimonial · pull-quote at display scale</span><div class="blk-c">Serif 40px, attribution in mono</div></div>
+      <div class="blk rev"><span class="blk-t">CTA band — the third and last reversal on the page</span><div class="blk-c">Have an RFP? Send us the docs.</div></div>
+      <div class="blk solid" style="min-height:90px"><span class="blk-t">Footer · 4 columns + promise line</span><div class="blk-c">One contractor, from ground-breaking to hand-over.</div></div>
+    </div>
+  </div>
+
+  <div class="row r2">
+    <div class="plate">
+      <div class="plate-head"><strong>P-04 · Service Detail</strong><span class="lbl">One template, six services</span></div>
+      <div class="wf">
+        <div class="blk"><span class="blk-t">Breadcrumb + service index (01/06)</span></div>
+        <div class="row r64">
+          <div class="blk" style="min-height:120px"><span class="blk-t">Hero left · title + lede</span><div class="hh">Civil Works</div></div>
+          <div class="blk"><span class="blk-t">Duotone plate</span></div>
+        </div>
+        <div class="blk"><span class="blk-t">Mono fact rail · 4 cells, hairline dividers</span><div class="blk-c">Typical value · Lead time · Crew size · Warranty</div></div>
+        <div class="row r2">
+          <div class="blk" style="min-height:110px"><span class="blk-t">Scope list · numbered, dashed rules</span></div>
+          <div class="blk" style="min-height:110px"><span class="blk-t">Capability spec table</span></div>
+        </div>
+        <div class="blk"><span class="blk-t">K-02 Equipment fleet — filtered to this service</span><div class="blk-c">3–4 cards: unit count, capacity, year</div></div>
+        <div class="blk"><span class="blk-t">Process timeline · horizontal on ≥1024, vertical below</span></div>
+        <div class="row r3"><div class="blk"><span class="blk-t">Related 1</span></div><div class="blk"><span class="blk-t">2</span></div><div class="blk"><span class="blk-t">3</span></div></div>
+        <div class="blk"><span class="blk-t">Testimonial (single, small)</span></div>
+        <div class="blk rev"><span class="blk-t">K-06 Tender CTA</span><div class="blk-c">Upload field UI + 5-day promise</div></div>
+        <div class="blk solid"><span class="blk-t">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="plate">
+      <div class="plate-head"><strong>P-06 · Project Detail</strong><span class="lbl">Case study · spec-table heavy</span></div>
+      <div class="wf">
+        <div class="blk"><span class="blk-t">Breadcrumb</span></div>
+        <div class="blk" style="min-height:130px"><span class="blk-t">Case hero · wide duotone, uncropped</span><div class="hh">Meranti Logistics Hub</div><div class="blk-c">Cikarang, West Java · 2024 · Industrial</div></div>
+        <div class="blk"><span class="blk-t">Fact rail · client / sector / value / duration / m²</span></div>
+        <div class="row r64">
+          <div class="blk" style="min-height:120px"><span class="blk-t">Brief — running text, 66ch</span></div>
+          <div class="blk"><span class="blk-t">Scope delivered · ticked list</span></div>
+        </div>
+        <div class="blk"><span class="blk-t">Timeline · phase bars, mono dates</span><div class="bar w90"></div><div class="bar w70"></div><div class="bar w45"></div></div>
+        <div class="row r3"><div class="blk" style="min-height:80px"><span class="blk-t">Gallery 1</span></div><div class="blk"><span class="blk-t">2</span></div><div class="blk"><span class="blk-t">3</span></div></div>
+        <div class="blk"><span class="blk-t">Spec table · 12 rows, mono headers, zebra off</span></div>
+        <div class="blk"><span class="blk-t">Client testimonial · attributed to project owner</span></div>
+        <div class="blk"><span class="blk-t">Next project ▸ full-width link row</span></div>
+        <div class="blk solid"><span class="blk-t">Footer</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="lbl" style="margin-top:6px">Responsive rule applied at build, not after: every <code>.row</code> above collapses to one column at 768; fact rails go 4→2→1; process timeline flips vertical below 1024; gallery becomes a swipe row at 375.</p>
+</section>
+
+<section>
+  <div class="shead">
+    <span class="num">03</span>
+    <h2>Art direction — natural black &amp; white</h2>
+    <span class="note lbl">30-min timebox · moodboard</span>
+  </div>
+
+  <span class="lbl">Palette — seven tokens, zero accents</span>
+  <div class="swatches" style="margin-top:12px">
+    <div class="sw"><div class="chip" style="background:#0A0A0A"></div><div class="info"><b>#0A0A0A</b><span>--ink · text, dark surfaces</span></div></div>
+    <div class="sw"><div class="chip" style="background:#FAFAF8"></div><div class="info"><b>#FAFAF8</b><span>--paper · warm ground</span></div></div>
+    <div class="sw"><div class="chip" style="background:#F2F2EE"></div><div class="info"><b>#F2F2EE</b><span>--panel · cards</span></div></div>
+    <div class="sw"><div class="chip" style="background:#111111"></div><div class="info"><b>#111111</b><span>--rule · strong borders</span></div></div>
+    <div class="sw"><div class="chip" style="background:#D6D5D0"></div><div class="info"><b>#D6D5D0</b><span>--rule-soft · dividers</span></div></div>
+    <div class="sw"><div class="chip" style="background:#6B6B66"></div><div class="info"><b>#6B6B66</b><span>--mute · captions</span></div></div>
+    <div class="sw"><div class="chip" style="background:linear-gradient(90deg,#F6F6F0 50%,#111111 50%)"></div><div class="info"><b>reversal</b><span>--hilite · 3 uses per page max</span></div></div>
+  </div>
+
+  <div class="dim"><span>Type specimen</span></div>
+  <div class="specimen">
+    <div class="big">Built to last.<br>Priced to bid <em>competitively</em>.</div>
+    <p style="color:var(--mute);margin:0">Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.</p>
+    <div class="scale">
+      <div><span class="k">Display / Instrument Serif</span><span>48 – 104px · −1% tracking · italic on exactly one word per hero</span></div>
+      <div><span class="k">Body / Inter Tight</span><span>16 – 18px · 1.55 leading · 66ch measure · never all-caps</span></div>
+      <div><span class="k">Data / JetBrains Mono</span><span>10 – 12px · uppercase · 0.14em · section numbers, meta rows, table heads</span></div>
+      <div><span class="k">Weight ladder</span><span>400 body · 500 mono labels · 600 nav + buttons. No 700+ anywhere.</span></div>
+    </div>
+    <div class="rev-band">
+      <span class="lbl">Reversal study · stats band, counters run up once on first scroll-in</span>
+      <div class="stats">
+        <div><b>18</b><span>Years in business</span></div>
+        <div><b>240+</b><span>Projects delivered</span></div>
+        <div><b>1.2M</b><span>m² built</span></div>
+        <div><b>96%</b><span>On-time</span></div>
+        <div><b>0</b><span>Lost-time incidents 2025</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dim"><span>Photography treatment — duotone black-on-warm-white</span></div>
+  <div class="duo">
+    <figure class="frame f1" style="margin:0"><figcaption>Structural steel, low sun · hero</figcaption></figure>
+    <figure class="frame f2" style="margin:0"><figcaption>Formwork repetition · services</figcaption></figure>
+    <figure class="frame f3" style="margin:0"><figcaption>Tower crane at dusk · project hero</figcaption></figure>
+    <figure class="frame f4" style="margin:0"><figcaption>Rebar mat, top-down · texture divider</figcaption></figure>
+  </div>
+  <p class="lbl" style="margin-top:10px">Plates above are CSS stand-ins for the tonal range and framing — final assets are real site photography, duotoned #0A0A0A → #FAFAF8, exported AVIF + WebP.</p>
+
+  <div class="dim"><span>Rules of the direction</span></div>
+  <div class="cols2">
+    <div>
+      <span class="lbl">Do</span>
+      <ul class="rules">
+        <li>Emphasis by weight, scale, ruled space, reversal — nothing else.</li>
+        <li>Blueprint dimension lines and tick corners as dividers.</li>
+        <li>Dense grids — trust signals stack, hairlines separate.</li>
+        <li>Wide, uncropped, industrial framing. Scale is the story.</li>
+        <li>Motion: hero reveal + one counter run-up. <code>prefers-reduced-motion</code> honoured.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="lbl">Don't</span>
+      <ul class="rules no">
+        <li>Any colour accent, including hover states and form focus rings.</li>
+        <li>More than three reversal blocks on a page.</li>
+        <li>Parallax, bounce easing, scroll-jacking, marquees.</li>
+        <li>Stock handshakes, hi-vis portraits, aerial city shots.</li>
+        <li>All-caps body copy or colour-highlighted words.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead">
+    <span class="num">04</span>
+    <h2>Asset shortlist</h2>
+    <span class="note lbl">All B&amp;W-treated · AVIF + WebP + <code>&lt;picture&gt;</code></span>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Ref</th><th>Asset</th><th>Where</th><th>Treatment / size</th></tr></thead>
+    <tbody>
+      <tr><td>IMG-01</td><td>Steel frame against low sun, wide</td><td>Home hero</td><td>Duotone, 2400×1350, LCP — preloaded</td></tr>
+      <tr><td>IMG-02</td><td>Formwork panels, repetition</td><td>Services header, service detail</td><td>Duotone, 1600×1000</td></tr>
+      <tr><td>IMG-03</td><td>Tower crane at dusk</td><td>Project detail hero</td><td>Duotone, 2400×1200</td></tr>
+      <tr><td>IMG-04</td><td>Rebar mat, top-down</td><td>Texture divider, About</td><td>Straight B&amp;W, 1600×900</td></tr>
+      <tr><td>IMG-05–12</td><td>8 project plates (warehouse, hospital, plant, tower, school, bridge, fit-out, road)</td><td>Portfolio grid</td><td>Duotone, 1200×900, lazy</td></tr>
+      <tr><td>IMG-13–16</td><td>4 site-detail shots (welding, survey, concrete pour, hand-over)</td><td>Project gallery</td><td>Duotone, 1200×800, lazy</td></tr>
+      <tr><td>IMG-17–20</td><td>4 team portraits, plain wall, no hi-vis</td><td>About · Team</td><td>B&amp;W, 800×1000</td></tr>
+      <tr><td>SVG-01</td><td>8 certification marks (ISO 9001/14001/45001, SMK3, LPJK, K3, GBCI, OHSAS)</td><td>K-01</td><td>Single-colour SVG sprite, currentColor</td></tr>
+      <tr><td>SVG-02</td><td>10 client wordmarks (fictitious)</td><td>K-05</td><td>Sprite, currentColor, 100% opacity — no grey-out</td></tr>
+      <tr><td>SVG-03</td><td>UI icon set (24): arrow, chevron, download, phone, pin, upload, check, close…</td><td>Global</td><td>Sprite, 1.5px stroke</td></tr>
+      <tr><td>SVG-04</td><td>6 equipment silhouettes (crane, excavator, batching plant, formwork, loader, pump)</td><td>K-02</td><td>Line drawings, sprite</td></tr>
+      <tr><td>MAP-01</td><td>Indonesia/SEA outline with 6 pins</td><td>K-04 · Contact</td><td>Inline SVG, hairline, no tiles — zero JS map cost</td></tr>
+      <tr><td>FNT</td><td>Instrument Serif · Inter Tight · JetBrains Mono</td><td>Global</td><td>Self-hosted woff2, subset latin, preload 2 faces</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <div class="shead">
+    <span class="num">05</span>
+    <h2>Copy starter — used verbatim</h2>
+    <span class="note lbl">EN primary · ID in <code>lang="id"</code> comment blocks</span>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Block</th><th>English</th><th>Bahasa Indonesia</th></tr></thead>
+    <tbody>
+      <tr><td>Hero headline</td><td>Built to last. Priced to bid competitively.</td><td>Dibangun untuk tahan lama. Dihargai untuk menang tender.</td></tr>
+      <tr><td>Hero sub</td><td>Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.</td><td>Kontraktor umum untuk proyek komersial, industri, dan residensial di Indonesia. 18 tahun, 240+ proyek selesai, tanpa keterlambatan.</td></tr>
+      <tr><td>Services</td><td>General Contracting · Civil Works · Mechanical, Electrical &amp; Plumbing · Renovation · Interior Fit-out · Site Preparation</td><td>Kontraktor Umum · Pekerjaan Sipil · Mekanikal, Elektrikal &amp; Plumbing · Renovasi · Interior Fit-out · Persiapan Lahan</td></tr>
+      <tr><td>Stats band</td><td>18 years in business · 240+ projects delivered · 1.2M m² built · 96% on-time · 0 lost-time incidents in 2025</td><td>18 tahun berdiri · 240+ proyek selesai · 1,2 juta m² terbangun · 96% tepat waktu · 0 insiden hilang jam kerja 2025</td></tr>
+      <tr><td>Tender CTA</td><td>Have an RFP? Send us the docs — you'll get a full technical proposal within 5 business days.</td><td>Punya RFP? Kirim dokumennya — proposal teknis lengkap dalam 5 hari kerja.</td></tr>
+      <tr><td>Footer promise</td><td>One contractor, from ground-breaking to hand-over.</td><td>Satu kontraktor, dari peletakan batu pertama sampai serah terima.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="margin-top:18px">Demo firm: <b>Rangga Karya Utama</b> (RKU), est. 2008, Jakarta — six offices across Java, Sumatra, and Johor. Sample projects carry credible names and sectors: Meranti Logistics Hub (industrial, 2024), Cengkareng Terminal 4 Apron Works (government, 2023), Bhakti Medika Hospital Wing B (healthcare, 2025), Sentra Niaga Tower (commercial, 2022), Pelindo Batubara Conveyor Line (industrial, 2023), SD Negeri 14 Rebuild (government, 2025).</p>
+</section>
+
+<section>
+  <div class="shead">
+    <span class="num">06</span>
+    <h2>What happens after sign-off</h2>
+    <span class="note lbl">Sequence is mandatory — Day 09 does not start until this sheet is approved</span>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Day</th><th>Output</th><th>Gate</th></tr></thead>
+    <tbody>
+      <tr><td>09</td><td>All 7 pages + docs built, responsive audited during build</td><td>Every kit-section rendered with real content</td></tr>
+      <tr><td>10</td><td>GSAP pass (hero + counters only), 6 screenshots + 1600×900 cover, ZIP, README, LICENSE, product copy ×3</td><td>Clean <code>src/</code> + <code>dist/</code></td></tr>
+      <tr><td>11</td><td>QA per §8 — Lighthouse ≥ 90 / 95 / 95 / 100, cross-browser, link + HTML validity sweep</td><td>Nothing ships until every box ticks</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <span class="lbl">MGL-KIT-001 · Rev B · Day 08 sheet — awaiting approval</span>
+  <span class="lbl">Natural black &amp; white · no colour accents</span>
+</footer>
+
+</div>

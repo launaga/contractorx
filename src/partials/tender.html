@@ -1,0 +1,67 @@
+<section class="section tender" id="tender">
+  <div class="shell">
+    <div class="tender__inner">
+      <div>
+        <p class="eyebrow"><span>K-06</span> Tender desk</p>
+        <h2>Have an RFP? Send us the docs.</h2>
+        <p>You'll get a full technical proposal within 5 business days — method statement, priced BoQ, programme, and the safety plan for your site.</p>
+        <ol class="tender-steps">
+          <li>Upload the RFP, drawings, and BoQ. ZIP up to 40 MB.</li>
+          <li>Estimating confirms scope and site access within 24 hours.</li>
+          <li>Site walk arranged if the package needs one.</li>
+          <li>Priced proposal and programme delivered in 5 business days.</li>
+        </ol>
+      </div>
+      <form class="tender-form" novalidate data-validate>
+        <div class="form-row">
+          <div class="field">
+            <label for="t-name">Contact name</label>
+            <input id="t-name" name="name" type="text" required autocomplete="name">
+            <span class="field__error">Enter your name</span>
+          </div>
+          <div class="field">
+            <label for="t-org">Organisation</label>
+            <input id="t-org" name="org" type="text" required autocomplete="organization">
+            <span class="field__error">Enter your organisation</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="t-email">Work email</label>
+            <input id="t-email" name="email" type="email" required autocomplete="email">
+            <span class="field__error">Enter a valid email address</span>
+          </div>
+          <div class="field">
+            <label for="t-close">Tender closing date</label>
+            <input id="t-close" name="closing" type="date" required>
+            <span class="field__error">Select the closing date</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="t-scope">Scope</label>
+          <select id="t-scope" name="scope" required>
+            <option value="">Select a scope</option>
+            <option>General contracting</option>
+            <option>Civil works</option>
+            <option>Mechanical, electrical &amp; plumbing</option>
+            <option>Renovation</option>
+            <option>Interior fit-out</option>
+            <option>Site preparation</option>
+            <option>Design &amp; build (multi-scope)</option>
+          </select>
+          <span class="field__error">Select a scope</span>
+        </div>
+        <div class="field">
+          <label for="t-file">Tender documents</label>
+          <div class="dropzone">
+            <svg width="24" height="24" aria-hidden="true"><use href="#i-upload"></use></svg>
+            Drop RFP / drawings / BoQ — or choose a file
+          </div>
+          <input id="t-file" name="docs" type="file" accept=".zip,.pdf,.dwg,.xlsx" multiple>
+        </div>
+        <button class="btn-x" type="submit">Submit to tender desk <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+        <p class="form-status" role="status" data-status></p>
+      </form>
+    </div>
+  </div>
+</section>

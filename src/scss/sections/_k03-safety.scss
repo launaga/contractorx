@@ -1,0 +1,20 @@
+// K-03 Safety record — LTIR / TRIR, programme, PPE policy, incident-free counter
+.safety { display: grid; gap: clamp(1.75rem, 4vw, 3rem);
+  @include up($bp-lg) { grid-template-columns: 1.1fr 1fr; }
+}
+.safety-figures { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft); grid-template-columns: repeat(2, 1fr);
+  > div { min-width: 0; }
+  > div { background: var(--paper); padding: clamp(1.25rem, 2.6vw, 1.75rem); }
+  > div > b { display: block; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+  > div > span { display: block; font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); margin-top: .625rem; }
+  small { display: block; font-size: .75rem; color: var(--mute); margin-top: .5rem; }
+}
+.safety-days {
+  background: var(--reverse-bg); color: var(--reverse-fg); padding: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: $hair * 0;
+  > b { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5.5rem); line-height: .92; font-variant-numeric: tabular-nums; display: block; }
+  > span { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; opacity: .68; }
+}
+.safety-list { list-style: none; padding: 0; margin: 0; border-top: $hair solid var(--rule); }
+.safety-list li { padding: .9375rem 0; border-bottom: $hair dashed var(--rule-soft); display: grid; grid-template-columns: 1.5rem 1fr; gap: .875rem; font-size: .9375rem;
+  &::before { content: "✓"; font-family: var(--font-mono); color: var(--mute); }
+}

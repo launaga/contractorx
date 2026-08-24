@@ -1,0 +1,14 @@
+// M-13 Pricing — engagement models, not price tags
+.pricing { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft); grid-template-columns: 1fr;
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+}
+.plan {
+  background: var(--paper); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 1rem;
+  &--feature { background: var(--reverse-bg); color: var(--reverse-fg); }
+  &__idx { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; opacity: .7; }
+  h3 { font-size: 1.625rem; }
+  .plan__meta { font-family: var(--font-mono); font-size: .8125rem; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .625rem; flex: 1; font-size: .9375rem; }
+  li { display: grid; grid-template-columns: 1.25rem 1fr; gap: .5rem; }
+  li::before { content: "—"; font-family: var(--font-mono); opacity: .5; }
+}

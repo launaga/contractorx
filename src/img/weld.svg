@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="sky14" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#FAFAF8"/><stop offset="1" stop-color="#CFCEC8"/></linearGradient>
+<pattern id="hatch14" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="1.6" opacity=".5"/></pattern>
+</defs>
+<rect width="1200" height="900" fill="url(#sky14)"/><path d="M0 900 L0 450 L1200 558 L1200 900 Z" fill="#0A0A0A" opacity="0.9"/><g stroke="#FAFAF8" stroke-width="3" opacity=".8"><path d="M360 504.00000000000006 l-14 -26"/><path d="M366 504.00000000000006 l-14 -26"/><path d="M372 504.00000000000006 l-14 -26"/><path d="M378 504.00000000000006 l-14 -26"/><path d="M384 504.00000000000006 l-14 -26"/><path d="M390 504.00000000000006 l-14 -26"/><path d="M396 504.00000000000006 l-14 -26"/><path d="M402 504.00000000000006 l-14 -26"/><path d="M408 504.00000000000006 l-14 -26"/><path d="M414 504.00000000000006 l-14 -26"/><path d="M420 504.00000000000006 l-14 -26"/><path d="M426 504.00000000000006 l-14 -26"/><path d="M432 504.00000000000006 l-14 -26"/><path d="M438 504.00000000000006 l-14 -26"/><path d="M444 504.00000000000006 l-14 -26"/><path d="M450 504.00000000000006 l-14 -26"/></g></svg>
