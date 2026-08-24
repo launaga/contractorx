@@ -36,6 +36,9 @@
 @import "sections/k06-tender";
 @import "sections/k07-awards";
 
+// --- Print ---------------------------------------------------
+@import "print";
+
 // --- Motion (GSAP-optional; CSS fallback runs without it) ---
 .reveal { opacity: 1; }
 @include motion-ok {

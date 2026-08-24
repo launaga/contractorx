@@ -1,0 +1,38 @@
+// ============================================================
+// Print — pages are printed by clients as often as they're read
+// ============================================================
+@media print {
+  :root { --paper: #fff; --ink: #000; --panel: #fff; --mute: #444; }
+
+  .nav-x { position: static; border-bottom: 1px solid #000; }
+  .nav-x__toggle,
+  .nav-x__panel,
+  .nav-x__cta,
+  .theme-toggle,
+  .skip-link,
+  .hero__scroll,
+  .filter-bar,
+  .cx-bar { display: none !important; }
+
+  .hero, .stats-band, .cta-band, .tender, .safety-days {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000;
+  }
+  .hero__media { display: none; }
+  .reverse .label, .reverse .meta, .reverse .mono,
+  .hero .label, .cta-band p, .tender p { opacity: 1 !important; color: #000 !important; }
+
+  .reveal { opacity: 1 !important; transform: none !important; }
+  details { display: block; }
+  details > summary { list-style: none; }
+  details p { display: block !important; }
+
+  .section { padding-block: 1.5rem; break-inside: avoid; }
+  .plate { break-inside: avoid; }
+  table, figure, .cert, .unit, .card-x { break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; }
+
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #444; }
+  a[href^="#"]::after, a[href$=".html"]::after { content: ""; }
+}
