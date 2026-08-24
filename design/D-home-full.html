@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{
+ --ink:#0B0C0D;--panel:#141618;--panel2:#1B1E21;--line:#292C30;
+ --fg:#F1ECE2;--steel:#8A9096;--dim:#5E646A;
+ --kraft:#D6CCB8;--kraft2:#C7BCA4;--kink:#17181A;
+ --hi:#FF5B04;--ok:#3F8B55;--warn:#C25E12;
+}
+body{width:1440px;background:var(--ink);color:var(--fg);font-family:Archivo,sans-serif;overflow-x:hidden}
+.m{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.anton{font-family:Anton,sans-serif;text-transform:uppercase;line-height:.84;letter-spacing:.004em}
+.hand{font-family:Caveat,cursive;font-weight:700;color:var(--hi)}
+.hi{color:var(--hi)}
+.shell{padding-inline:52px}
+section{position:relative}
+
+/* torn edge dark->kraft */
+.tear-d{height:16px;background:var(--ink);position:relative;z-index:2;margin-bottom:-1px;
+ -webkit-mask:radial-gradient(11px 16px at 11px 100%,#000 98%,transparent 100%) repeat-x;mask:radial-gradient(11px 16px at 11px 100%,#000 98%,transparent 100%) repeat-x;-webkit-mask-size:22px 16px;mask-size:22px 16px}
+.tear-k{height:16px;background:var(--kraft);position:relative;z-index:2;margin-bottom:-1px;
+ -webkit-mask:radial-gradient(11px 16px at 11px 100%,#000 98%,transparent 100%) repeat-x;mask:radial-gradient(11px 16px at 11px 100%,#000 98%,transparent 100%) repeat-x;-webkit-mask-size:22px 16px;mask-size:22px 16px}
+
+/* ---------- top + nav ---------- */
+.utility{display:flex;justify-content:space-between;padding:9px 52px;border-bottom:1px solid var(--line);color:var(--dim)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:18px 52px;border-bottom:1px solid var(--line)}
+.brand{font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+.brand i{font-style:normal;color:var(--hi)}
+.nav ul{display:flex;gap:28px;list-style:none;padding:0;color:var(--steel)}
+.btn{display:inline-block;background:var(--hi);color:#0B0C0D;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;padding:13px 20px}
+.btn.o{background:transparent;color:var(--fg);border:1px solid var(--line);font-weight:500}
+.btn.k{background:var(--kink);color:var(--kraft)}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 52px 0;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(90% 70% at 74% 2%,rgba(255,91,4,.13),transparent 58%),
+ repeating-linear-gradient(0deg,rgba(241,236,226,.024) 0 1px,transparent 1px 44px)}
+.hgrid{position:relative;display:grid;grid-template-columns:1fr 545px;gap:52px}
+.tagrow{display:flex;gap:14px;align-items:center;margin-bottom:20px}
+.tag{border:1px solid var(--hi);color:var(--hi);padding:5px 9px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase}
+h1{font-family:Anton,sans-serif;text-transform:uppercase;font-size:124px;line-height:.83;letter-spacing:.002em}
+h1 .g{color:var(--steel)}
+.lede{max-width:452px;margin-top:24px;font-size:16.5px;line-height:1.56;color:#C4BDB2}
+.acts{display:flex;gap:10px;margin-top:26px;align-items:center}
+
+/* site log document */
+.doc{position:relative;background:var(--kraft);color:var(--kink);padding:24px 22px 20px;box-shadow:0 26px 54px rgba(0,0,0,.6);transform:rotate(.6deg)}
+.doc::before{content:"";position:absolute;left:50%;top:-15px;transform:translateX(-50%);width:112px;height:24px;background:#2B2D2F;border-radius:3px;box-shadow:0 5px 9px rgba(0,0,0,.5)}
+.doc::after{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:72px;height:11px;background:#4A4D50;border-radius:2px}
+.doc h3{font-family:Anton,sans-serif;text-transform:uppercase;font-size:23px}
+.docmeta{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#5D584D;margin-top:5px;padding-bottom:10px;border-bottom:1.5px solid var(--kink)}
+.lrow{display:grid;grid-template-columns:48px 1fr 72px;gap:9px;padding:8px 0;border-bottom:1px dashed rgba(23,24,26,.28);align-items:center}
+.lrow .t{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:#5D584D}
+.lrow .d{font-size:13.5px;font-weight:500}
+.lrow .s{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;text-align:right;color:var(--ok)}
+.lrow .s.w{color:var(--warn)}
+.mark{background:linear-gradient(transparent 56%,rgba(255,91,4,.42) 56%)}
+.docfoot{display:flex;gap:14px;margin-top:13px;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:#5D584D}
+.stamp{position:absolute;border:2.5px solid var(--hi);color:var(--hi);font-family:Anton,sans-serif;text-transform:uppercase;letter-spacing:.04em;padding:7px 12px;transform:rotate(-8deg);line-height:1.05;text-align:center;background:rgba(11,12,13,.82)}
+
+/* ticker */
+.ticker{margin-top:50px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;gap:44px;padding:14px 0;color:var(--dim);white-space:nowrap}
+.ticker b{color:var(--fg);font-family:"JetBrains Mono",monospace;font-weight:700}
+
+/* ---------- section head ---------- */
+.sh{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:end}
+.sh h2{font-family:Anton,sans-serif;text-transform:uppercase;font-size:72px;line-height:.86}
+.sh p{color:var(--steel);font-size:14.5px;line-height:1.6}
+.kraftsec .sh p{color:#57524A}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--hi);margin-bottom:14px;display:block}
+
+/* ---------- spec table (services) ---------- */
+.sec{padding:74px 0 84px}
+.sheet{margin-top:40px;border-top:2px solid var(--fg)}
+.hrow,.srow{display:grid;grid-template-columns:56px 1.5fr 1fr .9fr .8fr 118px;align-items:center}
+.hrow{padding:10px 52px;color:var(--dim);border-bottom:1px solid var(--line)}
+.srow{padding:19px 52px;border-bottom:1px solid var(--line)}
+.srow .idx{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.srow .nm{font-family:Anton,sans-serif;text-transform:uppercase;font-size:25px;letter-spacing:.01em}
+.srow .v{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:500}
+.srow .v small{display:block;font-size:8.5px;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-bottom:4px}
+.srow .go{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;text-align:right;color:var(--dim)}
+.srow.on{background:var(--panel);border-left:3px solid var(--hi);padding-left:49px}
+.srow.on .go{color:var(--hi)}
+
+/* ---------- kraft ---------- */
+.kraftsec{background:var(--kraft);color:var(--kink);padding:66px 0 82px}
+.kraftsec .sh h2{color:var(--kink)}
+.kraftsec .eyebrow{color:#9A5312}
+.tape{position:absolute;width:84px;height:26px;background:rgba(243,239,230,.72);box-shadow:0 1px 3px rgba(0,0,0,.16);border-left:1px solid rgba(23,24,26,.08);border-right:1px solid rgba(23,24,26,.08)}
+
+/* fleet */
+.fleet{display:grid;grid-template-columns:repeat(3,1fr);margin-top:42px;border-top:2px solid var(--kink)}
+.unit{padding:22px 22px 20px 0;border-right:1px solid rgba(23,24,26,.22);position:relative}
+.unit:nth-child(3n){border-right:0}
+.unit:nth-child(n+4){border-top:1px solid rgba(23,24,26,.22)}
+.unit .n{font-family:Anton,sans-serif;font-size:62px;line-height:.85}
+.unit .n sup{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;vertical-align:super;color:#6C6659}
+.unit h4{font-family:Anton,sans-serif;text-transform:uppercase;font-size:19px;margin-top:6px}
+.unit dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:10px;font-family:"JetBrains Mono",monospace;font-size:10px}
+.unit dt{color:#6C6659;text-transform:uppercase;letter-spacing:.12em;font-size:8.5px}
+.unit dd{text-align:right;font-weight:500}
+
+/* safety */
+.figs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:38px}
+.fig{padding:24px 22px 24px 0;border-right:1px solid var(--line)}
+.fig:last-child{border-right:0}
+.fig b{display:block;font-family:Anton,sans-serif;font-size:66px;line-height:.85;white-space:nowrap}
+.fig span{display:block;margin-top:10px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.fig i{display:block;margin-top:6px;font-style:normal;font-size:12px;color:var(--dim)}
+.bars{margin-top:38px;display:grid;grid-template-columns:140px 1fr 74px;gap:0 20px;align-items:center}
+.bars .lb{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--steel);padding:9px 0}
+.trk{height:14px;background:var(--panel2);position:relative}
+.trk i{position:absolute;inset:0 auto 0 0;background:var(--hi);display:block}
+.trk.g i{background:#33373B}
+.bars .vl{font-family:"JetBrains Mono",monospace;font-size:10.5px;text-align:right}
+.chklist{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.chklist li{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px;color:#C4BDB2}
+.chklist li::before{content:"✓";color:var(--hi);font-family:"JetBrains Mono",monospace;font-size:12px}
+
+/* certs */
+.certs{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:2px solid var(--kink)}
+.cert{padding:20px 20px 22px 0;border-right:1px solid rgba(23,24,26,.22);border-bottom:1px solid rgba(23,24,26,.22);position:relative;min-height:150px}
+.cert:nth-child(4n){border-right:0}
+.cert .c{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.15em;color:#6C6659}
+.cert h4{font-family:Anton,sans-serif;text-transform:uppercase;font-size:19px;line-height:.95;margin:9px 0 7px}
+.cert p{font-size:11.5px;line-height:1.5;color:#57524A}
+.cert .vd{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.13em;color:#6C6659;margin-top:10px}
+
+/* projects */
+.projs{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;margin-top:40px}
+.pcard{position:relative;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+.pimg{height:330px;background:#0E1114;position:relative;overflow:hidden}
+.pimg::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+ background-image:linear-gradient(rgba(241,236,226,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(241,236,226,.07) 1px,transparent 1px);
+ background-size:46px 46px}
+.pcard.sm .pimg{height:158px}
+.pimg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) invert(1) contrast(1.15) brightness(1.05);opacity:.42}
+.pimg::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(11,12,13,.15) 0%,transparent 34%,rgba(11,12,13,.9))}
+.pdock{display:grid;grid-template-columns:1fr auto auto auto;gap:20px;align-items:center;padding:14px 18px;border-top:1px solid var(--line)}
+.pdock h4{font-family:Anton,sans-serif;text-transform:uppercase;font-size:21px}
+.pdock .kv{font-family:"JetBrains Mono",monospace;font-size:11px}
+.pdock .kv small{display:block;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.plabel{position:absolute;z-index:3;left:14px;top:14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:var(--hi);color:#0B0C0D;padding:4px 8px}
+.side2{display:grid;gap:20px}
+
+/* clients */
+.clients{display:grid;grid-template-columns:repeat(5,1fr);margin-top:36px;border-top:1px solid rgba(23,24,26,.25)}
+.cl{padding:20px 16px 20px 0;border-right:1px solid rgba(23,24,26,.18)}
+.cl:nth-child(5n){border-right:0}
+.cl b{font-family:Anton,sans-serif;text-transform:uppercase;font-size:19px;display:block}
+.cl span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#6C6659;display:block;margin-top:5px}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--line)}
+.st{padding:22px 22px 24px 0;border-right:1px solid var(--line)}
+.st:last-child{border-right:0}
+.st b{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.16em;color:var(--hi)}
+.st h4{font-family:Anton,sans-serif;text-transform:uppercase;font-size:23px;margin:12px 0 8px}
+.st p{font-size:13px;line-height:1.55;color:var(--steel)}
+
+/* quote */
+.quote{margin-top:0;padding:60px 0 0}
+.quote blockquote{font-family:Anton,sans-serif;text-transform:uppercase;font-size:46px;line-height:.94;max-width:1080px}
+.quote figcaption{margin-top:20px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--steel)}
+
+/* tender docket */
+.docket{display:grid;grid-template-columns:1.25fr 1fr 250px;background:var(--kraft);color:var(--kink);position:relative}
+.dk{padding:34px 30px}
+.dk.mid{border-inline:2px dashed rgba(23,24,26,.35)}
+.dk.right{background:var(--hi);color:#0B0C0D;display:flex;flex-direction:column;justify-content:space-between}
+.docket h2{font-family:Anton,sans-serif;text-transform:uppercase;font-size:56px;line-height:.86}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:18px}
+.field div span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:#6C6659;display:block}
+.field div b{font-family:"JetBrains Mono",monospace;font-size:13px;display:block;margin-top:4px;border-bottom:1px solid rgba(23,24,26,.3);padding-bottom:6px}
+.barcode{display:flex;gap:2px;align-items:flex-end;height:44px;margin-top:16px}
+.barcode i{display:block;width:2px;background:var(--kink)}
+
+/* footer */
+.foot{padding:54px 52px 26px;border-top:1px solid var(--line)}
+.tblock{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr .9fr;border:1px solid var(--line)}
+.tblock>div{padding:14px 16px;border-right:1px solid var(--line)}
+.tblock>div:last-child{border-right:0;background:var(--panel)}
+.tblock span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:block}
+.tblock b{font-family:Anton,sans-serif;text-transform:uppercase;font-size:15px;letter-spacing:.02em;display:block;margin-top:6px}
+.fbase{display:flex;justify-content:space-between;margin-top:22px;color:var(--dim)}
+</style></head><body>
+
+<div class="utility m"><span>RANGGA KARYA UTAMA · GENERAL CONTRACTOR · EST. 2008</span><span>07°25'S 107°03'E · WEST JAVA · LPJK GRADE 7 · ISO 9001 / 45001 / 14001</span></div>
+
+<nav class="nav">
+  <div class="brand">RKU<i>.</i></div>
+  <ul class="m"><li>Services</li><li>Projects</li><li>Fleet</li><li>Safety</li><li>About</li><li>Contact</li></ul>
+  <a class="btn">Request a tender pack</a>
+</nav>
+
+<section class="hero">
+  <div class="hgrid">
+    <div>
+      <div class="tagrow">
+        <span class="tag">Design &amp; Build</span>
+        <span class="m" style="color:var(--dim)">6 SITES LIVE · 4 PROVINCES · 2 COUNTRIES</span>
+      </div>
+      <h1>Built<br>to last.<br><span class="g">Priced</span><br><span class="hi">to bid.</span></h1>
+      <p class="lede">Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.</p>
+      <div class="acts">
+        <a class="btn">Request a tender pack →</a>
+        <a class="btn o">See the work</a>
+      </div>
+      <p class="hand" style="font-size:25px;margin-top:20px;transform:rotate(-1.2deg)">— priced proposal back in 5 working days.</p>
+    </div>
+
+    <div style="position:relative">
+      <div class="doc">
+        <h3>Daily site log</h3>
+        <div class="docmeta"><span>Meranti Logistics Hub</span><span>Cikarang · Sheet 412</span></div>
+        <div class="lrow"><span class="t">06:30</span><span class="d">Toolbox talk — 214 workers inducted</span><span class="s">Closed</span></div>
+        <div class="lrow"><span class="t">07:15</span><span class="d">Crane T-02 pre-lift inspection</span><span class="s">Closed</span></div>
+        <div class="lrow"><span class="t">09:40</span><span class="d">Slab pour, Grid C4–F9 · 340 m³</span><span class="s">Closed</span></div>
+        <div class="lrow"><span class="t">13:05</span><span class="d">Cube test — 28 day, 41.2 MPa</span><span class="s">Pass</span></div>
+        <div class="lrow"><span class="t">15:20</span><span class="d">Rebar tie inspection, Level 3</span><span class="s w">Open</span></div>
+        <div class="lrow"><span class="t">17:00</span><span class="d">Progress <span class="mark">78% against baseline</span></span><span class="s">On track</span></div>
+        <div class="docfoot"><span>Weather: clear 31°C</span><span>Wind 8 km/h</span><span>Lost hours: 0</span></div>
+      </div>
+      <div class="stamp" style="right:-22px;bottom:-16px;font-size:17px">0 LTI<br>612 DAYS</div>
+    </div>
+  </div>
+
+  <div class="ticker m">
+    <span>18 <b>YEARS</b></span><span>240+ <b>PROJECTS</b></span><span>1.2M <b>m² BUILT</b></span><span>96% <b>ON TIME</b></span>
+    <span>412 <b>DIRECT STAFF</b></span><span>6 <b>OFFICES</b></span><span>0 <b>LTI 2025</b></span><span>IDR 40–600 <b>BN RANGE</b></span>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">01 · Scopes</span><h2>Six routes.<br>One contract.</h2></div>
+      <p>Structure and civil are self-performed with our own crews and plant. Systems and finishes run through a fixed panel of specialists we have used since 2016 — no open tendering mid-project.</p>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="hrow m"><span>Route</span><span>Scope</span><span>Delivery</span><span>Typical value</span><span>Mobilise</span><span></span></div>
+    <div class="srow"><span class="idx">01</span><span class="nm">General contracting</span><span class="v"><small>Structure · Civil</small>Self-performed</span><span class="v"><small>IDR</small>40 – 600 bn</span><span class="v"><small>Days</small>14</span><span class="go">Open →</span></div>
+    <div class="srow on"><span class="idx">02</span><span class="nm">Civil works</span><span class="v"><small>Piling · Substructure</small>Self-performed</span><span class="v"><small>IDR</small>18 – 240 bn</span><span class="v"><small>Days</small>14</span><span class="go">Open →</span></div>
+    <div class="srow"><span class="idx">03</span><span class="nm">Mechanical, electrical &amp; plumbing</span><span class="v"><small>Fixed panel</small>Managed</span><span class="v"><small>IDR</small>12 – 180 bn</span><span class="v"><small>Days</small>21</span><span class="go">Open →</span></div>
+    <div class="srow"><span class="idx">04</span><span class="nm">Renovation</span><span class="v"><small>Live buildings</small>Self-performed</span><span class="v"><small>IDR</small>10 – 120 bn</span><span class="v"><small>Days</small>21</span><span class="go">Open →</span></div>
+    <div class="srow"><span class="idx">05</span><span class="nm">Interior fit-out</span><span class="v"><small>Own joinery</small>Self-performed</span><span class="v"><small>IDR</small>8 – 90 bn</span><span class="v"><small>Days</small>14</span><span class="go">Open →</span></div>
+    <div class="srow"><span class="idx">06</span><span class="nm">Site preparation</span><span class="v"><small>Earthworks</small>Self-performed</span><span class="v"><small>IDR</small>6 – 80 bn</span><span class="v"><small>Days</small>14</span><span class="go">Open →</span></div>
+  </div>
+</section>
+
+<div class="tear-d"></div>
+<section class="kraftsec">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">02 · Plant</span><h2>Owned plant.<br>Not rented promises.</h2></div>
+      <p>Every unit is company-owned, serviced on a 250-hour cycle, and operated by certified RKU crew. Availability is published to clients weekly and confirmed in writing at contract signature.</p>
+    </div>
+    <div class="fleet">
+      <div class="unit"><div class="tape" style="top:-12px;right:26px;transform:rotate(5deg)"></div><div class="n">6<sup>UNITS</sup></div><h4>Tower cranes</h4><dl><dt>Model</dt><dd>Potain MDT 219</dd><dt>Max load</dt><dd>10 t</dd><dt>Jib</dt><dd>60 – 65 m</dd><dt>Newest</dt><dd>2023</dd></dl></div>
+      <div class="unit"><div class="n">14<sup>UNITS</sup></div><h4>Excavators</h4><dl><dt>Class</dt><dd>13 t – 36 t</dd><dt>Fleet</dt><dd>PC130 – PC360</dd><dt>Attach.</dt><dd>Breaker, grab</dd><dt>Newest</dt><dd>2025</dd></dl></div>
+      <div class="unit"><div class="n">2<sup>PLANTS</sup></div><h4>Batching plants</h4><dl><dt>Output</dt><dd>60 m³/h each</dd><dt>Silos</dt><dd>4 × 100 t</dd><dt>Mixers</dt><dd>11 trucks</dd><dt>Newest</dt><dd>2021</dd></dl></div>
+      <div class="unit"><div class="n">18k<sup>m² FORMWORK</sup></div><h4>Formwork systems</h4><dl><dt>Type</dt><dd>PERI Skydeck</dd><dt>Shoring</dt><dd>4,200 props</dd><dt>Cycle</dt><dd>4-day floor</dd><dt>Newest</dt><dd>2024</dd></dl></div>
+      <div class="unit"><div class="tape" style="top:-12px;left:14px;transform:rotate(-6deg)"></div><div class="n">9<sup>UNITS</sup></div><h4>Loaders &amp; rollers</h4><dl><dt>Loaders</dt><dd>5 × 3.0 m³</dd><dt>Rollers</dt><dd>4 × 10 t</dd><dt>Use</dt><dd>Earth, pavement</dd><dt>Newest</dt><dd>2024</dd></dl></div>
+      <div class="unit"><div class="n">4<sup>UNITS</sup></div><h4>Concrete pumps</h4><dl><dt>Boom</dt><dd>2×42 m, 2×28 m</dd><dt>Output</dt><dd>160 m³/h</dd><dt>Support</dt><dd>2 line pumps</dd><dt>Newest</dt><dd>2022</dd></dl></div>
+    </div>
+  </div>
+</section>
+<div class="tear-k"></div>
+
+<section class="sec">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">03 · Safety</span><h2>Published in full.<br>Including the year<br>we had an incident.</h2></div>
+      <p>Rates per 1,000,000 work hours, self-reported to Kemnaker and verified in our annual SMK3 audit. Monthly statistics go to clients with the valuation, whatever they say.</p>
+    </div>
+    <div class="figs">
+      <div class="fig"><b class="hi">0.18</b><span>LTIR 2025</span><i>Industry average 1.42</i></div>
+      <div class="fig"><b>0.94</b><span>TRIR 2025</span><i>Recordable per 1M hours</i></div>
+      <div class="fig"><b>1.94<span style="font-size:32px;color:var(--steel)">M</span></b><span>Work hours 2025</span><i>Own staff + subcontractors</i></div>
+      <div class="fig"><b>612</b><span>Days since LTI</span><i>As at 24 Aug 2026</i></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:8px">
+      <div class="bars">
+        <span class="lb">RKU 2025</span><span class="trk"><i style="width:12.7%"></i></span><span class="vl">0.18</span>
+        <span class="lb">RKU 2024</span><span class="trk"><i style="width:19.7%"></i></span><span class="vl">0.28</span>
+        <span class="lb">RKU 2023</span><span class="trk"><i style="width:26.1%"></i></span><span class="vl">0.37</span>
+        <span class="lb">RKU 2022</span><span class="trk"><i style="width:33.8%"></i></span><span class="vl">0.48</span>
+        <span class="lb">Industry avg</span><span class="trk g"><i style="width:100%"></i></span><span class="vl">1.42</span>
+      </div>
+      <div style="margin-top:38px">
+        <ul class="chklist">
+          <li>Full-time QHSE officer on every site above IDR 30 bn — never a shared role</li>
+          <li>Permit-to-work for hot works, confined space, and every lift</li>
+          <li>PPE issued by RKU to every worker on site, subcontracted trades included</li>
+          <li>Stop-work authority for any worker, no justification required first</li>
+          <li>Near-miss reporting rewarded, not penalised — 340 logged in 2025</li>
+        </ul>
+        <p class="hand" style="font-size:23px;margin-top:16px;transform:rotate(-1deg)">2019: one LTI, fractured wrist. Procedure rewritten. Still on file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">04 · Selected work</span><h2>Recent hand-overs.</h2></div>
+      <p>Every entry links to the full case study — brief, scope, programme, as-built spec table, and the client's own words.</p>
+    </div>
+    <div class="projs">
+      <article class="pcard">
+        <div class="pimg"><span class="plabel">Project of the year 2024</span><img src="../dist/img/warehouse.svg" alt=""></div>
+        <div class="pdock">
+          <h4>Meranti Logistics Hub</h4>
+          <span class="kv"><small>Sector</small>Industrial</span>
+          <span class="kv"><small>Area</small>42,000 m²</span>
+          <span class="kv"><small>Delivered</small>11 days early</span>
+        </div>
+      </article>
+      <div class="side2">
+        <article class="pcard sm">
+          <div class="pimg"><img src="../dist/img/hospital.svg" alt=""></div>
+          <div class="pdock"><h4>Bhakti Medika Wing B</h4><span class="kv"><small>Sector</small>Healthcare</span><span class="kv"><small>Area</small>18,400 m²</span><span class="kv"><small>Year</small>2025</span></div>
+        </article>
+        <article class="pcard sm">
+          <div class="pimg"><img src="../dist/img/apron.svg" alt=""></div>
+          <div class="pdock"><h4>Cengkareng T4 Apron</h4><span class="kv"><small>Sector</small>Government</span><span class="kv"><small>Area</small>96,000 m²</span><span class="kv"><small>Year</small>2023</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear-d"></div>
+<section class="kraftsec">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">05 · Certifications</span><h2>Current and<br>countersigned.</h2></div>
+      <p>Copies of every certificate ship with the tender submission. Validity dates below are live — nothing expired is listed.</p>
+    </div>
+    <div class="certs">
+      <div class="cert"><div class="c">CERT 01</div><h4>ISO 9001:2015</h4><p>Quality management. Audited annually by TÜV across design coordination, procurement, and site execution.</p><div class="vd">Valid to 03 / 2028</div></div>
+      <div class="cert"><div class="c">CERT 02</div><h4>ISO 45001:2018</h4><p>Occupational health &amp; safety. Whole-company scope including subcontracted trades and plant operators.</p><div class="vd">Valid to 11 / 2027</div></div>
+      <div class="cert"><div class="c">CERT 03</div><h4>ISO 14001:2015</h4><p>Environmental management. Waste segregation, dewatering control, and noise limits on every site.</p><div class="vd">Valid to 06 / 2027</div></div>
+      <div class="cert"><div class="c">CERT 04</div><h4>SMK3 · PP 50/2012</h4><p>National safety system. Gold-level, 168 of 166 criteria met at the last Kemnaker audit.</p><div class="vd">Valid to 09 / 2027</div></div>
+      <div class="cert"><div class="c">CERT 05</div><h4>LPJK Grade 7</h4><p>Contractor qualification. Unlimited project value; BG004, BS001, SI003, MK001 held.</p><div class="vd">Valid to 02 / 2029</div></div>
+      <div class="cert"><div class="c">CERT 06</div><h4>K3 Award · Gold</h4><p>Zero-accident programme. 4.1 million consecutive work hours without a lost-time incident.</p><div class="vd">Issued 01 / 2026</div></div>
+      <div class="cert"><div class="c">CERT 07</div><h4>GBCI Greenship</h4><p>Two Greenship Gold deliveries; four accredited Greenship Associates on staff.</p><div class="vd">Member since 2019</div></div>
+      <div class="cert"><div class="c">CERT 08</div><h4>AKI · Member 0412</h4><p>Full member. Board seat on the national safety standards working group.</p><div class="vd">Member since 2011</div>
+        <div class="stamp" style="right:10px;bottom:12px;font-size:13px;background:transparent;border-color:#B4531A;color:#B4531A">Verified</div></div>
+    </div>
+
+    <div class="clients">
+      <div class="cl"><b>Meranti</b><span>Industrial</span></div>
+      <div class="cl"><b>Pelindo</b><span>State-owned</span></div>
+      <div class="cl"><b>Bhakti Medika</b><span>Healthcare</span></div>
+      <div class="cl"><b>Sentra Niaga</b><span>Commercial</span></div>
+      <div class="cl"><b>Angkasa Pura</b><span>Aviation</span></div>
+      <div class="cl"><b>Disdik Jabar</b><span>Government</span></div>
+      <div class="cl"><b>Cipta Baja</b><span>Manufacturing</span></div>
+      <div class="cl"><b>Halim Property</b><span>Developer</span></div>
+      <div class="cl"><b>Nusa Energi</b><span>Energy</span></div>
+      <div class="cl"><b>Johor Logpark</b><span>Malaysia</span></div>
+    </div>
+    <p class="hand" style="font-size:24px;margin-top:18px;color:#9A5312;transform:rotate(-1deg)">78% of 2025 revenue came from clients we had already built for.</p>
+  </div>
+</section>
+<div class="tear-k"></div>
+
+<section class="sec">
+  <div class="shell">
+    <div class="sh">
+      <div><span class="eyebrow">06 · Delivery</span><h2>Four stages.<br>Fixed reporting.</h2></div>
+      <p>Weekly S-curve against baseline, three-week look-ahead, photographic progress log, RFI register, and open change orders — from day one.</p>
+    </div>
+    <div class="proc">
+      <div class="st"><b>STAGE 01</b><h4>Pre-construction</h4><p>Buildability review, value engineering, programme, and a priced BoQ you can take to your board.</p></div>
+      <div class="st"><b>STAGE 02</b><h4>Mobilisation</h4><p>Site establishment, permits, HSE induction, and the safety plan signed before a machine moves.</p></div>
+      <div class="st"><b>STAGE 03</b><h4>Execution</h4><p>Self-performed structure and civil, weekly reporting, and a fixed change-order process.</p></div>
+      <div class="st"><b>STAGE 04</b><h4>Hand-over</h4><p>Commissioning, as-builts, O&amp;M manuals, training, and 24 months of defect liability.</p></div>
+    </div>
+
+    <figure class="quote">
+      <blockquote>“They ran our warehouse build while the site next door stayed live. Eleven days early, and the punch list fit on one page.”</blockquote>
+      <figcaption>Ir. Dewi Anggraini · Head of Facilities · Meranti Group</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section style="padding:0 52px 74px">
+  <div class="docket">
+    <div class="dk">
+      <span class="eyebrow">07 · Tender desk</span>
+      <h2>Have an RFP?<br>Send the docs.</h2>
+      <p style="margin-top:14px;font-size:14px;line-height:1.55;color:#57524A;max-width:340px">Full technical proposal in 5 business days — method statement, priced BoQ, programme, and the safety plan for your site.</p>
+      <div class="barcode">
+        <i style="height:44px"></i><i style="height:28px"></i><i style="height:44px;width:4px"></i><i style="height:20px"></i><i style="height:44px"></i><i style="height:34px;width:3px"></i><i style="height:44px"></i><i style="height:22px"></i><i style="height:40px;width:4px"></i><i style="height:28px"></i><i style="height:44px"></i><i style="height:18px"></i><i style="height:44px;width:3px"></i><i style="height:30px"></i><i style="height:44px"></i><i style="height:24px"></i><i style="height:44px;width:4px"></i><i style="height:36px"></i><i style="height:44px"></i><i style="height:20px"></i>
+      </div>
+      <div class="m" style="color:#6C6659;margin-top:8px">RKU · TENDER DESK · EST-01</div>
+    </div>
+    <div class="dk mid">
+      <div class="m" style="color:#6C6659">Submission slip</div>
+      <div class="field">
+        <div><span>Organisation</span><b>&nbsp;</b></div>
+        <div><span>Contact</span><b>&nbsp;</b></div>
+        <div><span>Scope</span><b>Civil works</b></div>
+        <div><span>Closing date</span><b>&nbsp;</b></div>
+        <div><span>Documents</span><b>ZIP · 40 MB</b></div>
+        <div><span>Site</span><b>&nbsp;</b></div>
+      </div>
+      <p class="hand" style="font-size:23px;margin-top:20px;color:#9A5312;transform:rotate(-1.5deg)">estimating confirms scope in 24 hrs.</p>
+    </div>
+    <div class="dk right">
+      <div>
+        <div class="m" style="opacity:.7">Status</div>
+        <div style="font-family:Anton,sans-serif;text-transform:uppercase;font-size:38px;line-height:.88;margin-top:8px">Submission<br>open</div>
+      </div>
+      <a class="btn k" style="text-align:center">Start a submission →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="tblock">
+    <div><span>Firm</span><b>Rangga Karya Utama</b></div>
+    <div><span>Registration</span><b>LPJK Grade 7</b></div>
+    <div><span>Head office</span><b>Jakarta Selatan</b></div>
+    <div><span>Sheet</span><b>Home · 01 / 07</b></div>
+    <div><span>Status</span><b class="hi">Issued</b></div>
+  </div>
+  <div class="fbase m">
+    <span>© 2026 RANGGA KARYA UTAMA · ONE CONTRACTOR, FROM GROUND-BREAKING TO HAND-OVER</span>
+    <span>+62 21 555 0148 · TENDER@RKU.EXAMPLE</span>
+  </div>
+</footer>
+</body></html>
