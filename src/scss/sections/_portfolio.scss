@@ -1,0 +1,32 @@
+// M-07 Portfolio grid + filters
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+  padding-block: 1rem; border-block: $hair solid var(--rule-soft); margin-bottom: $space-block;
+  &__group { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+}
+.filter-btn {
+  background: none; border: $hair solid var(--rule-soft); padding: .5rem .875rem; cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: $track-label; text-transform: uppercase;
+  color: var(--mute); transition: all .18s ease;
+  &:hover { border-color: var(--rule); color: var(--ink); }
+  &[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+}
+.proj-grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); grid-template-columns: 1fr;
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+}
+.proj {
+  display: flex; flex-direction: column; gap: .875rem; border-bottom: $hair solid var(--rule-soft); padding-bottom: 1.25rem;
+  &[hidden] { display: none; }
+  .plate { transition: transform .35s ease; }
+  &:hover .plate { transform: scale(1.01); }
+  &__meta { display: flex; justify-content: space-between; gap: 1rem; }
+  h3 { font-size: 1.375rem; }
+  p { font-size: .875rem; color: var(--mute); }
+}
+.proj-featured {
+  display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); grid-template-columns: 1fr;
+  @include up($bp-lg) { grid-template-columns: 1.62fr 1fr; }
+  .proj-featured__side { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); align-content: start; }
+}
+.proj-empty { padding: 3rem 0; color: var(--mute); font-family: var(--font-mono); font-size: .75rem; letter-spacing: $track-label; text-transform: uppercase; }

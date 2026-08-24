@@ -1,0 +1,21 @@
+// K-04 Ongoing projects — map + progress bars, signals live capacity
+.ongoing { display: grid; gap: clamp(1.75rem, 4vw, 3rem);
+  @include up($bp-lg) { grid-template-columns: 1fr 1.05fr; }
+}
+.site-map { align-self: start; border: $hair solid var(--rule-soft); background: var(--panel); padding: clamp(1rem, 2vw, 1.5rem); position: relative;
+  svg { width: 100%; height: auto; color: var(--ink); }
+  .site-map__legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
+}
+.pin { cursor: pointer; }
+.pin circle { transition: r .2s ease; }
+.pin:hover circle, .pin:focus-visible circle { r: 7; }
+.ongoing-list { list-style: none; padding: 0; margin: 0; border-top: $hair solid var(--rule); }
+.ongoing-item {
+  padding: 1.125rem 0; border-bottom: $hair solid var(--rule-soft); display: grid; gap: .625rem;
+  &__top { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  h3 { font-size: 1.125rem; font-family: var(--font-body); font-weight: 600; letter-spacing: 0; }
+  &__meta { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
+  &__bar { height: 10px; background: var(--rule-soft); position: relative; }
+  &__bar span { position: absolute; inset: 0 auto 0 0; background: var(--ink); width: 0; transition: width 1.1s cubic-bezier(.22,.61,.36,1); }
+  &.is-hot { outline: $hair solid var(--rule); outline-offset: 6px; }
+}

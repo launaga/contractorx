@@ -1,0 +1,14 @@
+// M-11 FAQ — native details, no JS
+.faq { border-top: $hair solid var(--rule); }
+.faq details {
+  border-bottom: $hair solid var(--rule-soft); padding: 1.25rem 0;
+  summary {
+    cursor: pointer; list-style: none; display: flex; gap: 1.25rem; align-items: baseline;
+    font-family: var(--font-display); font-size: clamp(1.125rem, 2vw, 1.5rem);
+    &::-webkit-details-marker { display: none; }
+    &::after { content: "+"; margin-left: auto; font-family: var(--font-mono); font-size: 1rem; color: var(--mute); }
+  }
+  &[open] summary::after { content: "–"; }
+  p { margin-top: .875rem; color: var(--mute); font-size: .9375rem; padding-left: 2.75rem; }
+  .faq__idx { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; color: var(--mute); min-width: 1.5rem; }
+}

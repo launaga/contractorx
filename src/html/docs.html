@@ -1,0 +1,218 @@
+<!--meta {
+  "title": "Documentation",
+  "description": "ContractorX Kit v1 documentation — install, folder structure, SCSS compile, tokens, fonts, images, navigation, new pages, sections, GSAP, forms, deploy."
+} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body>
+<!--sprites-->
+{{> nav}}
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="shell">
+      <ul class="crumb"><li><a href="index.html">Home</a></li><li>Documentation</li></ul>
+      <p class="eyebrow"><span>ContractorX Kit v1</span> Documentation</p>
+      <h1>Everything you need to make this kit yours.</h1>
+      <p class="lede">Twelve topics, in the order you'll need them. No build framework, no CLI to learn — a text editor and, if you want to change the styling, one SCSS command.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="shell">
+      <div class="hair-grid g-4 reveal">
+        <div style="padding:1.25rem"><span class="label">01</span><p style="margin:.5rem 0 0"><a href="#install">Install &amp; preview</a></p></div>
+        <div style="padding:1.25rem"><span class="label">02</span><p style="margin:.5rem 0 0"><a href="#structure">Folder structure</a></p></div>
+        <div style="padding:1.25rem"><span class="label">03</span><p style="margin:.5rem 0 0"><a href="#scss">Compiling SCSS</a></p></div>
+        <div style="padding:1.25rem"><span class="label">04</span><p style="margin:.5rem 0 0"><a href="#tokens">Colours &amp; tokens</a></p></div>
+        <div style="padding:1.25rem"><span class="label">05</span><p style="margin:.5rem 0 0"><a href="#fonts">Fonts</a></p></div>
+        <div style="padding:1.25rem"><span class="label">06</span><p style="margin:.5rem 0 0"><a href="#images">Images &amp; duotone</a></p></div>
+        <div style="padding:1.25rem"><span class="label">07</span><p style="margin:.5rem 0 0"><a href="#nav">Navigation</a></p></div>
+        <div style="padding:1.25rem"><span class="label">08</span><p style="margin:.5rem 0 0"><a href="#pages">Adding a page</a></p></div>
+        <div style="padding:1.25rem"><span class="label">09</span><p style="margin:.5rem 0 0"><a href="#sections">Section library</a></p></div>
+        <div style="padding:1.25rem"><span class="label">10</span><p style="margin:.5rem 0 0"><a href="#gsap">GSAP &amp; motion</a></p></div>
+        <div style="padding:1.25rem"><span class="label">11</span><p style="margin:.5rem 0 0"><a href="#forms">Wiring the forms</a></p></div>
+        <div style="padding:1.25rem"><span class="label">12</span><p style="margin:.5rem 0 0"><a href="#deploy">Deploying</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>01</span> Install &amp; preview</p>
+      <h2 class="d3">Open <code>dist/index.html</code> and you're running.</h2>
+      <p>The <code>dist/</code> folder is the finished site. Every path in it is relative, so you can double-click <code>dist/index.html</code> and it works from your file system — no server needed.</p>
+      <p>To work on the source instead, you need Node 18+ once:</p>
+      <div class="table-scroll"><table class="table-x"><tbody>
+        <tr><th scope="row">Install tooling</th><td><code>npm install</code></td></tr>
+        <tr><th scope="row">Build everything</th><td><code>npm run build</code></td></tr>
+        <tr><th scope="row">Local preview at :4321</th><td><code>npm start</code></td></tr>
+        <tr><th scope="row">Watch SCSS while editing</th><td><code>npm run css:watch</code></td></tr>
+      </tbody></table></div>
+      <p class="form-note">Editing only text and images? Skip Node entirely — edit the files in <code>dist/</code> directly and upload.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="structure">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>02</span> Folder structure</p>
+      <h2 class="d3">Where everything lives.</h2>
+      <div class="table-scroll"><table class="table-x">
+        <thead><tr><th scope="col">Path</th><th scope="col">What it holds</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/html/</code></td><td>The 7 pages + docs, written with <code>{{&gt; partial}}</code> includes</td></tr>
+          <tr><td><code>src/partials/</code></td><td>Head, navbar, footer, and the three reusable kit sections</td></tr>
+          <tr><td><code>src/scss/</code></td><td>Tokens, reset, typography, layout, and 23 section partials</td></tr>
+          <tr><td><code>src/js/</code></td><td><code>nav.js</code>, <code>counters.js</code>, <code>main.js</code> — plain ES5, no bundler</td></tr>
+          <tr><td><code>src/img/</code> · <code>src/icons/</code></td><td>Image plates and the three SVG sprites</td></tr>
+          <tr><td><code>dist/</code></td><td>The built site — this is what you upload</td></tr>
+          <tr><td><code>tools/</code></td><td>The page assembler and the asset generators</td></tr>
+          <tr><td><code>docs/</code></td><td>This documentation, plus the Day 08 structure sheet</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="scss">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>03</span> Compiling SCSS</p>
+      <h2 class="d3">One command, one output file.</h2>
+      <p>All 27 SCSS partials compile into a single <code>dist/css/main.css</code>:</p>
+      <p><code>npx sass src/scss/main.scss dist/css/main.css --style=compressed --no-source-map</code></p>
+      <p>Or run <code>npm run css:watch</code> and leave it running while you edit — every save recompiles in about 200 ms. Bootstrap 5.3's grid and utilities are linked separately as <code>dist/css/bootstrap-grid.min.css</code>; the kit's own layer always loads after it, so your overrides win without <code>!important</code>.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="tokens">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>04</span> Colours &amp; tokens</p>
+      <h2 class="d3">Rebrand from seven values.</h2>
+      <p>Everything visual routes through <code>src/scss/_variables.scss</code>. Change the seven palette tokens and the whole kit follows — including dark mode, which inverts automatically.</p>
+      <div class="table-scroll"><table class="table-x">
+        <thead><tr><th scope="col">Token</th><th scope="col">Default</th><th scope="col">Used for</th></tr></thead>
+        <tbody>
+          <tr><td><code>$ink</code></td><td>#0A0A0A</td><td>Text, dark surfaces</td></tr>
+          <tr><td><code>$paper</code></td><td>#FAFAF8</td><td>Page ground</td></tr>
+          <tr><td><code>$panel</code></td><td>#F2F2EE</td><td>Cards and panels</td></tr>
+          <tr><td><code>$rule</code></td><td>#111111</td><td>Strong rules</td></tr>
+          <tr><td><code>$rule-soft</code></td><td>#D6D5D0</td><td>Dividers and hairline grids</td></tr>
+          <tr><td><code>$mute</code></td><td>#6B6B66</td><td>Captions, secondary text</td></tr>
+          <tr><td><code>$reverse-bg</code> / <code>$reverse-fg</code></td><td>#111111 / #F6F6F0</td><td>Reversal blocks — hero, stats, CTA</td></tr>
+        </tbody>
+      </table></div>
+      <p class="form-note">Adding a brand colour? Set it on <code>$reverse-bg</code> first and check contrast before touching anything else. The design was drawn to hold at 3 reversal blocks per page — more than that and the emphasis stops meaning anything.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="fonts">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>05</span> Fonts</p>
+      <h2 class="d3">Three roles: display, body, data.</h2>
+      <p>The demo loads Instrument Serif, Inter Tight, and JetBrains Mono from Google Fonts in <code>src/partials/head.html</code>. To self-host — recommended for production — drop the woff2 files into <code>dist/fonts/</code>, replace that <code>&lt;link&gt;</code> with <code>@font-face</code> rules, and preload the two faces used above the fold.</p>
+      <p>To change a family, edit <code>$font-display</code>, <code>$font-body</code>, or <code>$font-mono</code> in <code>_variables.scss</code>. Keep the roles: a display serif, a humanist sans at 16–18 px, and a mono for labels. Italic is reserved for exactly one highlighted word in the hero.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="images">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>06</span> Images &amp; duotone</p>
+      <h2 class="d3">Swapping in your own photography.</h2>
+      <p>The kit ships vector plates in <code>dist/img/</code> so it weighs almost nothing out of the box. Replace them with real site photography — same filenames, and nothing else has to change.</p>
+      <p>For photographs, use a <code>&lt;picture&gt;</code> block so modern formats are served first:</p>
+      <p><code>&lt;picture&gt;&lt;source srcset="img/hero.avif" type="image/avif"&gt;&lt;source srcset="img/hero.webp" type="image/webp"&gt;&lt;img src="img/hero.jpg" alt="…" width="2400" height="1350"&gt;&lt;/picture&gt;</code></p>
+      <p>The black-and-white treatment is applied in CSS (<code>filter: grayscale(1) contrast(1.06)</code> on <code>.plate img</code>), so colour photos land in the palette automatically. For a true duotone, export at 100% black on #FAFAF8 in your editor and remove the filter.</p>
+      <p class="form-note">Keep <code>width</code> and <code>height</code> on every image — that is what holds CLS under 0.05.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="nav">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>07</span> Navigation</p>
+      <h2 class="d3">One file, both menus.</h2>
+      <p>Desktop links and the mobile panel both live in <code>src/partials/nav.html</code> — edit them together so they never drift. The footer's four columns are in <code>src/partials/footer.html</code>.</p>
+      <p>The current page gets <code>aria-current="page"</code> automatically from the build script's page map (<code>tools/build.mjs</code>); add your new page there when you add a nav link.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="pages">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>08</span> Adding a page</p>
+      <h2 class="d3">Copy, retitle, rebuild.</h2>
+      <p>Duplicate any file in <code>src/html/</code>, change the meta block at the top, then run <code>npm run build</code>:</p>
+      <p><code>&lt;!--meta { "title": "Careers", "description": "Open roles at RKU." } --&gt;</code></p>
+      <p>Those two values feed the <code>&lt;title&gt;</code>, meta description, Open Graph, and Twitter cards. Add the file to <code>sitemap.xml</code> and, if it belongs in the menu, to <code>nav.html</code>.</p>
+      <p>The six services all render from <code>service-detail.html</code>. For a static site, duplicate it once per service; if you later move to a CMS, the template maps cleanly to one content type.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="sections">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>09</span> Section library</p>
+      <h2 class="d3">23 sections — 16 general, 7 built for contractors.</h2>
+      <p>Every section is one SCSS partial in <code>src/scss/sections/</code>, named for what it is. Copy the markup from any page and it carries its own styling.</p>
+      <div class="table-scroll"><table class="table-x">
+        <thead><tr><th scope="col">Code</th><th scope="col">Section</th><th scope="col">Where to copy it from</th></tr></thead>
+        <tbody>
+          <tr><td>K-01</td><td>Certifications wall</td><td><code>src/partials/certifications.html</code></td></tr>
+          <tr><td>K-02</td><td>Equipment fleet</td><td><code>services.html</code> — <code>#fleet</code></td></tr>
+          <tr><td>K-03</td><td>Safety record</td><td><code>about.html</code> — <code>#safety</code></td></tr>
+          <tr><td>K-04</td><td>Ongoing projects + map</td><td><code>projects.html</code> — <code>#ongoing</code></td></tr>
+          <tr><td>K-05</td><td>Client logo strip</td><td><code>src/partials/clients.html</code></td></tr>
+          <tr><td>K-06</td><td>Tender CTA</td><td><code>src/partials/tender.html</code></td></tr>
+          <tr><td>K-07</td><td>Awards &amp; press</td><td><code>about.html</code> — <code>#awards</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="gsap">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>10</span> GSAP &amp; motion</p>
+      <h2 class="d3">Optional, and only in two places.</h2>
+      <p>GSAP is loaded on the home page only, and drives exactly two things: the hero reveal and the stats counter run-up. Delete <code>&lt;script src="js/gsap.min.js"&gt;</code> and both fall back to a CSS transition and a <code>requestAnimationFrame</code> counter — nothing breaks, nothing is missing.</p>
+      <p>Scroll reveals use <code>IntersectionObserver</code> on any element with <code>class="reveal"</code>. Everything respects <code>prefers-reduced-motion</code>: with it on, content appears immediately and counters show their final value.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="forms">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>11</span> Wiring the forms</p>
+      <h2 class="d3">Validation ships; the endpoint is yours.</h2>
+      <p>Both forms — general contact and the tender desk — validate in the browser, mark invalid fields, move focus to the first error, and disable the submit button while sending. No data leaves the page.</p>
+      <p>To connect Formspree, add the action and method, then delete the <code>e.preventDefault()</code> branch at the end of the submit handler in <code>src/js/main.js</code>:</p>
+      <p><code>&lt;form class="form-x" action="https://formspree.io/f/YOUR_ID" method="POST" data-validate&gt;</code></p>
+      <p>Netlify Forms: add <code>netlify</code> and a hidden <code>form-name</code> field. Your own backend: post the <code>FormData</code> from the handler. The tender form's file input accepts ZIP, PDF, DWG, and XLSX — check your endpoint's upload limit before promising 40 MB.</p>
+    </div>
+  </section>
+
+  <section class="section section--ruled" id="deploy">
+    <div class="shell shell--narrow">
+      <p class="eyebrow"><span>12</span> Deploying</p>
+      <h2 class="d3">Upload <code>dist/</code>. That's the whole deploy.</h2>
+      <p>It's static HTML, so anything works: Netlify, Vercel, Cloudflare Pages, GitHub Pages, or plain shared hosting over FTP. Drag the folder in; there is no build step to configure.</p>
+      <p>Before you go live: update <code>robots.txt</code> and <code>sitemap.xml</code> with your real domain, replace the <code>ranggakaryautama.example</code> URLs in the canonical and Open Graph tags, and swap the JSON-LD <code>GeneralContractor</code> block for your client's real business details — name, address, phone, and opening hours.</p>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="shell">
+      <div class="cta-band__inner">
+        <div>
+          <h2>Something not covered here?</h2>
+          <p>Every purchase includes six months of support. Reply to your receipt and a human answers.</p>
+        </div>
+        <div class="cta-actions"><a class="btn-x" href="contact.html">Contact support <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

@@ -1,0 +1,10 @@
+// M-12 Team
+.team-grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); grid-template-columns: repeat(2, 1fr);
+  > * { min-width: 0; }
+  @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+.member { display: grid; gap: .875rem;
+  h3 { font-size: 1.125rem; }
+  .member__role { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
+  p { font-size: .875rem; color: var(--mute); }
+}

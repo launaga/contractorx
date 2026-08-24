@@ -1,0 +1,25 @@
+// M-15 Contact form — client-side validation only
+.form-x { display: grid; gap: 1.25rem; }
+.field { display: grid; gap: .5rem; }
+.field label { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--paper); color: var(--ink);
+  border: $hair solid var(--rule-soft); border-radius: $radius; padding: .8125rem .875rem;
+  font-family: var(--font-body); font-size: 1rem;
+  &:focus { border-color: var(--ink); outline: 2px solid var(--ink); outline-offset: 1px; }
+}
+.field textarea { min-height: 160px; resize: vertical; }
+.field--half { @include up($bp-md) { grid-column: span 1; } }
+.form-row { display: grid; gap: 1.25rem; @include up($bp-md) { grid-template-columns: repeat(2, 1fr); } }
+.field__error { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--ink); display: none; }
+.field.is-invalid { input, select, textarea { border-color: var(--ink); border-width: 2px; } .field__error { display: block; } }
+.form-note { font-size: .8125rem; color: var(--mute); }
+.form-status { font-family: var(--font-mono); font-size: .75rem; letter-spacing: $track-label; text-transform: uppercase; border: $hair dashed var(--rule-soft); padding: .875rem; display: none; &.is-visible { display: block; } }
+.btn-x[disabled] { opacity: .45; pointer-events: none; }
+.offices { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft); grid-template-columns: 1fr;
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+  > div { background: var(--paper); padding: 1.5rem; display: grid; gap: .5rem; align-content: start; }
+  address { font-style: normal; font-size: .9375rem; color: var(--mute); margin: 0; }
+}
+.emergency { display: grid; gap: 1rem; align-items: center; @include up($bp-md) { grid-template-columns: 1fr auto; } }

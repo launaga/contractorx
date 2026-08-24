@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="sky9" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#FAFAF8"/><stop offset="1" stop-color="#CFCEC8"/></linearGradient>
+<pattern id="hatch9" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+<line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="1.6" opacity=".5"/></pattern>
+</defs>
+<rect width="1200" height="900" fill="url(#sky9)"/><path d="M0 648 L1200 270 L1200 396 L0 774 Z" fill="#0A0A0A" opacity="0.85"/><g stroke="#0A0A0A" stroke-width="3" opacity=".7"><path d="M30 720 v180"/><path d="M150 682.2 v180"/><path d="M270 644.4000000000001 v180"/><path d="M390 606.6 v180"/><path d="M510 568.8 v180"/><path d="M630 531.0000000000001 v180"/><path d="M750 493.20000000000005 v180"/><path d="M870 455.4 v180"/><path d="M990 417.6 v180"/><path d="M1110 379.8 v180"/></g></svg>

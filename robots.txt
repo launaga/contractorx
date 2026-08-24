@@ -1,0 +1,4 @@
+# ContractorX Kit — replace the host with your own domain before launch
+User-agent: *
+Allow: /
+Sitemap: https://ranggakaryautama.example/sitemap.xml
