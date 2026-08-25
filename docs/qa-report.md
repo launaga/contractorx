@@ -79,24 +79,28 @@ Verified per-page with a scripted scan of `documentElement.scrollWidth`
 - Theme toggle: light default, inverts to dark, persists in `localStorage`,
   wrapped in try/catch
 
-## Motion (Home and Projects)
+## Motion (all 8 pages)
 
-Added after the design sign-off, scoped to two pages. Verified:
+Every page carries the same baseline — a reading-progress rail and a
+parallaxed page head — plus at most one signature, so no effect repeats twice
+in a row. Contact and Docs stay on the baseline deliberately.
 
-- **Perf held at 100** on both. GSAP + ScrollTrigger (~50 KB gzipped) are
-  fetched by `motion.js` at runtime rather than linked in `<head>`, so they
-  never block first paint, and the six pages without the flag do not
-  reference them at all.
-- **Reduced motion** — GSAP is never downloaded; the elevation renders already
-  drawn and the readout reads 100% / Handover / 11 days early.
-- **390 px** — GSAP is never downloaded; the site register degrades to a
-  swipeable `overflow-x` row.
-- **JavaScript disabled** — both pages render as ordinary static documents with
-  the finished drawing visible. Nothing looks missing.
-- The reading-progress rail is plain DOM plus a throttled scroll listener, so
-  it works in every case above.
+Verified:
 
-Two defects found and fixed while wiring this up:
+- **Gate held.** All 8 pages still score 99–100 / 100 / 100 / 100. GSAP and
+  ScrollTrigger are fetched by `motion.js` at runtime rather than linked in
+  `<head>`, so they never block first paint.
+- **Reduced motion, all 8 pages** — GSAP loads on **zero** of them. The
+  elevation renders already drawn, both registers are swipeable rows, and the
+  sticky aids keep working because they are CSS, not script.
+- **390 px, all 8 pages** — GSAP loads on **zero** of them.
+- **JavaScript disabled** — every page renders as an ordinary static document
+  with the finished drawing visible. Nothing looks missing.
+- Three of the six signatures need no animation library at all: the Services
+  rate-card header and the Service Detail capability table are
+  `position: sticky`, and the About year readout is an `IntersectionObserver`.
+
+Defects found and fixed while wiring the motion up:
 
 - **The Projects filters were dead.** The chips were bound to `[data-project]`
   but no card carried the attribute after the redesign, so clicking a sector or
@@ -104,8 +108,10 @@ Two defects found and fixed while wiring this up:
   `data-year`, and the empty state — which could never appear before — is in
   place. Verified: all → 9 shown, Government → 3, Government + 2025 → 1,
   Government + 2022 → 0 with the empty message shown.
-- **Home section numbering** ran 01, 02, 03, 04, 05, 06 with the new programme
-  section inserted; it now runs 01–07 with no duplicate.
+- **Home section numbering** had a duplicate `06` once the programme section
+  was inserted; it now runs 01–07.
+- The progress rail was labelled "Programme" on every page; it now only says
+  that where a programme is actually being shown, and reads "Read" elsewhere.
 
 ## Images
 

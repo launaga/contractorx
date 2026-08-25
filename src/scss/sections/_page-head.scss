@@ -13,3 +13,8 @@
   letter-spacing: .15em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem;
   i { font-style: normal; opacity: .5; }
 }
+
+// The parallax ground is clipped by its own layer (.px-clip, z-index -1),
+// so the head keeps `overflow: visible` and .pmeta keeps the absolute
+// positioning it needs. `isolation` stops the -1 escaping behind the page.
+.phead { isolation: isolate; }

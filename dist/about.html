@@ -90,10 +90,11 @@
 
 <main id="main">
 <header class="phead">
+  <div class="px-clip" aria-hidden="true"><div class="px-ground" data-px="0.5"></div></div>
   <div class="crumb"><span>Home</span><i>/</i><span>About</span></div>
   <h1>Eighteen years of<br>finishing what<br>we started.</h1>
   <p class="lede">Rangga Karya Utama began in 2008 with nine people and one excavator on a warehouse job in Bekasi. Today: 412 direct staff, six offices, an owned plant fleet, and 240 completed sites.</p>
-  <div class="pmeta m" style="color:var(--dim)">SHEET A-102<br>ABOUT · 02 / 07</div>
+  <div class="pmeta m" data-px="1.15" style="color:var(--dim)">SHEET A-102<br>ABOUT · 02 / 07</div>
 </header>
 
 <section class="sec" style="padding-top:44px">
@@ -143,18 +144,26 @@
       <div><span class="eyebrow">02 · Record</span><h2>Eighteen years,<br>in the order<br>they happened.</h2></div>
       <p>Every entry below is a change in what the company could take on — not a press release.</p>
     </div>
-    <ul class="tl">
-      <li><b>2008</b><p>Founded in Bekasi with nine staff. First contract: a 1,400 m² warehouse extension for a plastics manufacturer.</p><span class="st">Founded</span></li>
-      <li><b>2011</b><p>Joined AKI. First IDR 50 bn contract — a four-storey commercial building in Kelapa Gading.</p><span class="st">Scale</span></li>
-      <li><b>2013</b><p>Bought the first tower crane and opened the Cikupa joinery workshop.</p><span class="st">Plant</span></li>
-      <li><b>2016</b><p>ISO 9001 and OHSAS 18001 certified. Fixed the specialist subcontractor panel still in use today.</p><span class="st">Systems</span></li>
-      <li><b>2018</b><p>Surabaya office opened. First hospital project — 9,200 m² inpatient wing for Bhakti Medika.</p><span class="st">Sector</span></li>
-      <li><b>2019</b><p>First batching plant commissioned. Joined GBCI; four staff accredited as Greenship Associates.</p><span class="st">Plant</span></li>
-      <li><b>2021</b><p>LPJK Grade 7 awarded. Second batching plant. Passed 150 completed projects.</p><span class="st">Grade</span></li>
-      <li><b>2023</b><p>Johor office opened — first work outside Indonesia, a logistics park for a Malaysian developer.</p><span class="st">Cross-border</span></li>
-      <li><b>2024</b><p>Meranti Logistics Hub named Project of the Year by Konstruksi Indonesia.</p><span class="st">Award</span></li>
-      <li><b>2025</b><p>Zero lost-time incidents across 1.94 million work hours. K3 Gold for the fourth consecutive year.</p><span class="st">Safety</span></li>
+    <div class="tlwrap">
+      <div class="tlyear" aria-hidden="true">
+        <span class="m">Year</span>
+        <b data-tl-year>2008</b>
+        <span class="m" data-tl-tag>Founded</span>
+        <span class="tlyear__bar"><i data-tl-bar></i></span>
+      </div>
+      <ul class="tl">
+      <li data-tl-item data-year="2008" data-tag="Founded"><b>2008</b><p>Founded in Bekasi with nine staff. First contract: a 1,400 m² warehouse extension for a plastics manufacturer.</p><span class="st">Founded</span></li>
+      <li data-tl-item data-year="2011" data-tag="Scale"><b>2011</b><p>Joined AKI. First IDR 50 bn contract — a four-storey commercial building in Kelapa Gading.</p><span class="st">Scale</span></li>
+      <li data-tl-item data-year="2013" data-tag="Plant"><b>2013</b><p>Bought the first tower crane and opened the Cikupa joinery workshop.</p><span class="st">Plant</span></li>
+      <li data-tl-item data-year="2016" data-tag="Systems"><b>2016</b><p>ISO 9001 and OHSAS 18001 certified. Fixed the specialist subcontractor panel still in use today.</p><span class="st">Systems</span></li>
+      <li data-tl-item data-year="2018" data-tag="Sector"><b>2018</b><p>Surabaya office opened. First hospital project — 9,200 m² inpatient wing for Bhakti Medika.</p><span class="st">Sector</span></li>
+      <li data-tl-item data-year="2019" data-tag="Plant"><b>2019</b><p>First batching plant commissioned. Joined GBCI; four staff accredited as Greenship Associates.</p><span class="st">Plant</span></li>
+      <li data-tl-item data-year="2021" data-tag="Grade"><b>2021</b><p>LPJK Grade 7 awarded. Second batching plant. Passed 150 completed projects.</p><span class="st">Grade</span></li>
+      <li data-tl-item data-year="2023" data-tag="Cross-border"><b>2023</b><p>Johor office opened — first work outside Indonesia, a logistics park for a Malaysian developer.</p><span class="st">Cross-border</span></li>
+      <li data-tl-item data-year="2024" data-tag="Award"><b>2024</b><p>Meranti Logistics Hub named Project of the Year by Konstruksi Indonesia.</p><span class="st">Award</span></li>
+      <li data-tl-item data-year="2025" data-tag="Safety"><b>2025</b><p>Zero lost-time incidents across 1.94 million work hours. K3 Gold for the fourth consecutive year.</p><span class="st">Safety</span></li>
     </ul>
+    </div>
   </div>
 </section>
 <div class="tear-p"></div>
@@ -224,7 +233,7 @@
 <script src="js/nav.js" defer></script>
 <script src="js/counters.js" defer></script>
 <script src="js/main.js" defer></script>
-
+<script src="js/motion.js" defer></script>
 
 </body>
 </html>

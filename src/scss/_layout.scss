@@ -163,7 +163,7 @@
 
 .pgrail__out {
   position: fixed;
-  top: .875rem;
+  bottom: 1rem;
   right: var(--shell-x);
   z-index: 60;
   display: flex;
@@ -184,11 +184,20 @@
   }
 }
 
-// The hero's blueprint ground, parallaxed behind the document stack.
+// The blueprint ground, parallaxed behind the document stack. It lives in
+// its own clipping layer so it can move without escaping its section and
+// without forcing `overflow: hidden` onto the section itself.
+.px-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .px-ground {
   position: absolute;
   inset: -15% -5%;
-  z-index: 0;
   pointer-events: none;
   background-image:
     linear-gradient(color-mix(in srgb, var(--fg) 6%, transparent) 1px, transparent 1px),
@@ -200,4 +209,29 @@
 
 @media (prefers-reduced-motion: reduce) {
   [data-px] { transform: none !important; }
+}
+
+// --- Sticky reading aids --------------------------------------------
+// No library involved: these are `position: sticky`, so they work at every
+// viewport, with JS off, and under prefers-reduced-motion.
+
+// A short column that holds its place while a longer one scrolls past it.
+.stickycol {
+  min-width: 0;
+
+  @include up($bp-lg) {
+    position: sticky;
+    top: clamp(5rem, 9vw, 7rem);
+  }
+}
+
+// The rate card's column headings stay readable down the whole schedule.
+.sheet [data-sticky-head] {
+  @include up($bp-md) {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
 }

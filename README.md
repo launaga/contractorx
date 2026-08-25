@@ -211,14 +211,32 @@ so your overrides win without `!important`.
 
 ## 8 · Motion
 
-Scroll motion runs on **Home and Projects only**. Every other page is static.
+Scroll motion runs on **every page**. Each one gets the same baseline, plus at
+most one signature — so the site never does the same trick twice in a row.
 
-| Where | What it does |
+**Baseline, all 8 pages**
+
+| | |
 | --- | --- |
-| Home hero | Blueprint ground 0.5×, site log 1.0×, safety stamp 1.4× |
-| Home `02 · Programme` | Pinned section; the elevation draws itself across five phases while the readout counts week 0 → 74 |
-| Projects site register | Six live sites pulled sideways — vertical scroll, horizontal output |
-| Both | A reading-progress rail across the top |
+| Reading-progress rail | Fixed 3 px bar plus a percentage readout, top right |
+| Page-head parallax | Blueprint ground at 0.5×, the sheet number at 1.3× |
+| Reveals | `class="reveal"` fades up once, `data-count` and `data-progress` run up once |
+
+**One signature per page**
+
+| Page | Signature | Needs |
+| --- | --- | --- |
+| Home | `02 · Programme` pins; the elevation draws itself across five phases while the readout counts week 0 → 74 | GSAP |
+| Projects | Six live sites pulled sideways — vertical scroll, horizontal output | GSAP |
+| Project Detail | The contact sheet, week 05 → 59, pulled sideways | GSAP |
+| About | A sticky year that follows the record and reports the entry you're level with | `IntersectionObserver` |
+| Services | The rate card's column headings stay readable down the whole schedule | `position: sticky` |
+| Service Detail | The capability table holds its place while the six scope steps pass it | `position: sticky` |
+| Contact · Docs | Baseline only — deliberately | — |
+
+Contact and Docs are quiet on purpose. A form you are filling in and a
+reference page you are searching should not perform; the rail and the head are
+enough.
 
 **Turning it on or off** is one line. Each page's `<!--meta -->` block carries a
 flag:
@@ -228,34 +246,30 @@ flag:
 ```
 
 Set it to `false`, or delete the line, and `tools/build.mjs` stops emitting the
-`motion.js` tag for that page. Add it to another page and that page gets the
-rail plus whichever motion sections it contains. Nothing else changes.
+`motion.js` tag for that page. Everything that page contains still renders — it
+just renders static.
 
-**It costs those two pages nothing on mobile.** `src/js/motion.js` fetches GSAP
-and ScrollTrigger itself, at runtime, and only when *all* of these hold:
+**It costs mobile nothing.** `src/js/motion.js` fetches GSAP and ScrollTrigger
+itself, at runtime, and only when *all* of these hold:
 
 - the viewport is at least 900 px wide,
 - `prefers-reduced-motion` is not set,
-- the page actually contains a motion section.
+- the page actually contains a GSAP-driven section.
 
-Below that bar the two libraries are never downloaded. The six pages without
-the flag never reference them at all.
+Below that bar the two libraries are never downloaded. The sticky sections and
+the progress rail need no library at all, so they keep working there.
 
 **Everything degrades to the finished state**, which is why the fallback never
 looks broken:
 
 - No JS, reduced motion, or a phone → the elevation is *already drawn*, the
-  readout reads 100% / Handover / 11 days early, and the register is an
-  ordinary swipeable row.
-- The progress rail is plain DOM and a scroll listener, so it works even where
-  GSAP is deliberately skipped.
-
-Scroll reveals elsewhere still use `IntersectionObserver` on `class="reveal"`
-and need no library.
+  readout reads 100% / Handover / 11 days early, and both registers are
+  ordinary swipeable rows.
+- The sticky aids are CSS, so they survive JS being off entirely.
 
 GSAP's standard licence is free for most uses; if you charge end users for
-access to the site, check <https://gsap.com/licensing>. Delete `"motion": true`
-from both meta blocks and the kit is fully functional without it.
+access to the site, check <https://gsap.com/licensing>. Remove the `"motion"`
+flags and the kit is fully functional without it.
 
 ## 9 · Contact and tender forms
 

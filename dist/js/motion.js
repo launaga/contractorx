@@ -1,11 +1,20 @@
-/* ContractorX Kit — scroll motion (Home and Projects only).
+/* ContractorX Kit — scroll motion.
    Loaded from src/partials/scripts.html on pages whose meta block sets
-   "motion": true. Everything degrades: with no JS, a narrow viewport, or
-   prefers-reduced-motion the pages render as ordinary static documents —
-   the elevation is already drawn and the register is a swipeable row.
+   "motion": true. Each page gets the shared baseline — a reading-progress
+   rail and a parallaxed page head — plus at most one signature section:
 
-   GSAP is fetched by this file rather than linked in the <head>, so the
-   six pages without motion never pay for it. */
+     Home            pinned build sequence, scrubbed
+     Projects        horizontal site register
+     Project Detail  horizontal contact sheet
+     About           sticky year following the record
+
+   Services and Service Detail use `position: sticky` only and need nothing
+   from this file beyond the baseline; Contact and Docs are deliberately
+   quiet — a form and a reference page should not perform.
+
+   Everything degrades: with no JS, a narrow viewport, or reduced motion the
+   pages are ordinary static documents. GSAP is fetched here rather than
+   linked in the <head>, so it never blocks first paint. */
 (function () {
   "use strict";
 
@@ -24,7 +33,8 @@
     var out = document.createElement("div");
     out.className = "pgrail__out";
     out.setAttribute("aria-hidden", "true");
-    out.innerHTML = '<span class="m">Programme</span><b>0%</b>';
+    var label = document.querySelector("[data-seq]") ? "Programme" : "Read";
+    out.innerHTML = '<span class="m">' + label + '</span><b>0%</b>';
 
     document.body.appendChild(bar);
     document.body.appendChild(out);
@@ -44,6 +54,35 @@
     paint();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+  })();
+
+  /* ---- 2 · About · the sticky year follows the record ------------------
+     IntersectionObserver only, so it works at every width and with reduced
+     motion. Without JS the readout simply shows the first entry. */
+  (function timeline() {
+    var items = document.querySelectorAll("[data-tl-item]");
+    var year = document.querySelector("[data-tl-year]");
+    if (!items.length || !year || !("IntersectionObserver" in window)) return;
+
+    var tag = document.querySelector("[data-tl-tag]");
+    var bar = document.querySelector("[data-tl-bar]");
+    var list = Array.prototype.slice.call(items);
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        year.textContent = el.getAttribute("data-year");
+        if (tag) tag.textContent = el.getAttribute("data-tag");
+        if (bar) {
+          bar.style.width =
+            (((list.indexOf(el) + 1) / list.length) * 100).toFixed(1) + "%";
+        }
+        list.forEach(function (n) { n.classList.toggle("is-on", n === el); });
+      });
+    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+
+    list.forEach(function (el) { io.observe(el); });
   })();
 
   /* Below 900px, or with reduced motion, we stop here. The static markup
@@ -76,17 +115,18 @@
 
   /* ---- 3 · hero parallax ---------------------------------------------- */
   function parallax() {
-    var hero = document.querySelector(".hero");
-    if (!hero) return;
-
     document.querySelectorAll("[data-px]").forEach(function (el) {
       var rate = parseFloat(el.getAttribute("data-px"));
-      if (!rate) return;
+      // Each layer is driven by the header it belongs to — the home hero,
+      // or the page head on every inner page.
+      var head = el.closest(".hero, .phead");
+      if (!rate || !head) return;
+
       gsap.to(el, {
-        y: function () { return (1 - rate) * window.innerHeight * 0.45; },
+        y: function () { return (1 - rate) * head.offsetHeight * 0.6; },
         ease: "none",
         scrollTrigger: {
-          trigger: hero, start: "top top", end: "bottom top",
+          trigger: head, start: "top top", end: "bottom top",
           scrub: true, invalidateOnRefresh: true
         }
       });

@@ -14,3 +14,6 @@
   display: flex; flex-wrap: wrap; gap: .875rem; align-items: center; margin-bottom: 1.25rem;
 }
 .acts { display: flex; flex-wrap: wrap; gap: .625rem; margin-top: 1.625rem; align-items: center; }
+
+// Contains the parallax ground layer (.px-clip sits at z-index -1).
+.hero { isolation: isolate; }
