@@ -241,6 +241,8 @@
         <span class="eyebrow">10 · Motion &amp; theme</span>
         <h2 style="font-size:clamp(1.75rem,3.4vw,2.75rem)">Reserved, and reversible.</h2>
         <p class="prose" style="margin-top:1rem;max-width:66ch">Three things move: elements with <code>class="reveal"</code> fade up once, numbers with <code>data-count</code> run up once, and bars with <code>data-progress</code> fill once. All three use <code>IntersectionObserver</code> and all three respect <code>prefers-reduced-motion</code> — with it on, everything appears at its final value immediately.</p>
+        <p class="prose" style="margin-top:.75rem;max-width:66ch"><strong>Scroll motion runs on Home and Projects only.</strong> The home hero parallaxes on three rates; <code>02 · Programme</code> pins and draws the elevation across five phases; the Projects site register scrolls sideways; both carry a reading-progress rail. Each page opts in with <code>"motion": true</code> in its <code>&lt;!--meta --&gt;</code> block — remove the line and the build stops emitting <code>motion.js</code> for that page.</p>
+        <p class="prose" style="margin-top:.75rem;max-width:66ch"><code>src/js/motion.js</code> fetches GSAP and ScrollTrigger itself, and only above 900&nbsp;px with <code>prefers-reduced-motion</code> unset. Below that the libraries are never downloaded, so phones pay nothing. Every motion section is authored so the static markup <em>is</em> the finished state: with no JS the building is already drawn and the register is a swipeable row — nothing looks missing.</p>
         <p class="prose" style="margin-top:.75rem;max-width:66ch">The kit ships light. The <strong>Invert</strong> button in the footer switches to the dark theme and remembers the choice in <code>localStorage</code>. To ship light-only, delete the <code>[data-theme="dark"]</code> block in <code>_variables.scss</code> and the button from the footer partial.</p>
       </article>
 
@@ -280,6 +282,7 @@
 <script src="js/nav.js" defer></script>
 <script src="js/counters.js" defer></script>
 <script src="js/main.js" defer></script>
+
 
 </body>
 </html>

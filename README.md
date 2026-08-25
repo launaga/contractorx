@@ -180,13 +180,19 @@ is. Copy the markup from any page and it brings its own styling.
 
 | Code | Section | Copy it from |
 | --- | --- | --- |
-| K-01 | Certifications wall | `src/partials/certifications.html` |
+| K-01 | Certifications wall | `index.html` → `06 · Certifications` |
 | K-02 | Equipment fleet | `services.html` → `#fleet` |
 | K-03 | Safety record | `about.html` → `#safety` |
-| K-04 | Ongoing projects + map | `projects.html` → `#ongoing` |
-| K-05 | Client logo strip | `src/partials/clients.html` |
+| K-04 | Live sites + map | `projects.html` → `#ongoing` |
+| K-05 | Client strip | `about.html` → clients row |
 | K-06 | Tender CTA | `src/partials/tender.html` |
-| K-07 | Awards & press | `about.html` → `#awards` |
+| K-07 | Awards & press | `about.html` → `05 · Earned` |
+| K-08 | Build sequence | `src/partials/build-sequence.html` |
+| K-09 | Horizontal site register | `projects.html` → `.hreg` |
+
+K-08 and K-09 are the two motion sections — see §8. Both are written so the
+static markup *is* the finished state, so you can drop either into a page that
+has no motion flag and it still reads correctly.
 
 The K-04 map is inline SVG, not a tile provider — no API key, no third-party
 script, no cookie banner. Move a pin by editing its `cx` / `cy`.
@@ -203,21 +209,53 @@ Bootstrap 5.3's grid and utilities load separately as
 `dist/css/bootstrap-grid.min.css`; the kit's own layer always loads after it,
 so your overrides win without `!important`.
 
-## 8 · GSAP and motion
+## 8 · Motion
 
-GSAP is loaded on the home page only and drives exactly two things: the hero
-reveal and the stats counter run-up. Delete
-`<script src="js/gsap.min.js">` from `index.html` and both fall back to a CSS
-transition and a `requestAnimationFrame` counter — nothing breaks and nothing
-looks missing.
+Scroll motion runs on **Home and Projects only**. Every other page is static.
 
-Scroll reveals use `IntersectionObserver` on any element with `class="reveal"`.
-Everything respects `prefers-reduced-motion`: with it on, content appears
-immediately and counters show their final value straight away.
+| Where | What it does |
+| --- | --- |
+| Home hero | Blueprint ground 0.5×, site log 1.0×, safety stamp 1.4× |
+| Home `02 · Programme` | Pinned section; the elevation draws itself across five phases while the readout counts week 0 → 74 |
+| Projects site register | Six live sites pulled sideways — vertical scroll, horizontal output |
+| Both | A reading-progress rail across the top |
+
+**Turning it on or off** is one line. Each page's `<!--meta -->` block carries a
+flag:
+
+```json
+{ "title": "…", "description": "…", "sheet": "Home · 01 / 07", "motion": true }
+```
+
+Set it to `false`, or delete the line, and `tools/build.mjs` stops emitting the
+`motion.js` tag for that page. Add it to another page and that page gets the
+rail plus whichever motion sections it contains. Nothing else changes.
+
+**It costs those two pages nothing on mobile.** `src/js/motion.js` fetches GSAP
+and ScrollTrigger itself, at runtime, and only when *all* of these hold:
+
+- the viewport is at least 900 px wide,
+- `prefers-reduced-motion` is not set,
+- the page actually contains a motion section.
+
+Below that bar the two libraries are never downloaded. The six pages without
+the flag never reference them at all.
+
+**Everything degrades to the finished state**, which is why the fallback never
+looks broken:
+
+- No JS, reduced motion, or a phone → the elevation is *already drawn*, the
+  readout reads 100% / Handover / 11 days early, and the register is an
+  ordinary swipeable row.
+- The progress rail is plain DOM and a scroll listener, so it works even where
+  GSAP is deliberately skipped.
+
+Scroll reveals elsewhere still use `IntersectionObserver` on `class="reveal"`
+and need no library.
 
 GSAP's standard licence is free for most uses; if you charge end users for
-access to the site, check <https://gsap.com/licensing>. The kit is fully
-functional without it.
+access to the site, check <https://gsap.com/licensing>. Delete `"motion": true`
+from both meta blocks and the kit is fully functional without it.
 
 ## 9 · Contact and tender forms
 

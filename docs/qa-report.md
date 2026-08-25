@@ -79,6 +79,34 @@ Verified per-page with a scripted scan of `documentElement.scrollWidth`
 - Theme toggle: light default, inverts to dark, persists in `localStorage`,
   wrapped in try/catch
 
+## Motion (Home and Projects)
+
+Added after the design sign-off, scoped to two pages. Verified:
+
+- **Perf held at 100** on both. GSAP + ScrollTrigger (~50 KB gzipped) are
+  fetched by `motion.js` at runtime rather than linked in `<head>`, so they
+  never block first paint, and the six pages without the flag do not
+  reference them at all.
+- **Reduced motion** — GSAP is never downloaded; the elevation renders already
+  drawn and the readout reads 100% / Handover / 11 days early.
+- **390 px** — GSAP is never downloaded; the site register degrades to a
+  swipeable `overflow-x` row.
+- **JavaScript disabled** — both pages render as ordinary static documents with
+  the finished drawing visible. Nothing looks missing.
+- The reading-progress rail is plain DOM plus a throttled scroll listener, so
+  it works in every case above.
+
+Two defects found and fixed while wiring this up:
+
+- **The Projects filters were dead.** The chips were bound to `[data-project]`
+  but no card carried the attribute after the redesign, so clicking a sector or
+  year did nothing. All nine cards now carry `data-project`, `data-sector` and
+  `data-year`, and the empty state — which could never appear before — is in
+  place. Verified: all → 9 shown, Government → 3, Government + 2025 → 1,
+  Government + 2022 → 0 with the empty message shown.
+- **Home section numbering** ran 01, 02, 03, 04, 05, 06 with the new programme
+  section inserted; it now runs 01–07 with no duplicate.
+
 ## Images
 
 Every content image slot ships **empty** by design — a dashed plate with a

@@ -141,3 +141,63 @@
   html.js .reveal { opacity: 0; transform: translateY(14px); }
   html.js .reveal.is-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
 }
+
+// --- Motion layer (Home and Projects only) --------------------------
+// The rail is injected by motion.js, so pages without motion never carry
+// the markup. Parallax layers only ever get transformed by GSAP; the
+// static position is the correct one.
+.pgrail {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  background: var(--line);
+
+  i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--hi);
+  }
+}
+
+.pgrail__out {
+  position: fixed;
+  top: .875rem;
+  right: var(--shell-x);
+  z-index: 60;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  color: var(--dim);
+  background: color-mix(in srgb, var(--ink) 84%, transparent);
+  padding: .3125rem .5rem;
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+
+  b {
+    font-family: $font-mono;
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--hi);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// The hero's blueprint ground, parallaxed behind the document stack.
+.px-ground {
+  position: absolute;
+  inset: -15% -5%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--fg) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fg) 6%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+[data-px] { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-px] { transform: none !important; }
+}

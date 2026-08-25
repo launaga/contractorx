@@ -28,6 +28,8 @@ for (const file of pages) {
   vars.slug = file === "index.html" ? "" : file;
   const nav = { "services.html": "navServices", "projects.html": "navProjects", "about.html": "navAbout", "contact.html": "navContact" }[file];
   if (nav) vars[nav] = ' aria-current="page"';
+  // Only pages that opt in load the motion layer — the rest never pay for GSAP.
+  vars.motionScript = vars.motion ? '<script src="js/motion.js" defer></script>' : "";
   let html = expand(raw.replace(/<!--meta[\s\S]*?-->\n?/, ""), vars);
   writeFileSync(join(OUT, file), html);
 }
@@ -40,5 +42,6 @@ cpSync("src/fonts", `${OUT}/fonts`, { recursive: true });
 
 cpSync("node_modules/bootstrap/dist/css/bootstrap-grid.min.css", `${OUT}/css/bootstrap-grid.min.css`);
 cpSync("node_modules/gsap/dist/gsap.min.js", `${OUT}/js/gsap.min.js`);
+cpSync("node_modules/gsap/dist/ScrollTrigger.min.js", `${OUT}/js/ScrollTrigger.min.js`);
 for (const f of ["robots.txt", "sitemap.xml", "LICENSE"]) if (existsSync(f)) cpSync(f, `${OUT}/${f}`);
 console.log(`built ${pages.length} pages → ${OUT}/`);
