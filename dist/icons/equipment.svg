@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-<symbol id="e-tower-crane" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M26 56V14M8 18h56M26 14 8 18M26 14l38 8M60 22v14M54 36h12v8H54zM18 56h16"/></symbol>
-<symbol id="e-excavator" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M4 50h44v-14H30l-6-10H8l-4 10Z"/><path d="m48 40 14-22 6 4-10 22"/><circle cx="16" cy="54" r="6"/><circle cx="38" cy="54" r="6"/></symbol>
-<symbol id="e-batching-plant" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M10 56V22h20v34M30 30h16l6 10v16H30M14 22l6-10h6l6 10M38 44h8"/></symbol>
-<symbol id="e-formwork" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M6 12h56v40H6z"/><path d="M20 12v40M34 12v40M48 12v40M6 32h56"/></symbol>
-<symbol id="e-wheel-loader" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M6 46h30V30h12l8 6v10"/><path d="m6 30 10-8v10"/><circle cx="18" cy="52" r="7"/><circle cx="46" cy="52" r="7"/></symbol>
-<symbol id="e-concrete-pump" viewBox="0 0 72 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><path d="M6 50h34V36H16l-4 8Z"/><path d="M22 36 40 12l10 4-14 24"/><circle cx="14" cy="54" r="5"/><circle cx="32" cy="54" r="5"/></symbol>
-</svg>

@@ -1,0 +1,12 @@
+// M-15b · Office directory
+.off {
+  display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); margin-top: 2.125rem;
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+  > div { padding: 1.25rem 1.375rem 1.375rem 0; border-bottom: 1px solid var(--line);
+          @include up($bp-md) { border-right: 1px solid var(--line); }
+          @include up($bp-lg) { &:nth-child(3n) { border-right: 0; } } }
+  h3 { font-size: 1.125rem; }
+  address { font-style: normal; font-size: .8125rem; line-height: 1.5; color: var(--steel); margin-top: .5rem; }
+  .ph { font-family: $font-mono; font-size: .6875rem; margin-top: .5rem; }
+}

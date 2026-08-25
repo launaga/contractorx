@@ -1,0 +1,44 @@
+// M-15 · Contact form drawn as a works permit
+.contact-split { display: grid; gap: 2.25rem; @include up($bp-lg) { grid-template-columns: 1.1fr 1fr; gap: 2.75rem; } }
+.permit {
+  background: var(--doc-bg); color: var(--doc-fg);
+  padding: clamp(1.25rem, 3vw, 1.75rem); position: relative;
+  h2, h3 { font-size: clamp(1.25rem, 2.4vw, 1.625rem); }
+  .rule { height: 2px; background: var(--doc-fg); margin-top: .625rem; opacity: .8; }
+}
+.frow {
+  display: grid; grid-template-columns: 1fr; gap: 1rem 1.25rem; margin-top: 1.25rem;
+  @include up($bp-sm) { grid-template-columns: 1fr 1fr; }
+}
+.fld {
+  span { font-family: $font-mono; font-size: .53125rem; letter-spacing: .15em;
+         text-transform: uppercase; color: var(--doc-dim); display: block; }
+  input, select, textarea {
+    display: block; width: 100%; margin-top: .3125rem;
+    background: transparent; color: var(--doc-fg);
+    border: 0; border-bottom: 1px solid var(--doc-line); padding-bottom: .5rem;
+    font-family: $font-mono; font-size: .8125rem; min-height: 26px;
+    &:focus { border-color: var(--hi); outline: 2px solid var(--hi); outline-offset: 3px; }
+  }
+  textarea { border: 1px solid var(--doc-line); min-height: 78px; padding: .5rem; resize: vertical; }
+  option { color: #0A1A2F; }
+  &.full { grid-column: 1 / -1; }
+  .err { display: none; font-family: $font-mono; font-size: .53125rem; letter-spacing: .14em;
+         text-transform: uppercase; color: var(--hi); margin-top: .375rem; }
+  &.is-invalid {
+    input, select, textarea { border-color: var(--hi); border-bottom-width: 2px; }
+    .err { display: block; }
+  }
+}
+.form-status {
+  display: none; margin-top: 1rem; font-family: $font-mono; font-size: .625rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  border: 1px dashed var(--doc-line); padding: .75rem;
+  &.is-visible { display: block; }
+}
+.emergency {
+  border: 2px solid var(--hi); padding: 1.375rem; margin-top: 1.625rem; background: var(--panel);
+  .num { font-family: $font-display; text-transform: uppercase;
+         font-size: clamp(1.75rem, 3.4vw, 2.625rem); line-height: .9; margin-top: .625rem; display: block; }
+  p { font-size: .8125rem; line-height: 1.55; color: var(--steel); margin-top: .625rem; }
+}

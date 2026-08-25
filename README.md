@@ -18,18 +18,18 @@ contractorx/
 ├── dist/               ← the finished site. This is what you upload.
 ├── src/
 │   ├── html/           7 pages + docs, written with {{> partial}} includes
-│   ├── partials/       head · navbar · footer · certifications · clients · tender
+│   ├── partials/       head · nav · footer · tender
 │   ├── scss/
 │   │   ├── _variables.scss     all design tokens
 │   │   ├── _reset.scss
 │   │   ├── _typography.scss
 │   │   ├── _layout.scss
-│   │   ├── sections/           23 partials — one per section
+│   │   ├── sections/           26 partials — one per section
 │   │   └── main.scss
-│   ├── js/             nav.js · counters.js · main.js
-│   ├── img/            image plates (SVG)
-│   └── icons/          three SVG sprites — UI, certifications, equipment
-├── tools/              page assembler + asset generators
+│   ├── js/             nav.js · main.js
+│   ├── img/            favicon only — content image slots ship empty
+│   └── fonts/          self-hosted woff2 — Anton · Archivo · Caveat · JetBrains Mono
+├── tools/              page assembler + QA harnesses
 ├── docs/               documentation (also at dist/docs.html)
 ├── LICENSE
 └── README.md
@@ -63,75 +63,86 @@ npm run css:watch    # recompile SCSS on every save while you work
 
 ## 1 · Colours
 
-Everything routes through `src/scss/_variables.scss`. Change these seven values
-and the entire kit follows, dark mode included.
+Everything routes through `src/scss/_variables.scss`. The palette is
+light-dominant: **white and soft blue are the only section grounds** — navy is
+reserved for objects that sit on those grounds (the tender docket, the footer
+title block, stamps), never for a whole section.
 
 | Token | Default | Used for |
 | --- | --- | --- |
-| `$ink` | `#0A0A0A` | Text, dark surfaces |
-| `$paper` | `#FAFAF8` | Page ground (warm off-white) |
-| `$panel` | `#F2F2EE` | Cards and panels |
-| `$rule` | `#111111` | Strong rules and borders |
-| `$rule-soft` | `#D6D5D0` | Dividers, hairline grids |
-| `$mute` | `#6B6B66` | Captions, secondary text |
-| `$reverse-bg` / `$reverse-fg` | `#111111` / `#F6F6F0` | Reversal blocks — hero, stats, CTA |
+| `$white` | `#FFFFFF` | Primary page ground |
+| `$soft` | `#F7F8FD` | Second ground — alternates with white |
+| `$soft-2` | `#EDF1FA` | Panels, table stripes, inset blocks |
+| `$line` | `#DCE3F2` | Hairlines, table rules, plate borders |
+| `$ink` | `#0A1A2F` | Body text and headings |
+| `$steel` | `#5C6B82` | Secondary copy |
+| `$dim` | `#8A99AE` | Captions, mono labels, meta |
+| `$doc-bg` / `$doc-fg` | `#0C1D33` / `#EEF3FB` | Navy objects — docket, title block |
+| `$bright` | `#2E86FF` | The one accent: CTAs, key numbers, one word per headline |
+| `$sky` | `#7FB2E5` | Accent support — bars, ticker, chart fills |
+| `$deep` | `#0A2E6B` | Deep blue for emphasis rules and hover states |
+| `$ok` / `$warn` | `#2F7D5A` / `#A66A22` | Status only — certification and permit states |
 
 Then run `npm run css`.
 
-Adding a brand colour? Put it on `$reverse-bg` first and check contrast. The
-design is drawn around a maximum of three reversal blocks per page — past
-that, the emphasis stops meaning anything.
+Use `$bright` surgically. If more than three things on a screen are wearing the
+accent, none of them is emphasised any more.
 
-**Dark mode** works out of the box: it follows the visitor's OS setting and can
-be toggled with the "Invert" button in the footer (stored in `localStorage`).
-To ship light-only, delete the `@media (prefers-color-scheme: dark)` and
-`:root[data-theme="dark"]` blocks in `_variables.scss` and remove the toggle
-button from `src/partials/footer.html`.
+**Dark mode** ships as a toggle — the "Invert" button in the footer, stored in
+`localStorage`. Light is the default; the dark tokens are one `@mixin
+dark-tokens` block in `_variables.scss` applied through
+`:root[data-theme="dark"]`. To ship light-only, delete that block and remove
+the toggle button from `src/partials/footer.html`.
 
 ## 2 · Fonts
 
-Three roles, set in `_variables.scss`:
+Four roles, set in `_variables.scss` — each doing a different job:
 
 ```scss
-$font-display: "Instrument Serif", Georgia, serif;   // 48–104px, headings
-$font-body:    "Inter Tight", system-ui, sans-serif; // 16–18px, running copy
-$font-mono:    "JetBrains Mono", ui-monospace;       // 10–12px labels, data
+$font-display: "Anton", Impact, sans-serif;          // uppercase headlines
+$font-body:    "Archivo", system-ui, sans-serif;     // 16–18px running copy
+$font-mono:    "JetBrains Mono", ui-monospace;       // data, spec tables, labels
+$font-hand:    "Caveat", cursive;                    // margin notes, annotations
 ```
 
-The demo loads them from Google Fonts in `src/partials/head.html`. For
-production, self-host: drop woff2 files into `dist/fonts/`, replace that
-`<link>` with `@font-face` rules, and preload the two faces used above the
-fold. Keep the three roles even if you change the families — a display serif, a
-humanist sans, and a mono for data. Italic is reserved for exactly one
-highlighted word in the hero (`<em class="hilite">`).
+**The fonts ship with the kit.** The woff2 files live in `src/fonts/` (copied
+to `dist/fonts/` on build) and the `@font-face` rules are in
+`src/scss/_fonts.scss`. There is no Google Fonts request, no `preconnect`, and
+nothing external to block the first paint — the site renders correctly offline
+and over `file://`.
+
+To swap a family: drop its woff2 into `src/fonts/`, edit the matching
+`@font-face` block in `_fonts.scss`, and change the `$font-*` variable.
+
+Keep the four roles even if you swap the families — a condensed display face, a
+neutral sans for copy, a mono carrying every number and code on the site, and a
+handwriting face for the annotations. The handwriting is what stops the
+document texture from reading as machine output; do not drop it to three.
 
 ## 3 · Images
 
-The kit ships vector plates in `dist/img/` so it weighs almost nothing out of
-the box. Replace them with real photography using the same filenames and
-nothing else needs to change.
-
-For photographs, use a `<picture>` block so modern formats are served first:
+**The image slots ship empty on purpose.** Each one is a dashed plate with a
+blueprint grid and an `IMAGE` marker, sized to the aspect ratio the layout
+expects. Drop your own photography in and the plate disappears:
 
 ```html
-<picture>
-  <source srcset="img/hero.avif" type="image/avif">
-  <source srcset="img/hero.webp" type="image/webp">
-  <img src="img/hero.jpg" alt="Steel frame at sunset" width="2400" height="1350">
-</picture>
+<figure class="plate">
+  <picture>
+    <source srcset="img/hero.avif" type="image/avif">
+    <source srcset="img/hero.webp" type="image/webp">
+    <img src="img/hero.jpg" alt="Steel frame at sunset" width="2400" height="1350">
+  </picture>
+</figure>
 ```
-
-The black-and-white treatment is applied in CSS
-(`filter: grayscale(1) contrast(1.06)` on `.plate img`), so colour photos land
-in the palette automatically. For a true duotone, export at 100% black on
-`#FAFAF8` in your editor and remove that filter.
 
 Always keep `width` and `height` on images — that is what holds CLS under 0.05.
 
-**Icons** live in three sprites under `src/icons/` (UI, certification marks,
-equipment silhouettes) and are inlined into each page at build time, so they
-work over `file://` with no extra requests. Reference one with
-`<svg><use href="#i-arrow-right"></use></svg>`. All draw in `currentColor`.
+No filter is applied to photography, so what you export is what ships. If you
+want the whole site to sit in one tonal range, grade the photos before export
+rather than adding a CSS filter — the layout already carries the blue.
+
+There is no icon sprite. The kit draws its marks with type, rules, and CSS
+shapes, which is why `dist/` is under 400 KB with nothing to preload.
 
 ## 4 · Navigation
 

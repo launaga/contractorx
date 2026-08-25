@@ -3,10 +3,10 @@
 :root{
  /* grounds are white and soft blue only. navy is for objects, never a section. */
  --ink:#FFFFFF;--char:#F7F8FD;--panel:#F7F8FD;--panel2:#EDF1FA;--line:#DCE3F2;
- --fg:#0A1A2F;--steel:#5C6B82;--dim:#8A99AE;
+ --fg:#0A1A2F;--steel:#5C6B82;--dim:#606E85;
  --paper:#F7F8FD;--paper2:#E8EDF8;--kink:#0A1A2F;
  --doc-bg:#0C1D33;--doc-fg:#EEF3FB;--doc-line:rgba(238,243,251,.22);
- --hi:#2E86FF;--sky:#7FB2E5;--deep:#0A2E6B;--navy:#0C1D33;
+ --hi:#1568D6;--sky:#7FB2E5;--deep:#0A2E6B;--navy:#0C1D33;
  --ok:#2F7D5A;--warn:#A66A22;
 }
 body{width:1440px;background:var(--ink);color:var(--fg);font-family:Archivo,sans-serif;overflow-x:hidden}
@@ -342,7 +342,7 @@ h1 .g{color:var(--steel)}
  --fg:#EEF4FB;--steel:#8296AC;--dim:#5A6B80;
  --paper:#0B1B33;--paper2:#12253F;--kink:#EEF4FB;
  --doc-bg:#F7FAFD;--doc-fg:#0A1420;--doc-line:rgba(10,20,32,.2);
- --hi:#2E86FF;--sky:#7FB2E5;--deep:#CFDCEA;--navy:#0B1B33;
+ --hi:#1568D6;--sky:#7FB2E5;--deep:#CFDCEA;--navy:#0B1B33;
 }
 :root[data-theme="dark"] .pimg,
 :root[data-theme="dark"] .frameimg{background:#070C15;border-color:#1E2C42}

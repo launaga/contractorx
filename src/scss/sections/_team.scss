@@ -1,10 +1,18 @@
-// M-12 Team
-.team-grid { display: grid; gap: clamp(1rem, 2.4vw, 1.75rem); grid-template-columns: repeat(2, 1fr);
-  > * { min-width: 0; }
+// M-12 · Team as ID cards
+.team {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2.25rem;
   @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
 }
-.member { display: grid; gap: .875rem;
-  h3 { font-size: 1.125rem; }
-  .member__role { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
-  p { font-size: .875rem; color: var(--mute); }
+.idc {
+  background: var(--doc-bg); color: var(--doc-fg); padding: 1rem; position: relative;
+  .ph { height: 132px; background: var(--paper2); border: 1px dashed var(--paper2);
+        display: grid; place-items: center;
+        span { font-family: $font-mono; font-size: .5rem; letter-spacing: .2em; color: var(--dim); } }
+  h3 { font-size: 1.0625rem; margin-top: .75rem; line-height: 1; }
+  .rl { font-family: $font-mono; font-size: .53125rem; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--doc-dim); margin-top: .375rem; }
+  p { font-size: .71875rem; line-height: 1.45; color: color-mix(in srgb, var(--doc-fg) 78%, transparent);
+      margin-top: .5625rem; }
+  .bar { margin-top: .75rem; height: 18px; display: flex; gap: 2px; align-items: flex-end;
+         i { width: 2px; background: var(--doc-fg); display: block; } }
 }

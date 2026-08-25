@@ -1,38 +1,22 @@
-// ============================================================
-// Print — pages are printed by clients as often as they're read
-// ============================================================
+// Contractors print these pages for meetings. Make it survive the printer.
 @media print {
-  :root { --paper: #fff; --ink: #000; --panel: #fff; --mute: #444; }
-
-  .nav-x { position: static; border-bottom: 1px solid #000; }
-  .nav-x__toggle,
-  .nav-x__panel,
-  .nav-x__cta,
-  .theme-toggle,
-  .skip-link,
-  .hero__scroll,
-  .filter-bar,
-  .cx-bar { display: none !important; }
-
-  .hero, .stats-band, .cta-band, .tender, .safety-days {
-    background: #fff !important;
-    color: #000 !important;
-    border: 1px solid #000;
+  :root {
+    --ink: #fff; --char: #fff; --panel: #fff; --panel2: #fff; --line: #999;
+    --fg: #000; --steel: #333; --dim: #555;
+    --paper: #fff; --paper2: #fff; --kink: #000;
+    --doc-bg: #fff; --doc-fg: #000; --doc-line: #999;
+    --hi: #000; --sky: #666;
   }
-  .hero__media { display: none; }
-  .reverse .label, .reverse .meta, .reverse .mono,
-  .hero .label, .cta-band p, .tender p { opacity: 1 !important; color: #000 !important; }
-
+  .nav { position: static; }
+  .nav-toggle, .nav-panel, .nav > .btn, .theme-toggle, .skip-link,
+  .chips, .barcode, .tape { display: none !important; }
+  .doc, .permit, .docket, .idc { border: 1px solid #000; box-shadow: none; transform: none; }
+  .dk.right { border-left: 1px solid #000; }
   .reveal { opacity: 1 !important; transform: none !important; }
-  details { display: block; }
-  details > summary { list-style: none; }
-  details p { display: block !important; }
-
-  .section { padding-block: 1.5rem; break-inside: avoid; }
-  .plate { break-inside: avoid; }
-  table, figure, .cert, .unit, .card-x { break-inside: avoid; }
+  .trk i { background: #000 !important; }
+  .sec, .papersec { padding-block: 1.25rem; break-inside: avoid; }
+  .pcard, .cert, .unit, .idc, .fig, table, figure { break-inside: avoid; }
   h1, h2, h3 { break-after: avoid; }
-
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #444; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; }
   a[href^="#"]::after, a[href$=".html"]::after { content: ""; }
 }

@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" preserveAspectRatio="xMidYMid slice">
-<defs>
-<linearGradient id="sky17" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0" stop-color="#FAFAF8"/><stop offset="1" stop-color="#CFCEC8"/></linearGradient>
-<pattern id="hatch17" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
-<line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="1.6" opacity=".5"/></pattern>
-</defs>
-<rect width="1200" height="900" fill="url(#sky17)"/><g stroke="#0A0A0A" fill="none" stroke-width="2" opacity="0.8"><path d="M144 180 v540"/><path d="M372 180 v540"/><path d="M600 180 v540"/><path d="M828 180 v540"/><path d="M1056 180 v540"/><path d="M144 180 h912"/><path d="M144 360 h912"/><path d="M144 540 h912"/><path d="M144 720 h912"/><path d="M144 720 l228 -180"/><path d="M372 720 l228 -180"/><path d="M600 720 l228 -180"/><path d="M828 720 l228 -180"/></g><path d="M0 792 h1200 v108 h-1200 Z" fill="#0A0A0A" opacity="0.85"/></svg>

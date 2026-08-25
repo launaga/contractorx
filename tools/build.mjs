@@ -7,9 +7,6 @@ import { join } from "node:path";
 const P = "src/partials", H = "src/html", OUT = "dist";
 const partial = (n) => readFileSync(join(P, n + ".html"), "utf8");
 
-const sprites = ["sprite", "certs", "equipment"]
-  .map((f) => readFileSync(`src/icons/${f}.svg`, "utf8").replace(/^<\?xml.*?\?>\s*/, ""))
-  .join("\n");
 
 function expand(html, vars) {
   let out = html;
@@ -29,10 +26,9 @@ for (const file of pages) {
   const meta = raw.match(/<!--meta\s+([\s\S]*?)-->/);
   const vars = meta ? JSON.parse(meta[1]) : {};
   vars.slug = file === "index.html" ? "" : file;
-  const nav = { "index.html": "navHome", "services.html": "navServices", "projects.html": "navProjects", "about.html": "navAbout", "contact.html": "navContact" }[file];
+  const nav = { "services.html": "navServices", "projects.html": "navProjects", "about.html": "navAbout", "contact.html": "navContact" }[file];
   if (nav) vars[nav] = ' aria-current="page"';
   let html = expand(raw.replace(/<!--meta[\s\S]*?-->\n?/, ""), vars);
-  html = html.replace("<!--sprites-->", `<div hidden aria-hidden="true">\n${sprites}\n</div>`);
   writeFileSync(join(OUT, file), html);
 }
 
@@ -40,7 +36,8 @@ for (const file of pages) {
 mkdirSync(`${OUT}/css`, { recursive: true });
 cpSync("src/js", `${OUT}/js`, { recursive: true });
 cpSync("src/img", `${OUT}/img`, { recursive: true });
-cpSync("src/icons", `${OUT}/icons`, { recursive: true });
+cpSync("src/fonts", `${OUT}/fonts`, { recursive: true });
+
 cpSync("node_modules/bootstrap/dist/css/bootstrap-grid.min.css", `${OUT}/css/bootstrap-grid.min.css`);
 cpSync("node_modules/gsap/dist/gsap.min.js", `${OUT}/js/gsap.min.js`);
 for (const f of ["robots.txt", "sitemap.xml", "LICENSE"]) if (existsSync(f)) cpSync(f, `${OUT}/${f}`);

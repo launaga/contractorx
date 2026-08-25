@@ -1,39 +1,41 @@
-// M-01 Navbar — sticky, hairline, no shadow
-.nav-x {
+// M-01 · Utility strip + primary navigation
+.utility {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: .5625rem var(--shell-x);
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  @include down($bp-lg) { span:last-child { display: none; } }
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.125rem var(--shell-x);
+  border-bottom: 1px solid var(--line);
   position: sticky; top: 0; z-index: 60;
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
-  backdrop-filter: saturate(1) blur(6px);
-  border-bottom: $hair solid var(--rule-soft);
-  transition: border-color .2s ease;
-  &.is-stuck { border-color: var(--rule); }
-}
-.nav-x__inner { display: flex; align-items: center; gap: 1.5rem; min-height: 68px; }
-.nav-x__brand {
-  font-family: var(--font-display); font-size: 1.375rem; letter-spacing: -.01em; line-height: 1;
-  display: flex; align-items: baseline; gap: .5rem;
-  span { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; color: var(--mute); }
-}
-.nav-x__links {
-  display: none; gap: 1.75rem; margin-inline: auto; list-style: none; padding: 0; margin-bottom: 0;
-  @include up($bp-lg) { display: flex; }
-  a {
-    font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: $track-label;
-    text-transform: uppercase; padding-block: .375rem; border-bottom: $hair solid transparent;
-    &:hover, &:focus-visible, &[aria-current="page"] { border-color: var(--ink); }
+  background: color-mix(in srgb, var(--ink) 94%, transparent);
+  backdrop-filter: blur(6px);
+  ul {
+    display: none; gap: 1.75rem; list-style: none; padding: 0; color: var(--steel);
+    @include up($bp-lg) { display: flex; }
+    a { padding-block: .25rem; border-bottom: 1px solid transparent;
+        &:hover, &:focus-visible, &[aria-current="page"] { color: var(--hi); border-color: var(--hi); } }
   }
+  > .btn { display: none; @include up($bp-lg) { display: inline-block; } }
 }
-.nav-x__cta { display: none; @include up($bp-lg) { display: inline-flex; } }
-.nav-x__toggle {
-  margin-left: auto; background: none; border: $hair solid var(--rule); padding: .625rem .75rem;
-  font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: $track-label; text-transform: uppercase;
-  cursor: pointer;
+.brand {
+  font-family: $font-display; font-size: 1.25rem; text-transform: uppercase; letter-spacing: .02em;
+  i { font-style: normal; color: var(--hi); }
+}
+.nav-toggle {
+  margin-left: auto; border: 1px solid var(--line); padding: .625rem .75rem; cursor: pointer;
+  font-family: $font-mono; font-size: .625rem; letter-spacing: .14em; text-transform: uppercase;
   @include up($bp-lg) { display: none; }
 }
-.nav-x__panel {
-  display: none; border-top: $hair solid var(--rule-soft); padding-block: 1rem 1.5rem;
+.nav-panel {
+  display: none; border-bottom: 1px solid var(--line); padding: 0 var(--shell-x) 1.25rem;
   &.is-open { display: block; }
   @include up($bp-lg) { display: none !important; }
   ul { list-style: none; padding: 0; margin: 0 0 1rem; }
-  li + li { border-top: $hair solid var(--rule-soft); }
-  a { display: block; padding: .875rem 0; font-family: var(--font-mono); font-size: .75rem; letter-spacing: $track-label; text-transform: uppercase; }
+  li + li { border-top: 1px solid var(--line); }
+  a { display: block; padding: .875rem 0; font-family: $font-mono; font-size: .75rem;
+      letter-spacing: .14em; text-transform: uppercase; }
 }

@@ -1,0 +1,32 @@
+// K-09 · Spec sheet — services as a priced schedule, the page's spine
+.sheet { margin-top: 2.5rem; border-top: 2px solid var(--fg); }
+.hrow, .srow { display: grid; align-items: center; }
+.hrow {
+  display: none; padding: .625rem var(--shell-x); color: var(--dim);
+  border-bottom: 1px solid var(--line);
+  @include up($bp-lg) { display: grid; grid-template-columns: 56px 1.5fr 1fr .9fr .8fr 118px; }
+}
+.srow {
+  padding: 1.1875rem var(--shell-x);
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: 1fr;
+  gap: .75rem;
+  @include up($bp-lg) { grid-template-columns: 56px 1.5fr 1fr .9fr .8fr 118px; gap: 0; }
+  .idx { font-family: $font-mono; font-size: .625rem; letter-spacing: .14em; color: var(--dim); }
+  .nm  { font-family: $font-display; text-transform: uppercase;
+         font-size: clamp(1.25rem, 2.2vw, 1.5625rem); letter-spacing: .01em; }
+  .v   { font-family: $font-mono; font-size: .78125rem; font-weight: 500;
+         small { display: block; font-size: .53125rem; letter-spacing: .15em; color: var(--dim);
+                 text-transform: uppercase; margin-bottom: .25rem; } }
+  .go  { font-family: $font-mono; font-size: .59375rem; letter-spacing: .14em;
+         text-transform: uppercase; color: var(--dim);
+         @include up($bp-lg) { text-align: right; } }
+  &.on { background: var(--panel); border-left: 3px solid var(--hi);
+         padding-left: calc(var(--shell-x) - 3px);
+         .go { color: var(--hi); } }
+  &:hover { background: var(--panel); }
+  // below lg the row becomes a stacked card: name, then the values inline
+  @include down($bp-lg) {
+    .v { display: inline-grid; margin-right: 1.5rem; }
+  }
+}

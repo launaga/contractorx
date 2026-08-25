@@ -1,0 +1,39 @@
+// K-06 · Tender docket — the recurring CTA object
+.docket {
+  display: grid; grid-template-columns: 1fr;
+  background: var(--doc-bg); color: var(--doc-fg); position: relative;
+  @include up($bp-lg) { grid-template-columns: 1.25fr 1fr 250px; }
+  h2 { font-family: $font-display; text-transform: uppercase;
+       font-size: clamp(2rem, 4vw, 3.5rem); line-height: .86; }
+  .eyebrow { color: var(--sky); }
+  p { color: color-mix(in srgb, var(--doc-fg) 72%, transparent); }
+}
+.dk {
+  padding: clamp(1.5rem, 3vw, 2.125rem) clamp(1.25rem, 2.6vw, 1.875rem);
+  &.mid {
+    border-top: 2px dashed var(--doc-line);
+    @include up($bp-lg) { border-top: 0; border-inline: 2px dashed var(--doc-line); }
+  }
+  &.right {
+    background: var(--hi); color: #fff;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+  }
+}
+.field {
+  display: grid; grid-template-columns: 1fr; gap: .875rem 1.125rem; margin-top: 1.125rem;
+  @include up($bp-sm) { grid-template-columns: 1fr 1fr; }
+  span { font-family: $font-mono; font-size: .53125rem; letter-spacing: .15em;
+         text-transform: uppercase; color: var(--doc-dim); display: block; }
+  input, select {
+    width: 100%; background: transparent; color: var(--doc-fg);
+    border: 0; border-bottom: 1px solid var(--doc-line); padding: .375rem 0 .4375rem;
+    font-family: $font-mono; font-size: .8125rem; margin-top: .25rem;
+    &:focus { border-color: var(--hi); outline: 2px solid var(--hi); outline-offset: 3px; }
+  }
+  option { color: #0A1A2F; }
+  .full { grid-column: 1 / -1; }
+}
+.barcode {
+  display: flex; gap: 2px; align-items: flex-end; height: 44px; margin-top: 1rem;
+  i { display: block; width: 2px; background: var(--doc-fg); }
+}

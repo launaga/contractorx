@@ -1,6 +1,7 @@
 <!--meta {
   "title": "Contact",
-  "description": "Talk to RKU — six offices across Indonesia and Malaysia, a dedicated tender desk, and a 24-hour emergency line for live sites."
+  "description": "Six offices across Indonesia and Malaysia, a dedicated tender desk, and a 24-hour emergency line for live sites.",
+  "sheet": "Contact · 07 / 07"
 } -->
 <!DOCTYPE html>
 <html lang="en">
@@ -8,170 +9,89 @@
 {{> head}}
 </head>
 <body>
-<!--sprites-->
 {{> nav}}
 
 <main id="main">
+<header class="phead">
+  <div class="crumb"><span>Home</span><i>/</i><span>Contact</span></div>
+  <h1>Two ways in:<br>a conversation,<br>or a tender.</h1>
+  <p class="lede">General enquiries go to the office nearest your site. Tender documents go straight to the estimating desk — different form, different people, faster answer.</p>
+  <div class="pmeta m" style="color:var(--dim)">SHEET A-107<br>CONTACT · 07 / 07</div>
+</header>
 
-  <section class="page-head">
-    <div class="shell">
-      <ul class="crumb"><li><a href="index.html">Home</a></li><li>Contact</li></ul>
-      <p class="eyebrow"><span>P-07</span> Contact</p>
-      <h1>Two ways in: a conversation, or a tender.</h1>
-      <p class="lede">General enquiries go to the office nearest your site. Tender documents go straight to the estimating desk — different form, different people, faster answer.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell">
-      <div class="about-split">
-        <div class="reveal">
-          <p class="eyebrow"><span>01</span> General enquiry</p>
-          <form class="form-x" novalidate data-validate>
-            <div class="form-row">
-              <div class="field">
-                <label for="c-name">Name</label>
-                <input id="c-name" name="name" type="text" required autocomplete="name">
-                <span class="field__error">Enter your name</span>
-              </div>
-              <div class="field">
-                <label for="c-company">Company</label>
-                <input id="c-company" name="company" type="text" autocomplete="organization">
-                <span class="field__error">Enter your company</span>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="c-email">Email</label>
-                <input id="c-email" name="email" type="email" required autocomplete="email">
-                <span class="field__error">Enter a valid email address</span>
-              </div>
-              <div class="field">
-                <label for="c-phone">Phone</label>
-                <input id="c-phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+()\s-]{7,}">
-                <span class="field__error">Enter a reachable phone number</span>
-              </div>
-            </div>
-            <div class="field">
-              <label for="c-subject">What is this about?</label>
-              <select id="c-subject" name="subject" required>
-                <option value="">Select a subject</option>
-                <option>New project enquiry</option>
-                <option>Site visit request</option>
-                <option>Subcontractor / supplier registration</option>
-                <option>Defect or warranty (existing client)</option>
-                <option>Careers</option>
-                <option>Press</option>
-              </select>
-              <span class="field__error">Select a subject</span>
-            </div>
-            <div class="field">
-              <label for="c-message">Message</label>
-              <textarea id="c-message" name="message" required minlength="20"></textarea>
-              <span class="field__error">Tell us a little about the project — 20 characters minimum</span>
-            </div>
-            <button class="btn-x" type="submit">Send enquiry <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
-            <p class="form-status" role="status" data-status></p>
-            <p class="form-note">This demo validates in the browser and stops there — no data is sent anywhere. Wire it to Formspree, Netlify Forms, or your own handler in one line; see the kit README.</p>
-          </form>
+<section class="sec" style="padding-top:44px">
+  <div class="shell">
+    <div class="contact-split">
+      <form class="permit" novalidate data-validate>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1rem">
+          <h2>Enquiry slip</h2>
+          <span class="m" style="color:var(--doc-dim)">Form RKU-01</span>
         </div>
-
-        <div class="reveal">
-          <p class="eyebrow"><span>02</span> Direct lines</p>
-          <div class="hair-grid g-2" style="margin-bottom:1.5rem">
-            <div style="padding:1.25rem">
-              <span class="label">Estimating &amp; tenders</span>
-              <p class="num" style="margin-top:.5rem;font-size:.9375rem"><a href="mailto:tender@rku.example">tender@rku.example</a><br>+62 21 555 0148</p>
-            </div>
-            <div style="padding:1.25rem">
-              <span class="label">General office</span>
-              <p class="num" style="margin-top:.5rem;font-size:.9375rem"><a href="mailto:halo@rku.example">halo@rku.example</a><br>+62 21 555 0100</p>
-            </div>
-          </div>
-          <div class="emergency reverse" style="padding:1.5rem">
-            <div>
-              <span class="label">24-hour site emergency line</span>
-              <p class="d3" style="margin-top:.5rem"><a href="tel:+628111550911">+62 811 155 0911</a></p>
-              <p style="opacity:.7;font-size:.875rem;margin-top:.5rem">Answered by the duty QHSE manager, every day of the year. For incidents, structural concerns, or utility strikes on any RKU site.</p>
-            </div>
-            <a class="btn-x" href="tel:+628111550911"><svg class="icon" width="14" height="14" aria-hidden="true"><use href="#i-phone"></use></svg> Call now</a>
-          </div>
-          <p class="form-note" style="margin-top:1rem">Office hours: Monday – Friday, 08:00 – 17:30 WIB. Saturday site visits by arrangement.</p>
+        <div class="rule"></div>
+        <div class="frow">
+          <div class="fld"><label for="c-name"><span>Name</span></label><input id="c-name" name="name" type="text" required autocomplete="name"><span class="err">Enter your name</span></div>
+          <div class="fld"><label for="c-company"><span>Company</span></label><input id="c-company" name="company" type="text" autocomplete="organization"></div>
+          <div class="fld"><label for="c-email"><span>Email</span></label><input id="c-email" name="email" type="email" required autocomplete="email"><span class="err">Enter a valid email address</span></div>
+          <div class="fld"><label for="c-phone"><span>Phone</span></label><input id="c-phone" name="phone" type="tel" required autocomplete="tel" pattern="[0-9+()\s-]{7,}"><span class="err">Enter a reachable number</span></div>
+          <div class="fld full"><label for="c-subject"><span>Subject</span></label>
+            <select id="c-subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option>New project enquiry</option><option>Site visit request</option>
+              <option>Subcontractor / supplier registration</option>
+              <option>Defect or warranty (existing client)</option>
+              <option>Careers</option><option>Press</option>
+            </select><span class="err">Select a subject</span></div>
+          <div class="fld full"><label for="c-message"><span>Message</span></label><textarea id="c-message" name="message" required minlength="20"></textarea><span class="err">Tell us about the project — 20 characters minimum</span></div>
         </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.375rem">
+          <button class="btn" type="submit">Send enquiry →</button>
+          <span class="m" style="color:var(--doc-dim)">Response within 1 working day</span>
+        </div>
+        <p class="form-status" role="status" data-status></p>
+      </form>
+      </div>
+
+      <div>
+        <span class="eyebrow">01 · Direct lines</span>
+        <div class="table-scroll"><table class="tbl" style="margin-top:18px">
+          <tbody>
+            <tr><td style="font-family:Archivo;font-size:14px;text-transform:none">Estimating &amp; tenders</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px">tender@rku.example<br>+62 21 555 0148</td></tr>
+            <tr><td style="font-family:Archivo;font-size:14px;text-transform:none">General office</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px">halo@rku.example<br>+62 21 555 0100</td></tr>
+            <tr><td style="font-family:Archivo;font-size:14px;text-transform:none">Supplier registration</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px">vendor@rku.example</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="emergency">
+          <div class="m" style="color:var(--hi)">24-HOUR SITE EMERGENCY LINE</div>
+          <a class="num" href="tel:+628111550911">+62 811 155 0911</a>
+          <p style="font-size:13px;line-height:1.55;color:var(--steel);margin-top:10px">Answered by the duty QHSE manager, every day of the year. For incidents, structural concerns, or utility strikes on any RKU site.</p>
+        </div>
+        <p class="hand" style="font-size:24px;margin-top:18px;transform:rotate(-1.2deg)">office hours 08:00 – 17:30 WIB. site visits by arrangement.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section--ruled">
-    <div class="shell">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow"><span>03</span> Offices</p>
-          <h2>Six offices, one contract.</h2>
-        </div>
-        <p class="section-head__aside">Work is run from the office nearest your site. Contracts, guarantees, and invoicing stay with Jakarta.</p>
-      </div>
-      <div class="offices reveal">
-        <div>
-          <span class="label label--ink">Jakarta — Head office</span>
-          <address>Menara Kadin, Lt. 9<br>Jl. H.R. Rasuna Said Kav. C-12<br>Jakarta Selatan 12940</address>
-          <p class="num" style="font-size:.8125rem">+62 21 555 0100</p>
-        </div>
-        <div>
-          <span class="label label--ink">Surabaya</span>
-          <address>Jl. Mayjen Sungkono 121, Lt. 4<br>Surabaya 60256<br>Jawa Timur</address>
-          <p class="num" style="font-size:.8125rem">+62 31 555 0212</p>
-        </div>
-        <div>
-          <span class="label label--ink">Bandung</span>
-          <address>Jl. Asia Afrika 88, Unit 2B<br>Bandung 40112<br>Jawa Barat</address>
-          <p class="num" style="font-size:.8125rem">+62 22 555 0334</p>
-        </div>
-        <div>
-          <span class="label label--ink">Medan</span>
-          <address>Jl. Putri Hijau 14, Lt. 3<br>Medan 20111<br>Sumatera Utara</address>
-          <p class="num" style="font-size:.8125rem">+62 61 555 0447</p>
-        </div>
-        <div>
-          <span class="label label--ink">Batam</span>
-          <address>Kompleks Mahkota Raya Blok C-8<br>Batam 29444<br>Kepulauan Riau</address>
-          <p class="num" style="font-size:.8125rem">+62 778 555 062</p>
-        </div>
-        <div>
-          <span class="label label--ink">Johor Bahru — Malaysia</span>
-          <address>Menara Ansar, Level 12<br>Jalan Trus, 80000 Johor Bahru<br>Johor, Malaysia</address>
-          <p class="num" style="font-size:.8125rem">+60 7 555 0198</p>
-        </div>
-      </div>
+<div class="tear-d"></div>
+<section class="papersec">
+  <div class="shell">
+    <div class="sh reveal">
+      <div><span class="eyebrow">02 · Offices</span><h2>Six offices.<br>One contract.</h2></div>
+      <p>Work is run from the office nearest your site. Contracts, guarantees, and invoicing stay with Jakarta.</p>
     </div>
-  </section>
-
-  {{> tender}}
-
-  <section class="section section--tight section--ruled">
-    <div class="shell">
-      <p class="eyebrow reveal"><span>04</span> Head office</p>
-      <div class="site-map reveal">
-        <svg viewBox="0 0 900 260" role="img" aria-label="Schematic location map of the RKU head office on Jl. H.R. Rasuna Said, Jakarta Selatan">
-          <title>Head office location — schematic</title>
-          <g stroke="currentColor" stroke-width="1" opacity=".2"><path d="M0 65h900M0 130h900M0 195h900M150 0v260M300 0v260M450 0v260M600 0v260M750 0v260"/></g>
-          <g stroke="currentColor" fill="none" stroke-width="2.5" opacity=".7">
-            <path d="M60 240 L300 40 L840 40"/>
-            <path d="M0 150 L900 120"/>
-            <path d="M420 0 L470 260"/>
-          </g>
-          <g fill="currentColor" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">
-            <text x="310" y="32">JL. H.R. RASUNA SAID</text>
-            <text x="20" y="142">JL. GATOT SUBROTO</text>
-            <text x="478" y="230">JL. CASABLANCA</text>
-          </g>
-          <g class="pin"><circle cx="450" cy="98" r="7" fill="currentColor"/><text x="466" y="94" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="currentColor">MENARA KADIN LT. 9 — RKU</text></g>
-        </svg>
-        <p class="site-map__legend"><span>−6.2231, 106.8305</span><span>Parking: basement P2</span><span>Nearest MRT: Setiabudi Astra, 700 m</span></p>
-      </div>
+    <div class="off" style="border-top-color:rgba(10,20,32,.28)">
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Jakarta — Head office</h3><address style="color:var(--kink)">Menara Kadin, Lt. 9<br>Jl. H.R. Rasuna Said Kav. C-12<br>Jakarta Selatan 12940</address><div class="ph">+62 21 555 0100</div></div>
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Surabaya</h3><address style="color:var(--kink)">Jl. Mayjen Sungkono 121, Lt. 4<br>Surabaya 60256<br>Jawa Timur</address><div class="ph">+62 31 555 0212</div></div>
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Bandung</h3><address style="color:var(--kink)">Jl. Asia Afrika 88, Unit 2B<br>Bandung 40112<br>Jawa Barat</address><div class="ph">+62 22 555 0334</div></div>
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Medan</h3><address style="color:var(--kink)">Jl. Putri Hijau 14, Lt. 3<br>Medan 20111<br>Sumatera Utara</address><div class="ph">+62 61 555 0447</div></div>
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Batam</h3><address style="color:var(--kink)">Kompleks Mahkota Raya Blok C-8<br>Batam 29444<br>Kepulauan Riau</address><div class="ph">+62 778 555 062</div></div>
+      <div style="border-color:rgba(10,20,32,.18)"><h3>Johor Bahru — Malaysia</h3><address style="color:var(--kink)">Menara Ansar, Level 12<br>Jalan Trus, 80000 Johor Bahru<br>Johor, Malaysia</address><div class="ph">+60 7 555 0198</div></div>
     </div>
-  </section>
+  </div>
+</section>
+<div class="tear-p"></div>
 
+{{> tender}}
 </main>
 
 {{> footer}}
