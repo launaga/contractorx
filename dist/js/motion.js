@@ -92,7 +92,7 @@
   var needsGsap = document.querySelector("[data-seq], [data-hreg], [data-px]");
   if (!needsGsap) return;
 
-  /* ---- 2 · load GSAP, then start ------------------------------------- */
+  /* ---- 3 · load GSAP, then start ------------------------------------- */
   load("js/gsap.min.js", function () {
     load("js/ScrollTrigger.min.js", start);
   });
@@ -113,7 +113,7 @@
     register();
   }
 
-  /* ---- 3 · hero parallax ---------------------------------------------- */
+  /* ---- 4 · page-head and hero parallax -------------------------------- */
   function parallax() {
     document.querySelectorAll("[data-px]").forEach(function (el) {
       var rate = parseFloat(el.getAttribute("data-px"));
@@ -133,7 +133,7 @@
     });
   }
 
-  /* ---- 4 · pinned build sequence -------------------------------------- */
+  /* ---- 5 · pinned build sequence -------------------------------------- */
   var PHASES = [
     { name: "Foundation", stat: "On programme" },
     { name: "Structure",  stat: "On programme" },
@@ -206,7 +206,7 @@
     paint(0);
   }
 
-  /* ---- 5 · horizontal register ---------------------------------------- */
+  /* ---- 6 · horizontal register ---------------------------------------- */
   function register() {
     var sec = document.querySelector("[data-hreg]");
     if (!sec) return;
