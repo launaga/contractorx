@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" preserveAspectRatio="xMidYMid slice">
-<defs>
-<linearGradient id="sky12" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0" stop-color="#FAFAF8"/><stop offset="1" stop-color="#CFCEC8"/></linearGradient>
-<pattern id="hatch12" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
-<line x1="0" y1="0" x2="0" y2="7" stroke="#0A0A0A" stroke-width="1.6" opacity=".5"/></pattern>
-</defs>
-<rect width="1200" height="900" fill="url(#sky12)"/><g stroke="#0A0A0A" fill="none" stroke-width="2" opacity="0.9"><path d="M72 108 v666"/><path d="M248 108 v666"/><path d="M424 108 v666"/><path d="M600 108 v666"/><path d="M776 108 v666"/><path d="M952 108 v666"/><path d="M1128 108 v666"/><path d="M72 108 h1056"/><path d="M72 274.5 h1056"/><path d="M72 441 h1056"/><path d="M72 607.5 h1056"/><path d="M72 774 h1056"/><path d="M72 774 l176 -166.5"/><path d="M248 774 l176 -166.5"/><path d="M424 774 l176 -166.5"/><path d="M600 774 l176 -166.5"/><path d="M776 774 l176 -166.5"/><path d="M952 774 l176 -166.5"/></g><path d="M72 774 h1056 v72 h-1056 Z" fill="#0A0A0A" opacity="0.8"/></svg>

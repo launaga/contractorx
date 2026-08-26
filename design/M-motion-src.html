@@ -1,0 +1,635 @@
+<title>Build Sequence Motion Study</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600&family=Caveat:wght@600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ==========================================================
+   ContractorX — scroll motion study
+   Tokens are the kit's own (src/scss/_variables.scss).
+   Grounds: white + soft blue. Navy is an object, never a ground.
+   ========================================================== */
+:root{
+  --white:#FFFFFF; --soft:#F7F8FD; --soft2:#EDF1FA; --line:#DCE3F2;
+  --fg:#0A1A2F; --steel:#5C6B82; --dim:#606E85;
+  --doc-bg:#0C1D33; --doc-fg:#EEF3FB; --doc-dim:#8FA2B8; --doc-line:rgba(238,243,251,.22);
+  --hi:#1568D6; --sky:#7FB2E5; --deep:#0A2E6B; --ok:#2F7D5A; --warn:#A66A22;
+  --ground:var(--white); --alt:var(--soft); --panel:var(--soft2);
+  --shell:clamp(1.25rem,3.6vw,3.25rem);
+  --f-display:Anton,"Arial Narrow",sans-serif;
+  --f-body:Archivo,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  --f-hand:Caveat,cursive;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --white:#060910; --soft:#0B1B33; --soft2:#12253F; --line:#1E2C42;
+    --fg:#EEF4FB; --steel:#8296AC; --dim:#7B8CA2;
+    --doc-bg:#F7FAFD; --doc-fg:#0A1420; --doc-dim:#5F6D83; --doc-line:rgba(10,20,32,.2);
+    --hi:#5AA0FF; --sky:#7FB2E5; --deep:#CFDCEA;
+    --ground:var(--white); --alt:var(--soft); --panel:var(--soft2);
+  }
+}
+:root[data-theme="dark"]{
+  --white:#060910; --soft:#0B1B33; --soft2:#12253F; --line:#1E2C42;
+  --fg:#EEF4FB; --steel:#8296AC; --dim:#7B8CA2;
+  --doc-bg:#F7FAFD; --doc-fg:#0A1420; --doc-dim:#5F6D83; --doc-line:rgba(10,20,32,.2);
+  --hi:#5AA0FF; --sky:#7FB2E5; --deep:#CFDCEA;
+  --ground:var(--white); --alt:var(--soft); --panel:var(--soft2);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--fg);
+  font-family:var(--f-body);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-transform:uppercase;
+  margin:0;line-height:.9;letter-spacing:.002em;text-wrap:balance}
+p{margin:0}
+.shell{max-width:1240px;margin:0 auto;padding-inline:var(--shell)}
+.m{font-family:var(--f-mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase}
+.hand{font-family:var(--f-hand);font-size:1.45rem;color:var(--hi);line-height:1.15}
+.hi{color:var(--hi)}
+:focus-visible{outline:2px solid var(--hi);outline-offset:3px}
+
+/* ---- fixed programme rail (technique: scroll progress) ---- */
+.rail{position:fixed;inset:0 0 auto 0;z-index:60;height:3px;background:var(--line)}
+.rail i{display:block;height:100%;width:0;background:var(--hi);transform-origin:0 50%}
+.railout{position:fixed;top:14px;right:var(--shell);z-index:60;
+  display:flex;align-items:baseline;gap:.55rem;color:var(--dim);
+  background:color-mix(in srgb,var(--ground) 84%,transparent);
+  padding:.35rem .6rem;border:1px solid var(--line);backdrop-filter:blur(6px)}
+.railout b{font-family:var(--f-mono);font-size:.8125rem;font-weight:500;
+  color:var(--hi);font-variant-numeric:tabular-nums}
+
+/* ---- section frame ---- */
+.sec{padding-block:clamp(3.5rem,7vw,6rem);position:relative}
+.sec--alt{background:var(--alt)}
+.sh{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;align-items:flex-end;
+  justify-content:space-between;margin-bottom:2.25rem}
+.sh h2{font-size:clamp(2.1rem,5.4vw,3.6rem)}
+.sh .eyebrow{color:var(--hi);display:block;margin-bottom:.5rem}
+.sh p{color:var(--steel);max-width:46ch}
+.tag{display:inline-block;border:1px solid var(--line);padding:.4rem .6rem;
+  color:var(--dim);background:var(--ground)}
+
+/* ---- hero (technique: parallax) ---- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;
+  overflow:hidden;border-bottom:1px solid var(--line)}
+.hero__grid{position:absolute;inset:-15% -5%;z-index:0;will-change:transform;
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px);
+  background-size:64px 64px}
+.hero__in{position:relative;z-index:2;display:grid;gap:clamp(2rem,5vw,4rem);
+  grid-template-columns:minmax(0,1fr);width:100%;padding-block:7rem 3rem}
+@media(min-width:1000px){.hero__in{grid-template-columns:1.05fr .95fr;align-items:center}}
+.hero h1{font-size:clamp(3.2rem,10.5vw,7.5rem)}
+.hero h1 em{font-style:normal;color:var(--hi);display:block}
+.hero .lede{color:var(--steel);font-size:clamp(1rem,1.5vw,1.1875rem);
+  max-width:38ch;margin-top:1.25rem}
+.rates{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem}
+.rate{display:flex;align-items:center;gap:.5rem;border:1px solid var(--line);
+  background:var(--ground);padding:.5rem .7rem}
+.rate b{font-family:var(--f-mono);font-weight:500;font-size:.8125rem;
+  font-variant-numeric:tabular-nums}
+.rate span{color:var(--dim)}
+.rate--f b{color:var(--hi)} .rate--m b{color:var(--fg)} .rate--b b{color:var(--sky)}
+
+.stage{position:relative;min-height:clamp(360px,52vw,470px)}
+.logcard{position:relative;z-index:3;background:var(--doc-bg);color:var(--doc-fg);
+  border:1px solid var(--doc-bg);padding:1.25rem 1.375rem 1.125rem;
+  box-shadow:0 26px 60px rgba(10,26,47,.20);will-change:transform;max-width:520px}
+.logcard h3{font-size:1.3125rem;color:var(--doc-fg)}
+.logcard .meta{display:flex;justify-content:space-between;gap:1rem;
+  color:var(--doc-dim);margin-top:.4rem;padding-bottom:.7rem;
+  border-bottom:1px solid var(--doc-line)}
+.lrow{display:grid;grid-template-columns:auto 1fr auto;gap:.85rem;align-items:baseline;
+  padding:.5rem 0;border-bottom:1px dashed var(--doc-line)}
+.lrow .t{font-family:var(--f-mono);font-size:.625rem;color:var(--doc-dim);
+  font-variant-numeric:tabular-nums}
+.lrow .s{font-family:var(--f-mono);font-size:.5625rem;letter-spacing:.14em;
+  text-transform:uppercase}
+.s--ok{color:#5FD39B} .s--open{color:#FFB25C} .s--run{color:var(--sky)}
+.stamp{position:absolute;z-index:4;right:2%;bottom:2%;border:2px solid var(--hi);
+  color:var(--hi);padding:.5rem .75rem;text-align:center;line-height:1.15;
+  transform:rotate(-7deg);background:color-mix(in srgb,var(--ground) 88%,transparent);
+  will-change:transform}
+.stamp b{display:block;font-family:var(--f-mono);font-size:.9375rem;font-weight:500}
+.slab{position:absolute;z-index:1;right:-2%;bottom:-4%;width:min(64%,340px);
+  aspect-ratio:16/10;border:1px dashed var(--line);background:var(--panel);
+  will-change:transform;display:grid;place-items:center}
+.slab span{color:var(--dim)}
+
+/* ---- pinned build sequence ---- */
+.pinwrap{position:relative;background:var(--alt);border-block:1px solid var(--line)}
+.pin{height:100svh;display:flex;align-items:center;overflow:hidden}
+.pin__in{display:grid;gap:clamp(1rem,2.4vw,2rem);width:100%;
+  grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.pin__in{grid-template-columns:210px minmax(0,1fr) 200px;align-items:center}}
+.phases{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.phase{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:baseline;
+  padding:.5rem .6rem;border-left:2px solid var(--line);transition:none}
+.phase .n{font-family:var(--f-mono);font-size:.625rem;color:var(--dim);
+  font-variant-numeric:tabular-nums}
+.phase .nm{font-family:var(--f-display);text-transform:uppercase;font-size:1rem;
+  color:var(--steel);line-height:1}
+.phase .wk{grid-column:2;font-family:var(--f-mono);font-size:.5625rem;
+  letter-spacing:.13em;color:var(--dim);opacity:0;height:0;overflow:hidden}
+.phase.on{border-left-color:var(--hi);background:var(--ground)}
+.phase.on .nm{color:var(--fg)} .phase.on .n{color:var(--hi)}
+.phase.on .wk{opacity:1;height:auto;margin-top:.2rem}
+@media(max-width:899px){
+  .phases{flex-direction:row;overflow-x:auto;gap:.35rem;padding-bottom:.4rem}
+  .phase{border-left:0;border-top:2px solid var(--line);flex:0 0 auto;
+    grid-template-columns:auto;gap:.15rem}
+  .phase.on{border-top-color:var(--hi)}
+  .phase .wk{grid-column:1}
+}
+.draw{position:relative;min-width:0;background:var(--ground);
+  border:1px solid var(--line);padding:.75rem}
+.draw__grid{position:absolute;inset:.75rem;
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--fg) 5%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--fg) 5%,transparent) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none}
+.draw{display:flex;flex-direction:column;justify-content:center}
+.draw svg{position:relative;display:block;width:100%;height:min(56vh,460px)}
+.draw__cap{display:flex;justify-content:space-between;gap:1rem;
+  color:var(--dim);margin-top:.5rem}
+.readout{display:flex;flex-direction:column;gap:.9rem;min-width:0}
+.big{font-family:var(--f-display);font-size:clamp(2.6rem,7vw,3.9rem);line-height:.82;
+  color:var(--hi);font-variant-numeric:tabular-nums}
+.kv{display:flex;justify-content:space-between;gap:.75rem;
+  border-bottom:1px dashed var(--line);padding-bottom:.35rem}
+.kv dt{color:var(--dim);font-family:var(--f-mono);font-size:.5625rem;
+  letter-spacing:.13em;text-transform:uppercase}
+.kv dd{margin:0;font-family:var(--f-mono);font-size:.75rem;
+  font-variant-numeric:tabular-nums}
+.bar{height:5px;background:var(--line);position:relative}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--hi)}
+
+/* ---- horizontal register ---- */
+.hwrap{position:relative;background:var(--ground)}
+.hpin{height:100svh;display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;gap:1.25rem}
+.track{display:flex;gap:1rem;padding-inline:var(--shell);will-change:transform}
+.pcard{flex:0 0 clamp(260px,74vw,380px);border:1px solid var(--line);
+  background:var(--ground);display:flex;flex-direction:column}
+.pcard .plate{aspect-ratio:4/3;border-bottom:1px solid var(--line);
+  background:var(--panel);display:grid;place-items:center;position:relative;
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--fg) 5%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--fg) 5%,transparent) 1px,transparent 1px);
+  background-size:26px 26px}
+.pcard .plate span{color:var(--dim);border:1px dashed var(--line);
+  background:var(--ground);padding:.3rem .5rem}
+.pcard .body{padding:.9rem 1rem 1.05rem;display:flex;flex-direction:column;gap:.55rem}
+.pcard h3{font-size:1.1875rem}
+.pcard dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem .75rem;margin:0}
+.pcard .no{color:var(--dim)}
+.hbar{display:flex;align-items:center;gap:.75rem;padding-inline:var(--shell)}
+.hbar .t{flex:1;height:1px;background:var(--line);position:relative}
+.hbar .t i{position:absolute;top:-3px;left:0;width:7px;height:7px;border-radius:50%;
+  background:var(--hi)}
+
+/* ---- reveal strip ---- */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:.9rem 1.25rem;
+  align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.row .n{font-family:var(--f-mono);font-size:.625rem;color:var(--hi);
+  font-variant-numeric:tabular-nums}
+.row .d{color:var(--steel)}
+.row .v{font-family:var(--f-mono);font-size:.75rem;color:var(--dim);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:640px){.row{grid-template-columns:auto 1fr}.row .v{grid-column:2}}
+
+/* ---- spec / integration table ---- */
+.wrapx{overflow-x:auto;border:1px solid var(--line);background:var(--ground)}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th,td{text-align:left;padding:.7rem .85rem;border-bottom:1px solid var(--line);
+  vertical-align:top}
+th{font-family:var(--f-mono);font-size:.5625rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);background:var(--panel)}
+td{font-size:.9375rem}
+td b{font-family:var(--f-mono);font-size:.75rem;font-weight:500;color:var(--hi)}
+tr:last-child td{border-bottom:0}
+.note{border-left:2px solid var(--hi);padding-left:1rem;color:var(--steel);
+  max-width:62ch;margin-top:1.75rem}
+footer{padding-block:2.5rem 3.5rem;border-top:1px solid var(--line);color:var(--dim)}
+
+@media(prefers-reduced-motion:reduce){
+  .hero__grid,.logcard,.stamp,.slab,.track{transform:none!important}
+}
+</style>
+
+<div class="rail" aria-hidden="true"><i data-rail></i></div>
+<div class="railout" aria-hidden="true"><span class="m">Programme</span><b data-railpct>0%</b></div>
+
+<!-- ============ HERO · PARALLAX ============ -->
+<header class="hero">
+  <div class="hero__grid" data-px="0.5" aria-hidden="true"></div>
+  <div class="shell hero__in">
+    <div>
+      <span class="m tag">Motion study · not yet in the kit</span>
+      <h1 style="margin-top:1.25rem">Scroll is<br>the<em>programme.</em></h1>
+      <p class="lede">Five scroll techniques, each one doing a job the contractor site
+        already needs. Nothing here is decoration — the motion carries information the
+        page was showing as static numbers.</p>
+      <p class="hand" style="margin-top:1rem">— scroll. everything moves at its own rate.</p>
+      <div class="rates">
+        <span class="rate rate--f"><b>1.4×</b><span class="m">Stamp</span></span>
+        <span class="rate rate--m"><b>1.0×</b><span class="m">Site log</span></span>
+        <span class="rate rate--b"><b>0.5×</b><span class="m">Blueprint grid</span></span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="slab" data-px="0.78" aria-hidden="true"><span class="m">Image slot — stays empty</span></div>
+      <article class="logcard" data-px="1.0">
+        <h3>Daily site log</h3>
+        <div class="meta"><span class="m">Meranti Logistics Hub</span><span class="m">Sheet 412</span></div>
+        <div class="lrow"><span class="t">06:30</span><span>Toolbox talk — 214 workers inducted</span><span class="s s--ok">Closed</span></div>
+        <div class="lrow"><span class="t">09:40</span><span>Slab pour, Grid C4–F9 · 340 m³</span><span class="s s--ok">Closed</span></div>
+        <div class="lrow"><span class="t">13:05</span><span>Cube test — 28 day, 41.2 MPa</span><span class="s s--run">Pass</span></div>
+        <div class="lrow" style="border-bottom:0"><span class="t">17:00</span><span>Progress 78% against baseline</span><span class="s s--open">On track</span></div>
+      </article>
+      <div class="stamp" data-px="1.42"><b>0 LTI</b><span class="m">612 days</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ PINNED BUILD SEQUENCE ============ -->
+<section class="sec sec--alt" style="padding-bottom:0;background:var(--alt)">
+  <div class="shell sh">
+    <div>
+      <span class="m eyebrow">Pin · scrub · progress</span>
+      <h2>The build<br>draws itself.</h2>
+    </div>
+    <p>One pinned section. The scroll bar becomes the programme bar — five phases,
+      week 0 to week 74, the elevation drawing on as you go. This is the character
+      object: no other contractor theme has it.</p>
+  </div>
+</section>
+
+<div class="pinwrap" data-build>
+  <div class="pin">
+    <div class="shell pin__in">
+
+      <div class="phases" data-phases>
+        <div class="phase" data-phase="0"><span class="n">01</span><span class="nm">Foundation</span><span class="wk">Week 00 – 14 · piling, pile caps</span></div>
+        <div class="phase" data-phase="1"><span class="n">02</span><span class="nm">Structure</span><span class="wk">Week 14 – 32 · steel portal frames</span></div>
+        <div class="phase" data-phase="2"><span class="n">03</span><span class="nm">Envelope</span><span class="wk">Week 32 – 48 · roof, cladding</span></div>
+        <div class="phase" data-phase="3"><span class="n">04</span><span class="nm">Fit-out</span><span class="wk">Week 48 – 66 · docks, glazing, M&amp;E</span></div>
+        <div class="phase" data-phase="4"><span class="n">05</span><span class="nm">Handover</span><span class="wk">Week 66 – 74 · commissioning, snag</span></div>
+      </div>
+
+      <div class="draw">
+        <div class="draw__grid" aria-hidden="true"></div>
+        <svg viewBox="16 94 866 364" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Elevation of the Meranti Logistics Hub drawing itself across five construction phases">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" vector-effect="non-scaling-stroke">
+
+            <!-- ground -->
+            <line class="ln p0" x1="40" y1="400" x2="860" y2="400" stroke-width="2"></line>
+
+            <!-- 01 foundation -->
+            <g class="grp" data-g="0" stroke="var(--hi)">
+              <line class="ln" x1="90"  y1="400" x2="90"  y2="446"></line>
+              <line class="ln" x1="245" y1="400" x2="245" y2="446"></line>
+              <line class="ln" x1="400" y1="400" x2="400" y2="446"></line>
+              <line class="ln" x1="555" y1="400" x2="555" y2="446"></line>
+              <line class="ln" x1="710" y1="400" x2="710" y2="446"></line>
+              <line class="ln" x1="810" y1="400" x2="810" y2="446"></line>
+              <rect class="ln" x="60"  y="386" width="60" height="14"></rect>
+              <rect class="ln" x="215" y="386" width="60" height="14"></rect>
+              <rect class="ln" x="370" y="386" width="60" height="14"></rect>
+              <rect class="ln" x="525" y="386" width="60" height="14"></rect>
+              <rect class="ln" x="680" y="386" width="60" height="14"></rect>
+              <rect class="ln" x="780" y="386" width="60" height="14"></rect>
+            </g>
+
+            <!-- 02 structure -->
+            <g class="grp" data-g="1">
+              <line class="ln" x1="90"  y1="386" x2="90"  y2="196"></line>
+              <line class="ln" x1="245" y1="386" x2="245" y2="196"></line>
+              <line class="ln" x1="400" y1="386" x2="400" y2="196"></line>
+              <line class="ln" x1="555" y1="386" x2="555" y2="196"></line>
+              <line class="ln" x1="710" y1="386" x2="710" y2="196"></line>
+              <line class="ln" x1="810" y1="386" x2="810" y2="196"></line>
+              <line class="ln" x1="90"  y1="196" x2="810" y2="196"></line>
+              <line class="ln" x1="90"  y1="196" x2="450" y2="120"></line>
+              <line class="ln" x1="450" y1="120" x2="810" y2="196"></line>
+              <line class="ln" x1="450" y1="120" x2="450" y2="196"></line>
+              <line class="ln" x1="167" y1="196" x2="167" y2="180"></line>
+              <line class="ln" x1="322" y1="196" x2="322" y2="164"></line>
+              <line class="ln" x1="578" y1="196" x2="578" y2="164"></line>
+              <line class="ln" x1="733" y1="196" x2="733" y2="180"></line>
+            </g>
+
+            <!-- 03 envelope -->
+            <g class="grp" data-g="2">
+              <line class="ln" x1="84"  y1="202" x2="450" y2="114"></line>
+              <line class="ln" x1="450" y1="114" x2="816" y2="202"></line>
+              <line class="ln" x1="140" y1="386" x2="140" y2="200"></line>
+              <line class="ln" x1="190" y1="386" x2="190" y2="200"></line>
+              <line class="ln" x1="295" y1="386" x2="295" y2="200"></line>
+              <line class="ln" x1="345" y1="386" x2="345" y2="200"></line>
+              <line class="ln" x1="450" y1="386" x2="450" y2="200"></line>
+              <line class="ln" x1="500" y1="386" x2="500" y2="200"></line>
+              <line class="ln" x1="605" y1="386" x2="605" y2="200"></line>
+              <line class="ln" x1="655" y1="386" x2="655" y2="200"></line>
+              <line class="ln" x1="760" y1="386" x2="760" y2="200"></line>
+              <line class="ln" x1="90"  y1="300" x2="810" y2="300"></line>
+            </g>
+
+            <!-- 04 fit-out -->
+            <g class="grp" data-g="3" stroke="var(--hi)">
+              <rect class="ln" x="118" y="308" width="94" height="78"></rect>
+              <rect class="ln" x="272" y="308" width="94" height="78"></rect>
+              <rect class="ln" x="426" y="308" width="94" height="78"></rect>
+              <line class="ln" x1="118" y1="330" x2="212" y2="330"></line>
+              <line class="ln" x1="272" y1="330" x2="366" y2="330"></line>
+              <line class="ln" x1="426" y1="330" x2="520" y2="330"></line>
+              <line class="ln" x1="100" y1="296" x2="540" y2="296" stroke-width="2.4"></line>
+              <rect class="ln" x="600" y="236" width="180" height="52"></rect>
+              <line class="ln" x1="645" y1="236" x2="645" y2="288"></line>
+              <line class="ln" x1="690" y1="236" x2="690" y2="288"></line>
+              <line class="ln" x1="735" y1="236" x2="735" y2="288"></line>
+              <rect class="ln" x="612" y="316" width="66" height="70"></rect>
+              <rect class="ln" x="702" y="316" width="66" height="70"></rect>
+            </g>
+
+            <!-- 05 handover -->
+            <g class="grp" data-g="4">
+              <line class="ln" x1="40" y1="400" x2="40" y2="372" stroke="var(--hi)"></line>
+              <path class="ln" d="M40 372 L74 380 L40 388 Z" stroke="var(--hi)"></path>
+              <path class="ln" d="M846 400 q0 -34 -16 -46 M846 400 q0 -34 16 -46" stroke="var(--hi)"></path>
+              <path class="ln" d="M40 428 h820" stroke-dasharray="6 7" stroke="var(--hi)"></path>
+            </g>
+          </g>
+
+          <g data-hand opacity="0">
+            <text x="470" y="104" font-family="Caveat,cursive" font-size="26" fill="var(--hi)">handed over 11 days early</text>
+          </g>
+        </svg>
+        <div class="draw__cap">
+          <span class="m">Meranti Logistics Hub · elevation E-02</span>
+          <span class="m">Scale 1:200</span>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div>
+          <span class="m" style="color:var(--dim)">Programme complete</span>
+          <div class="big"><span data-pct>0</span>%</div>
+        </div>
+        <div class="bar" aria-hidden="true"><i data-buildbar></i></div>
+        <dl style="margin:0;display:flex;flex-direction:column;gap:.5rem">
+          <div class="kv"><dt>Phase</dt><dd data-phname>Foundation</dd></div>
+          <div class="kv"><dt>Week</dt><dd><span data-week>0</span> / 74</dd></div>
+          <div class="kv"><dt>Value</dt><dd>Rp <span data-val>0</span> bn</dd></div>
+          <div class="kv" style="border-bottom:0"><dt>Status</dt><dd data-stat style="color:var(--hi)">On programme</dd></div>
+        </dl>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ HORIZONTAL REGISTER ============ -->
+<section class="sec" style="padding-bottom:0">
+  <div class="shell sh">
+    <div>
+      <span class="m eyebrow">Horizontal scroll</span>
+      <h2>Pull the<br>drawing set.</h2>
+    </div>
+    <p>Vertical input, horizontal output. The project register reads the way a set of
+      drawings is actually handled — pulled sideways, one sheet at a time.</p>
+  </div>
+</section>
+
+<div class="hwrap" data-hwrap>
+  <div class="hpin">
+    <div class="hbar" style="justify-content:space-between">
+      <span class="m" style="color:var(--hi)">Project register · 5 sheets</span>
+      <span class="m" style="color:var(--dim)">Keep scrolling down</span>
+    </div>
+    <div class="track" data-track>
+      <article class="pcard"><div class="plate"><span class="m">Image slot</span></div>
+        <div class="body"><span class="m" style="color:var(--hi)">Sheet 01</span><h3>Meranti Logistics Hub</h3>
+          <dl><span class="m no">Sector</span><span class="m">Industrial</span><span class="m no">Area</span><span class="m">42,000 m²</span><span class="m no">Handover</span><span class="m">11 days early</span></dl></div></article>
+      <article class="pcard"><div class="plate"><span class="m">Image slot</span></div>
+        <div class="body"><span class="m" style="color:var(--hi)">Sheet 02</span><h3>Bhakti Medika Wing B</h3>
+          <dl><span class="m no">Sector</span><span class="m">Healthcare</span><span class="m no">Area</span><span class="m">18,400 m²</span><span class="m no">Year</span><span class="m">2025</span></dl></div></article>
+      <article class="pcard"><div class="plate"><span class="m">Image slot</span></div>
+        <div class="body"><span class="m" style="color:var(--hi)">Sheet 03</span><h3>Cengkareng T4 Apron</h3>
+          <dl><span class="m no">Sector</span><span class="m">Government</span><span class="m no">Area</span><span class="m">96,000 m²</span><span class="m no">Year</span><span class="m">2023</span></dl></div></article>
+      <article class="pcard"><div class="plate"><span class="m">Image slot</span></div>
+        <div class="body"><span class="m" style="color:var(--hi)">Sheet 04</span><h3>Sentra Niaga Tower</h3>
+          <dl><span class="m no">Sector</span><span class="m">Commercial</span><span class="m no">Area</span><span class="m">31,600 m²</span><span class="m no">Year</span><span class="m">2022</span></dl></div></article>
+      <article class="pcard"><div class="plate"><span class="m">Image slot</span></div>
+        <div class="body"><span class="m" style="color:var(--hi)">Sheet 05</span><h3>Rasuna Pedestrian Link</h3>
+          <dl><span class="m no">Sector</span><span class="m">Government</span><span class="m no">Span</span><span class="m">148 m</span><span class="m no">Year</span><span class="m">2024</span></dl></div></article>
+    </div>
+    <div class="hbar"><span class="m" style="color:var(--dim)">Sheet <span data-sheet>1</span> / 5</span>
+      <span class="t"><i data-hdot></i></span><span class="m" style="color:var(--dim)">Vertical → horizontal</span></div>
+  </div>
+</div>
+
+<!-- ============ REVEAL STRIP ============ -->
+<section class="sec sec--alt">
+  <div class="shell">
+    <div class="sh">
+      <div>
+        <span class="m eyebrow">Scroll trigger</span>
+        <h2>Numbers arrive<br>when you reach them.</h2>
+      </div>
+      <p>The kit already reveals on scroll. Retimed: rows stagger 60&nbsp;ms apart and the
+        figures count from zero, so a spec table reads as being filled in rather than
+        appearing all at once.</p>
+    </div>
+    <div class="rows" data-rows>
+      <div class="row"><span class="n">01</span><span class="d">Completed projects since 2008</span><span class="v"><span data-count="247">0</span></span></div>
+      <div class="row"><span class="n">02</span><span class="d">Work hours without a lost-time incident</span><span class="v"><span data-count="1940000">0</span></span></div>
+      <div class="row"><span class="n">03</span><span class="d">Staff across six offices</span><span class="v"><span data-count="412">0</span></span></div>
+      <div class="row"><span class="n">04</span><span class="d">Owned plant units — no rented promises</span><span class="v"><span data-count="53">0</span></span></div>
+      <div class="row"><span class="n">05</span><span class="d">Live sites this quarter</span><span class="v"><span data-count="6">0</span></span></div>
+      <div class="row"><span class="n">06</span><span class="d">Average days early at handover</span><span class="v"><span data-count="9">0</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRATION ============ -->
+<section class="sec">
+  <div class="shell">
+    <div class="sh">
+      <div>
+        <span class="m eyebrow">If you approve this</span>
+        <h2>Where each<br>one lands.</h2>
+      </div>
+      <p>Five techniques, five homes. Each used once, so none of them becomes the
+        thing the site does on every scroll.</p>
+    </div>
+    <div class="wrapx">
+      <table>
+        <thead><tr><th>Technique</th><th>Section</th><th>Page</th><th>What it carries</th></tr></thead>
+        <tbody>
+          <tr><td><b>Pin + scrub</b></td><td>Build sequence <em>(new)</em></td><td>Home, Service Detail</td><td>The five-phase programme, week 0–74</td></tr>
+          <tr><td><b>Parallax</b></td><td>Hero</td><td>All 8</td><td>Depth on the document stack — grid, log, stamp</td></tr>
+          <tr><td><b>Horizontal</b></td><td>Project register</td><td>Projects</td><td>Five sheets pulled sideways</td></tr>
+          <tr><td><b>Progress</b></td><td>Top rail + safety bars</td><td>All 8</td><td>How far through the page you are</td></tr>
+          <tr><td><b>Trigger</b></td><td>Spec rows, figures</td><td>All 8</td><td>Already there — retimed and staggered</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">One real cost: GSAP + ScrollTrigger add about 50&nbsp;KB gzipped. The
+      kit currently scores 100 on performance with no external requests at all. I'd
+      load them deferred and only above 900&nbsp;px, so phones and
+      <code>prefers-reduced-motion</code> get the static layout and keep the 100 —
+      which is also what this page does. Scroll it with reduced motion on and nothing
+      breaks; the building is simply already built.</p>
+  </div>
+</section>
+
+<footer><div class="shell">
+  <span class="m">ContractorX Kit · motion study · Aug 2026</span>
+</div></footer>
+
+<script>/*__GSAP__*/</script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var wide   = window.matchMedia("(min-width: 900px)").matches;
+
+  var fmt = function (n) { return n.toLocaleString("en-US"); };
+
+  /* ---------- 1 · page progress rail ---------- */
+  var railFill = document.querySelector("[data-rail]");
+  var railPct  = document.querySelector("[data-railpct]");
+  function rail() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+    railFill.style.width = (p * 100).toFixed(2) + "%";
+    railPct.textContent = Math.round(p * 100) + "%";
+  }
+  rail();
+  window.addEventListener("scroll", rail, { passive: true });
+  window.addEventListener("resize", rail);
+
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- 2 · hero parallax ---------- */
+  if (!reduce) {
+    document.querySelectorAll("[data-px]").forEach(function (el) {
+      var rate = parseFloat(el.getAttribute("data-px"));
+      gsap.to(el, {
+        y: function () { return (1 - rate) * window.innerHeight * 0.45; },
+        ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+      });
+    });
+  }
+
+  /* ---------- 3 · pinned build sequence ---------- */
+  var PHASES = [
+    { name: "Foundation", wk: 14, val: 42,  stat: "On programme" },
+    { name: "Structure",  wk: 32, val: 118, stat: "On programme" },
+    { name: "Envelope",   wk: 48, val: 176, stat: "On programme" },
+    { name: "Fit-out",    wk: 66, val: 214, stat: "2 weeks ahead" },
+    { name: "Handover",   wk: 74, val: 238, stat: "11 days early" }
+  ];
+  var lines  = Array.prototype.slice.call(document.querySelectorAll(".draw .ln:not(.p0)"));
+  var groups = Array.prototype.slice.call(document.querySelectorAll(".draw .grp"));
+  var chips  = Array.prototype.slice.call(document.querySelectorAll("[data-phase]"));
+  var elPct = document.querySelector("[data-pct]"),
+      elBar = document.querySelector("[data-buildbar]"),
+      elPh  = document.querySelector("[data-phname]"),
+      elWk  = document.querySelector("[data-week]"),
+      elVal = document.querySelector("[data-val]"),
+      elSt  = document.querySelector("[data-stat]"),
+      hand  = document.querySelector("[data-hand]");
+
+  /* prime every stroke for a draw-on */
+  lines.forEach(function (l) {
+    var len = 0;
+    try { len = l.getTotalLength ? l.getTotalLength() : 0; } catch (e) {}
+    if (!len) { var b = l.getBBox(); len = (b.width + b.height) * 2; }
+    l.style.strokeDasharray = len;
+    l.style.strokeDashoffset = reduce ? 0 : len;
+  });
+
+  function paint(p) {
+    var i = Math.min(4, Math.floor(p * 5));
+    var ph = PHASES[i];
+    elPct.textContent = Math.round(p * 100);
+    elBar.style.width = (p * 100).toFixed(1) + "%";
+    elPh.textContent  = ph.name;
+    elWk.textContent  = Math.round(p * 74);
+    elVal.textContent = Math.round(p * 238);
+    elSt.textContent  = ph.stat;
+    chips.forEach(function (c, n) { c.classList.toggle("on", n === i); });
+  }
+
+  if (reduce) {
+    paint(1);
+    if (hand) hand.setAttribute("opacity", "1");
+  } else {
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "[data-build]", start: "top top", end: "+=420%",
+        pin: true, scrub: 0.6, anticipatePin: 1,
+        onUpdate: function (self) { paint(self.progress); }
+      }
+    });
+    groups.forEach(function (g, i) {
+      tl.to(g.querySelectorAll(".ln"), {
+        strokeDashoffset: 0, duration: 1, stagger: 0.06, ease: "none"
+      }, i);
+    });
+    tl.to(hand, { opacity: 1, duration: 0.4 }, 4.4);
+    paint(0);
+  }
+
+  /* ---------- 4 · horizontal register ---------- */
+  var track = document.querySelector("[data-track]");
+  var dot   = document.querySelector("[data-hdot]");
+  var sheet = document.querySelector("[data-sheet]");
+  if (track && wide && !reduce) {
+    var dist = function () { return track.scrollWidth - window.innerWidth + 40; };
+    gsap.to(track, {
+      x: function () { return -dist(); },
+      ease: "none",
+      scrollTrigger: {
+        trigger: "[data-hwrap]", start: "top top",
+        end: function () { return "+=" + dist(); },
+        pin: true, scrub: 0.5, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          dot.style.left = (self.progress * 100).toFixed(1) + "%";
+          sheet.textContent = Math.min(5, Math.floor(self.progress * 5) + 1);
+        }
+      }
+    });
+  } else if (track) {
+    track.style.overflowX = "auto";
+    document.querySelector(".hpin").style.height = "auto";
+    document.querySelector(".hpin").style.paddingBlock = "3rem";
+  }
+
+  /* ---------- 5 · reveal + count ---------- */
+  document.querySelectorAll("[data-rows] .row").forEach(function (row, i) {
+    if (reduce) return;
+    gsap.from(row, {
+      opacity: 0, y: 26, duration: 0.55, delay: i * 0.06, ease: "power2.out",
+      scrollTrigger: { trigger: "[data-rows]", start: "top 78%" }
+    });
+  });
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var end = parseFloat(el.getAttribute("data-count"));
+    if (reduce) { el.textContent = fmt(end); return; }
+    var o = { v: 0 };
+    gsap.to(o, {
+      v: end, duration: 1.5, ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 88%" },
+      onUpdate: function () { el.textContent = fmt(Math.round(o.v)); }
+    });
+  });
+})();
+</script>

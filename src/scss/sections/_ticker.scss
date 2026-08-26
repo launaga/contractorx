@@ -1,0 +1,11 @@
+// M-04 · Data ticker — the stat band, set as a single measured line
+.ticker {
+  margin-top: clamp(2rem, 4vw, 3.125rem);
+  border-block: 1px solid var(--line);
+  display: flex; gap: 2.75rem; padding: .875rem 0;
+  color: var(--dim); white-space: nowrap;
+  overflow-x: auto; scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+  b { color: var(--fg); font-family: $font-mono; font-weight: 700; }
+  .num { font-variant-numeric: tabular-nums; }
+}

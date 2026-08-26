@@ -1,0 +1,22 @@
+// K-07 · Awards and press
+.awards-split { display: grid; gap: 2rem; @include up($bp-lg) { grid-template-columns: 1.05fr 1fr; gap: 3rem; } }
+.awd {
+  list-style: none; padding: 0; margin: 2.125rem 0 0; border-top: 1px solid var(--line);
+  li { display: grid; gap: .375rem 1.375rem; padding: .875rem 0;
+       border-bottom: 1px solid var(--line); align-items: baseline;
+       @include up($bp-md) { grid-template-columns: 70px 1fr 150px; } }
+  .y { font-family: $font-mono; font-size: .75rem; color: var(--hi); }
+  b { font-family: $font-display; text-transform: uppercase; font-size: 1.125rem; display: block; }
+  span { font-size: .8125rem; color: var(--steel); }
+  .tg { font-family: $font-mono; font-size: .53125rem; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--dim); @include up($bp-md) { text-align: right; } }
+}
+.press {
+  display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.375rem;
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  article { border: 1px solid var(--line); padding: 1.25rem; background: var(--ink); }
+  .o { display: flex; justify-content: space-between; gap: 1rem; font-family: $font-mono;
+       font-size: .53125rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  blockquote { font-family: $font-display; text-transform: uppercase; font-size: 1.25rem;
+               line-height: 1.02; margin-top: .75rem; }
+}

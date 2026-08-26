@@ -1,44 +1,37 @@
 // ============================================================
 // ContractorX Kit v1 — design tokens
-// Natural black & white. No colour accents anywhere.
-// Edit these values to rebrand the whole kit.
+// Grounds are white and soft blue only. Navy is for objects —
+// the site log, the permit slip, the tender docket, ID cards —
+// never for a whole section. Edit these to rebrand the kit.
 // ============================================================
 
 // --- Palette -------------------------------------------------
-$ink:        #0A0A0A;   // text, dark surfaces
-$paper:      #FAFAF8;   // page ground, warm off-white
-$panel:      #F2F2EE;   // card / panel surface
-$rule:       #111111;   // strong rules
-$rule-soft:  #D6D5D0;   // dividers, dashed lines
-$mute:       #6B6B66;   // secondary text, captions
-$reverse-bg: #111111;   // reversal block ground
-$reverse-fg: #F6F6F0;   // reversal block text
+$white:    #FFFFFF;   // primary ground
+$soft:     #F7F8FD;   // soft blue ground, alternates with white
+$soft-2:   #EDF1FA;   // deeper soft blue — image plates, panels
+$line:     #DCE3F2;   // hairlines and borders
+$ink:      #0A1A2F;   // body text, headings
+$steel:    #5C6B82;   // secondary text
+$dim:      #606E85;   // labels, captions (AA on white and soft blue)
+
+$doc-bg:   #0C1D33;   // document objects (navy)
+$doc-fg:   #EEF3FB;   // text on document objects
+$doc-dim:  #8FA2B8;   // muted labels ON navy objects
+
+$bright:   #1568D6;   // accent — one word, CTAs, key numbers (AA on all grounds)
+$sky:      #7FB2E5;   // secondary accent, annotation
+$deep:     #0A2E6B;   // deep blue, blueprint rules
+
+$ok:       #2F7D5A;   // status only
+$warn:     #A66A22;   // status only
 
 // --- Type ----------------------------------------------------
-$font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
-$font-body:    "Inter Tight", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-$font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+$font-display: Anton, "Arial Narrow", sans-serif;      // headings, uppercase
+$font-body:    Archivo, system-ui, -apple-system, sans-serif;
+$font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+$font-hand:    Caveat, "Segoe Script", cursive;        // margin notes
 
-$fs-body:      1.0625rem;  // 17px
-$lh-body:      1.55;
-$measure:      66ch;
-
-// Fluid display scale
-$fs-d1: clamp(2.75rem, 7.2vw, 6.5rem);   // hero
-$fs-d2: clamp(2rem, 4.4vw, 3.5rem);      // section heads
-$fs-d3: clamp(1.5rem, 2.6vw, 2.25rem);   // card heads
-$fs-d4: 1.25rem;
-
-$fs-label: 0.65625rem;  // 10.5px mono labels
-$track-label: 0.14em;
-
-// --- Space & structure ---------------------------------------
-$space-section: clamp(4.5rem, 9vw, 8.5rem);
-$space-block:   clamp(2rem, 4vw, 3.5rem);
-$hair: 1px;
-$radius: 0;             // the kit is square by design
-
-// --- Breakpoints (mobile-first: 320 / 768 / 1024 / 1440) -----
+// --- Breakpoints (mobile-first: 320 · 768 · 1024 · 1440) -----
 $bp-sm: 576px;
 $bp-md: 768px;
 $bp-lg: 1024px;
@@ -48,37 +41,57 @@ $bp-xl: 1440px;
 @mixin down($bp) { @media (max-width: ($bp - 0.02px)) { @content; } }
 @mixin motion-ok { @media (prefers-reduced-motion: no-preference) { @content; } }
 
-// --- CSS custom properties (runtime theming + dark mode) -----
+// --- Runtime tokens ------------------------------------------
 :root {
-  --ink: #{$ink};
-  --paper: #{$paper};
-  --panel: #{$panel};
-  --rule: #{$rule};
-  --rule-soft: #{$rule-soft};
-  --mute: #{$mute};
-  --reverse-bg: #{$reverse-bg};
-  --reverse-fg: #{$reverse-fg};
+  --ink: #{$white};        // page ground
+  --char: #{$soft};        // alternating ground
+  --panel: #{$soft};
+  --panel2: #{$soft-2};
+  --line: #{$line};
 
-  --font-display: #{$font-display};
-  --font-body: #{$font-body};
-  --font-mono: #{$font-mono};
+  --fg: #{$ink};
+  --steel: #{$steel};
+  --dim: #{$dim};
 
-  --shell-x: clamp(1.25rem, 4vw, 3.5rem);
-  --section-y: #{$space-section};
+  --paper: #{$soft};       // soft-blue section ground
+  --paper2: #{$soft-2};
+  --kink: #{$ink};
+
+  --doc-bg: #{$doc-bg};
+  --doc-fg: #{$doc-fg};
+  --doc-dim: #{$doc-dim};
+  --doc-line: rgba(238, 243, 251, .22);
+
+  --hi: #{$bright};
+  --sky: #{$sky};
+  --deep: #{$deep};
+  --navy: #{$doc-bg};
+  --ok: #{$ok};
+  --warn: #{$warn};
+
+  --shell-x: clamp(1.25rem, 3.6vw, 3.25rem);
+  --section-y: clamp(3.25rem, 6vw, 4.625rem);
 }
 
-// Dark mode inverts (PRD §4). Explicit choice wins over OS.
+// Dark theme — the toggle, not the default. Grounds invert;
+// document objects flip to white so they still read as printed.
 @mixin dark-tokens {
-  --ink: #FAFAF8;
-  --paper: #0A0A0A;
-  --panel: #151513;
-  --rule: #E8E8E2;
-  --rule-soft: #34342F;
-  --mute: #9C9C95;
-  --reverse-bg: #F6F6F0;
-  --reverse-fg: #111111;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { @include dark-tokens; }
+  --ink: #060910;
+  --char: #0B1B33;
+  --panel: #0E1626;
+  --panel2: #142033;
+  --line: #1E2C42;
+  --fg: #EEF4FB;
+  --steel: #8296AC;
+  --dim: #7B8CA2;
+  --paper: #0B1B33;
+  --paper2: #12253F;
+  --kink: #EEF4FB;
+  --doc-bg: #F7FAFD;
+  --doc-fg: #0A1420;
+  --doc-dim: #5F6D83;
+  --doc-line: rgba(10, 20, 32, .2);
+  --deep: #CFDCEA;
+  --navy: #0B1B33;
 }
 :root[data-theme="dark"] { @include dark-tokens; }

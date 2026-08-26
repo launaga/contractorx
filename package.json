@@ -7,7 +7,6 @@
     "doc": "docs"
   },
   "scripts": {
-    "assets": "node tools/make-assets.mjs && node tools/make-icons.mjs",
     "css": "sass src/scss/main.scss dist/css/main.css --style=compressed --no-source-map --quiet",
     "css:watch": "sass --watch src/scss/main.scss dist/css/main.css --no-source-map",
     "html": "node tools/build.mjs",

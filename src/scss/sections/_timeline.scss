@@ -1,0 +1,25 @@
+// Milestone register + programme phase bars
+.tl {
+  list-style: none; padding: 0; margin: 2.125rem 0 0; border-top: 1px solid var(--line);
+  li { display: grid; gap: .5rem 1.5rem; padding: .9375rem 0;
+       border-bottom: 1px solid var(--line); align-items: baseline;
+       @include up($bp-md) { grid-template-columns: 96px 1fr 130px; } }
+  b { font-family: $font-display; font-size: 1.375rem; }
+  p { font-size: .875rem; line-height: 1.5; color: var(--steel); }
+  .st { font-family: $font-mono; font-size: .5625rem; letter-spacing: .14em;
+        text-transform: uppercase; color: var(--dim);
+        @include up($bp-md) { text-align: right; } }
+}
+.papersec .tl {
+  border-color: rgba(10, 20, 32, .28);
+  li { border-color: rgba(10, 20, 32, .18); }
+  p { color: var(--kink); }
+  .st { color: var(--dim); }
+}
+.phase {
+  display: grid; grid-template-columns: 84px 1fr; gap: .25rem 1rem; align-items: center; margin-top: 1.875rem;
+  @include up($bp-md) { grid-template-columns: 118px 1fr 128px; gap: 0 1.25rem; }
+  .p1, .p3 { font-family: $font-mono; font-size: .59375rem; letter-spacing: .13em;
+             text-transform: uppercase; color: var(--steel); padding: .5rem 0; }
+  .p3 { grid-column: 2; @include up($bp-md) { grid-column: auto; text-align: right; } }
+}

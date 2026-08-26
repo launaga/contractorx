@@ -1,0 +1,36 @@
+// K-03 · Safety record — figures plotted against the industry average
+.figs {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--line); margin-top: 2.375rem;
+  @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+.fig {
+  padding: 1.5rem 1.375rem 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+  @include up($bp-lg) { border-right: 1px solid var(--line); border-bottom: 0;
+                        &:last-child { border-right: 0; } }
+  b { display: block; font-family: $font-display; font-size: clamp(2.75rem, 5vw, 4.125rem);
+      line-height: .85; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  > span { display: block; margin-top: .625rem; font-family: $font-mono; font-size: .5625rem;
+           letter-spacing: .16em; text-transform: uppercase; color: var(--steel); }
+  > i { display: block; margin-top: .375rem; font-style: normal; font-size: .75rem; color: var(--dim); }
+}
+.safety-split {
+  display: grid; gap: 2rem; margin-top: .5rem;
+  @include up($bp-lg) { grid-template-columns: 1fr 1fr; gap: 3.25rem; }
+}
+.bars {
+  margin-top: 2.375rem;
+  display: grid; grid-template-columns: 90px 1fr 56px; gap: 0 .875rem; align-items: center;
+  @include up($bp-md) { grid-template-columns: 140px 1fr 74px; gap: 0 1.25rem; }
+  .lb { font-family: $font-mono; font-size: .59375rem; letter-spacing: .13em;
+        text-transform: uppercase; color: var(--steel); padding: .5625rem 0; }
+  .vl { font-family: $font-mono; font-size: .65625rem; text-align: right;
+        font-variant-numeric: tabular-nums; }
+}
+.chklist {
+  list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line);
+  li { display: grid; grid-template-columns: 20px 1fr; gap: .75rem; padding: .6875rem 0;
+       border-bottom: 1px solid var(--line); font-size: .875rem; color: var(--steel);
+       &::before { content: "✓"; color: var(--hi); font-family: $font-mono; font-size: .75rem; } }
+}

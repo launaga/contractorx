@@ -1,8 +1,0 @@
-// M-03 Logo cloud — associations & partners (generic master section)
-.logo-cloud { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft);
-  grid-template-columns: repeat(2, 1fr);
-  @include up($bp-md) { grid-template-columns: repeat(3, 1fr); }
-  @include up($bp-lg) { grid-template-columns: repeat(6, 1fr); }
-  > div { background: var(--paper); display: grid; place-items: center; padding: 1.5rem 1rem; min-height: 96px; }
-  svg { width: 100%; max-width: 118px; height: auto; color: var(--ink); }
-}

@@ -1,0 +1,60 @@
+// M-07 · Project cards + K-10 image slots (empty by design)
+.projs {
+  display: grid; gap: 1.25rem; margin-top: 2.5rem;
+  @include up($bp-lg) { grid-template-columns: 1.5fr 1fr; }
+}
+.side2 { display: grid; gap: 1.25rem; }
+.grid3 {
+  display: grid; gap: 1rem; margin-top: 1.5rem; grid-template-columns: 1fr;
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(3, 1fr); }
+}
+.pcard {
+  position: relative; border: 1px solid var(--line); background: var(--ink); overflow: hidden;
+  transition: border-color .2s ease;
+  &:hover { border-color: var(--hi); }
+}
+.pimg {
+  height: clamp(180px, 26vw, 330px); position: relative; overflow: hidden;
+  &::after { content: "IMAGE"; position: absolute; inset: 0; z-index: 2; display: grid;
+             place-items: center; font-family: $font-mono; font-size: .5625rem;
+             letter-spacing: .22em; color: var(--steel); opacity: .5; }
+}
+.pcard.sm .pimg { height: clamp(150px, 15vw, 158px); }
+.pdock {
+  display: grid; gap: .75rem 1.25rem; align-items: center;
+  padding: .875rem 1.125rem; border-top: 1px solid var(--line);
+  grid-template-columns: 1fr;
+  @include up($bp-md) { grid-template-columns: 1fr auto auto auto; }
+  h3 { font-size: clamp(1.0625rem, 1.6vw, 1.3125rem); }
+  .kv { font-family: $font-mono; font-size: .6875rem;
+        small { display: block; font-size: .5rem; letter-spacing: .15em; text-transform: uppercase;
+                color: var(--dim); margin-bottom: .1875rem; } }
+  @include down($bp-md) {
+    grid-template-columns: 1fr;
+    .dock-facts { display: flex; flex-wrap: wrap; gap: .625rem 1.25rem; }
+    .kv { display: grid; }
+  }
+}
+.plabel {
+  position: absolute; z-index: 3; left: .875rem; top: .875rem;
+  font-family: $font-mono; font-size: .5625rem; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--hi); color: #fff; padding: .25rem .5rem;
+}
+
+// Empty image slots — dashed plate, blueprint grid. Client supplies the photography.
+.pimg, .frameimg {
+  border: 1px dashed #C3D0E6;
+  background: var(--panel2);
+  &::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(10,46,107,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,46,107,.07) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+}
+:root[data-theme="dark"] {
+  .pimg, .frameimg { background: #070C15; border-color: #1E2C42; }
+  .pcard, .press article, .map { background: #0E1626; }
+}

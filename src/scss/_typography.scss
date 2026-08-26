@@ -1,58 +1,55 @@
-// ============================================================
-// Typography — display serif / humanist body / mono data
-// ============================================================
-h1, h2, h3, h4, .display {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.012em;
-  line-height: 1.02;
-  text-wrap: balance;
-  margin: 0;
-}
-h1, .d1 { font-size: $fs-d1; }
-h2, .d2 { font-size: $fs-d2; }
-h3, .d3 { font-size: $fs-d3; line-height: 1.1; }
-h4, .d4 { font-size: $fs-d4; line-height: 1.2; }
+// Four roles: display (Anton) · body (Archivo) · data (mono) · human (Caveat)
+h1, h2, h3 { font-family: $font-display; text-transform: uppercase; font-weight: 400; }
 
-// Italic is reserved for exactly one highlighted word per hero.
-.hilite { font-style: italic; }
-
-p { margin: 0 0 1.1em; max-width: $measure; }
-p:last-child { margin-bottom: 0; }
-
-.lede {
-  font-size: clamp(1.0625rem, 1.6vw, 1.3125rem);
-  line-height: 1.5;
-  color: var(--mute);
-  max-width: 54ch;
+h1 {
+  font-size: clamp(3rem, 8.6vw, 7.75rem);
+  line-height: .83;
+  letter-spacing: .002em;
+  .g { color: var(--steel); }
 }
 
-// Mono data / labels — never used for running copy
-.label, .meta, .mono {
-  font-family: var(--font-mono);
-  font-size: $fs-label;
-  letter-spacing: $track-label;
+.m, .mono {
+  font-family: $font-mono;
+  font-size: .625rem;
+  letter-spacing: .16em;
   text-transform: uppercase;
-  font-weight: 500;
-  color: var(--mute);
 }
-.label--ink { color: var(--ink); }
-.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+.hand {
+  font-family: $font-hand;
+  font-weight: 700;
+  color: var(--hi);
+  font-size: clamp(1.125rem, 1.8vw, 1.5625rem);
+}
+.papersec .hand { color: #1E6FD9; }
+
+.hi { color: var(--hi); }
 
 .eyebrow {
-  display: flex;
-  align-items: baseline;
-  gap: .75rem;
-  font-family: var(--font-mono);
-  font-size: $fs-label;
-  letter-spacing: $track-label;
+  display: block;
+  font-family: $font-mono;
+  font-size: .59375rem;
+  letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--mute);
-  margin-bottom: 1.25rem;
+  color: var(--hi);
+  margin-bottom: .875rem;
 }
-.eyebrow::after {
-  content: "";
-  flex: 1;
-  height: $hair;
-  background: var(--rule-soft);
+.papersec .eyebrow { color: #1E6FD9; }
+
+.lede {
+  max-width: 29rem;
+  margin-top: 1.5rem;
+  font-size: clamp(.9375rem, 1.2vw, 1.03125rem);
+  line-height: 1.56;
+  color: var(--steel);
+}
+
+.tag {
+  border: 1px solid var(--hi);
+  color: var(--hi);
+  padding: .3125rem .5625rem;
+  font-family: $font-mono;
+  font-size: .59375rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
 }

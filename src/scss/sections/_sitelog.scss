@@ -1,0 +1,33 @@
+// K-08 · Site log — the page's character object. Navy card, bulldog clip.
+.doc {
+  position: relative; background: var(--doc-bg); color: var(--doc-fg);
+  padding: 1.5rem 1.375rem 1.25rem;
+  box-shadow: 0 26px 54px rgba(6, 16, 32, .28);
+  transform: rotate(.6deg);
+  &::before, &::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); }
+  &::before { top: -15px; width: 112px; height: 24px; background: #1B2635; border-radius: 3px;
+              box-shadow: 0 5px 9px rgba(6,16,32,.3); }
+  &::after  { top: -6px;  width: 72px;  height: 11px; background: #2E3D52; border-radius: 2px; }
+  h2, h3 { font-size: 1.4375rem; }
+}
+.docmeta {
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  font-family: $font-mono; font-size: .5625rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--dim); margin-top: .3125rem; padding-bottom: .625rem;
+  border-bottom: 1.5px solid var(--doc-line);
+}
+.lrow {
+  display: grid; grid-template-columns: 48px 1fr 72px; gap: .5625rem;
+  padding: .5rem 0; border-bottom: 1px dashed var(--doc-line); align-items: center;
+  .t { font-family: $font-mono; font-size: .59375rem; color: var(--dim); }
+  .d { font-size: .84375rem; font-weight: 500; }
+  .s { font-family: $font-mono; font-size: .53125rem; letter-spacing: .12em; text-transform: uppercase;
+       text-align: right; color: var(--ok); &.w { color: var(--warn); } }
+  @include down($bp-sm) { grid-template-columns: 42px 1fr; .s { grid-column: 2; text-align: left; } }
+}
+.mark { background: linear-gradient(transparent 56%, rgba(46,134,255,.34) 56%); }
+.docfoot {
+  display: flex; flex-wrap: wrap; gap: .875rem; margin-top: .8125rem;
+  font-family: $font-mono; font-size: .53125rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--dim);
+}

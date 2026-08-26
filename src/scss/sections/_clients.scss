@@ -1,0 +1,17 @@
+// K-05 · Client strip — named, with sector
+.clients {
+  display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 2.25rem;
+  border-top: 1px solid rgba(10, 20, 32, .25);
+  @include up($bp-md) { grid-template-columns: repeat(3, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(5, 1fr); }
+}
+.cl {
+  padding: 1.25rem 1rem 1.25rem 0;
+  border-right: 1px solid rgba(10, 20, 32, .18);
+  border-bottom: 1px solid rgba(10, 20, 32, .1);
+  @include up($bp-lg) { &:nth-child(5n) { border-right: 0; } }
+  b { font-family: $font-display; text-transform: uppercase;
+      font-size: clamp(.9375rem, 1.4vw, 1.1875rem); display: block; }
+  span { font-family: $font-mono; font-size: .53125rem; letter-spacing: .14em;
+         text-transform: uppercase; color: var(--dim); display: block; margin-top: .3125rem; }
+}

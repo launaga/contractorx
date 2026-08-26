@@ -1,0 +1,18 @@
+// K-01 · Certifications wall
+.certs {
+  display: grid; grid-template-columns: repeat(2, 1fr); margin-top: 2.5rem;
+  border-top: 2px solid var(--kink);
+  @include up($bp-md) { grid-template-columns: repeat(3, 1fr); }
+  @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+.cert {
+  padding: 1.25rem 1.25rem 1.375rem 0; position: relative; min-height: 150px;
+  border-right: 1px solid rgba(10, 20, 32, .22);
+  border-bottom: 1px solid rgba(10, 20, 32, .22);
+  @include up($bp-lg) { &:nth-child(4n) { border-right: 0; } }
+  .c  { font-family: $font-mono; font-size: .5625rem; letter-spacing: .15em; color: var(--dim); }
+  h3  { font-size: 1.1875rem; line-height: .95; margin: .5625rem 0 .4375rem; }
+  p   { font-size: .71875rem; line-height: 1.5; color: var(--kink); }
+  .vd { font-family: $font-mono; font-size: .53125rem; letter-spacing: .13em;
+        color: var(--dim); margin-top: .625rem; }
+}

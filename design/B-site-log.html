@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--ink:#0C0C0C;--ink2:#161616;--kraft:#D8CFBC;--kraft2:#C9BFA8;--hi:#FF6A00;--paper:#F1ECE2}
+body{width:1440px;background:var(--ink);font-family:Barlow,sans-serif;color:var(--paper);overflow-x:hidden}
+.mono{font-family:"JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10px}
+.hand{font-family:Caveat,cursive;font-weight:700;color:var(--hi)}
+.anton{font-family:Anton,sans-serif;text-transform:uppercase;letter-spacing:.005em;line-height:.85}
+
+/* ---- HERO : site log board ---- */
+.hero{position:relative;padding:38px 56px 0;overflow:hidden;min-height:1000px}
+.hero::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 78% 8%,rgba(255,106,0,.16),transparent 55%),
+             repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 46px);}
+.bar{position:relative;display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(241,236,226,.18)}
+.logo{font-family:Anton,sans-serif;font-size:22px;letter-spacing:.02em;text-transform:uppercase}
+.logo span{color:var(--hi)}
+.navm{display:flex;gap:26px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1fr 560px;gap:56px;margin-top:52px}
+h1{font-family:Anton,sans-serif;text-transform:uppercase;font-size:128px;line-height:.84;letter-spacing:-.005em}
+h1 em{font-style:normal;color:var(--hi)}
+.kicker{display:flex;gap:16px;align-items:center;margin-bottom:22px}
+.tag{border:1px solid var(--hi);color:var(--hi);padding:6px 10px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.lede{max-width:470px;margin-top:26px;font-size:17px;line-height:1.55;color:#CFC8BC}
+.acts{display:flex;gap:12px;margin-top:30px;align-items:center}
+.btn{background:var(--hi);color:#0C0C0C;font-family:"JetBrains Mono",monospace;font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px}
+.btn.g{background:transparent;color:var(--paper);border:1px solid rgba(241,236,226,.35)}
+
+/* log sheet */
+.log{position:relative;background:var(--kraft);color:#191919;padding:26px 24px 22px;box-shadow:0 30px 60px rgba(0,0,0,.55);transform:rotate(.8deg)}
+.log::before{content:"";position:absolute;left:50%;top:-16px;transform:translateX(-50%);width:120px;height:26px;background:#2A2A2A;border-radius:3px;box-shadow:0 4px 8px rgba(0,0,0,.5)}
+.log::after{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:78px;height:12px;background:#454545;border-radius:2px}
+.log h3{font-family:Anton,sans-serif;text-transform:uppercase;font-size:26px;letter-spacing:.01em}
+.logmeta{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#5C574C;margin-top:6px;padding-bottom:12px;border-bottom:1.5px solid #191919}
+.rows{margin-top:12px}
+.row{display:grid;grid-template-columns:52px 1fr 74px;gap:10px;padding:9px 0;border-bottom:1px dashed rgba(25,25,25,.3);align-items:center}
+.row .t{font-family:"JetBrains Mono",monospace;font-size:10px;color:#5C574C}
+.row .d{font-size:14px;font-weight:500}
+.row .s{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;text-align:right;color:#2A7A3B}
+.row .s.w{color:#B24A00}
+.chk{position:absolute;right:26px;bottom:22px}
+.stampbox{position:absolute;right:-26px;bottom:64px;border:3px solid var(--hi);color:var(--hi);font-family:Anton,sans-serif;font-size:19px;letter-spacing:.04em;text-transform:uppercase;padding:8px 14px;transform:rotate(-8deg);background:rgba(12,12,12,.86)}
+.weather{display:flex;gap:14px;margin-top:16px;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5C574C}
+.scribble{position:absolute;right:-150px;top:180px;width:150px}
+
+/* stat strip */
+.strip{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(241,236,226,.2);margin-top:60px}
+.strip>div{padding:26px 0 30px;border-right:1px solid rgba(241,236,226,.12)}
+.strip>div:last-child{border-right:0}
+.strip b{font-family:Anton,sans-serif;font-size:62px;line-height:.9;display:block;white-space:nowrap}
+.strip b .u{color:var(--hi);font-size:30px;letter-spacing:.02em}
+.strip span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#8C857A;display:block;margin-top:8px}
+
+/* ---- SECTION : fleet on kraft ---- */
+.kraftsec{background:var(--kraft);color:#161616;padding:64px 56px 84px;position:relative}
+.kraftsec::before{content:"";position:absolute;top:0;left:0;right:0;height:14px;background:var(--ink);
+  -webkit-mask:radial-gradient(10px 14px at 10px 100%,#000 98%,transparent) repeat-x;mask:radial-gradient(10px 14px at 10px 100%,#000 98%,transparent);mask-size:20px 14px}
+.kh{display:flex;justify-content:space-between;align-items:flex-end}
+.kh h2{font-family:Anton,sans-serif;text-transform:uppercase;font-size:76px;line-height:.85}
+.kh h2 em{font-style:normal;color:var(--hi)}
+.kh p{max-width:320px;font-size:14px;line-height:1.55;color:#4B463C}
+.fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;border-top:2px solid #161616}
+.unit{padding:22px 20px 20px;border-right:1px solid rgba(22,22,22,.25);position:relative}
+.unit:nth-child(3n){border-right:0}
+.unit .n{font-family:Anton,sans-serif;font-size:72px;line-height:.85;letter-spacing:-.01em}
+.unit .n sup{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;vertical-align:super;color:#6B655A}
+.unit h4{font-family:Anton,sans-serif;text-transform:uppercase;font-size:21px;margin-top:8px}
+.unit dl{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em}
+.unit dt{color:#6B655A;text-transform:uppercase;letter-spacing:.12em;font-size:9px}
+.unit dd{text-align:right;font-weight:500}
+.tapebit{position:absolute;top:-10px;right:18px;width:64px;height:22px;background:rgba(241,236,226,.55);transform:rotate(6deg);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.hlt{background:linear-gradient(transparent 58%,rgba(255,106,0,.45) 58%)}
+</style></head><body>
+
+<section class="hero">
+  <div class="bar">
+    <div class="logo">RKU<span>.</span></div>
+    <div class="navm mono">
+      <span>Services</span><span>Projects</span><span>Fleet</span><span>Safety</span><span>Contact</span>
+    </div>
+    <div class="mono" style="color:#8C857A">SITE LOG · DAY 412 · 24.08.2026</div>
+  </div>
+
+  <div class="hero-grid">
+    <div>
+      <div class="kicker">
+        <span class="tag">General Contractor</span>
+        <span class="mono" style="color:#8C857A">07°25'S 107°03'E · WEST JAVA</span>
+      </div>
+      <h1>Built<br>to last.<br><em>Priced<br>to bid.</em></h1>
+      <p class="lede">Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.</p>
+      <div class="acts">
+        <a class="btn">Request a tender pack</a>
+        <a class="btn g">See the work</a>
+      </div>
+      <p class="hand" style="font-size:26px;margin-top:22px;transform:rotate(-1.5deg)">— proposal back in 5 working days.</p>
+    </div>
+
+    <div style="position:relative">
+      <div class="log">
+        <h3>Daily site log</h3>
+        <div class="logmeta"><span>Meranti Logistics Hub</span><span>Cikarang · Sheet 412</span></div>
+        <div class="rows">
+          <div class="row"><span class="t">06:30</span><span class="d">Toolbox talk — 214 workers inducted</span><span class="s">Closed</span></div>
+          <div class="row"><span class="t">07:15</span><span class="d">Crane T-02 pre-lift inspection</span><span class="s">Closed</span></div>
+          <div class="row"><span class="t">09:40</span><span class="d">Slab pour, Grid C4–F9 · 340 m³</span><span class="s">Closed</span></div>
+          <div class="row"><span class="t">13:05</span><span class="d">Cube test — 28 day, 41.2 MPa</span><span class="s">Pass</span></div>
+          <div class="row"><span class="t">15:20</span><span class="d">Rebar tie inspection, Level 3</span><span class="s w">Open</span></div>
+          <div class="row"><span class="t">17:00</span><span class="d">Progress: <span class="hlt">78% against baseline</span></span><span class="s">On track</span></div>
+        </div>
+        <div class="weather"><span>Weather: Clear 31°C</span><span>Wind 8 km/h</span><span>Lost hours: 0</span></div>
+      </div>
+      <div class="stampbox">0 LTI<br>612 DAYS</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div><b>18</b><span>Years in business</span></div>
+    <div><b>240<span class="u">+</span></b><span>Projects delivered</span></div>
+    <div><b>1.2<span class="u">M&nbsp;m²</span></b><span>Built floor area</span></div>
+    <div><b>96<span class="u">%</span></b><span>On-time hand-over</span></div>
+  </div>
+</section>
+
+<section class="kraftsec">
+  <div class="kh">
+    <h2>Owned plant.<br><em>Not rented promises.</em></h2>
+    <p>Every unit is company-owned, serviced on a 250-hour cycle, and operated by certified RKU crew. Availability published to clients weekly.</p>
+  </div>
+  <div class="fleet">
+    <div class="unit"><div class="tapebit"></div><div class="n">6<sup>UNITS</sup></div><h4>Tower cranes</h4>
+      <dl><dt>Model</dt><dd>Potain MDT 219</dd><dt>Max load</dt><dd>10 t</dd><dt>Jib</dt><dd>60 – 65 m</dd><dt>Newest</dt><dd>2023</dd></dl></div>
+    <div class="unit"><div class="n">14<sup>UNITS</sup></div><h4>Excavators</h4>
+      <dl><dt>Class</dt><dd>13 t – 36 t</dd><dt>Fleet</dt><dd>PC130 – PC360</dd><dt>Attach.</dt><dd>Breaker, grab</dd><dt>Newest</dt><dd>2025</dd></dl></div>
+    <div class="unit"><div class="tapebit" style="right:auto;left:22px;transform:rotate(-5deg)"></div><div class="n">2<sup>PLANTS</sup></div><h4>Batching plants</h4>
+      <dl><dt>Output</dt><dd>60 m³/h each</dd><dt>Silos</dt><dd>4 × 100 t</dd><dt>Mixers</dt><dd>11 trucks</dd><dt>Newest</dt><dd>2021</dd></dl></div>
+  </div>
+</section>
+</body></html>

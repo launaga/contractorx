@@ -1,21 +1,15 @@
-// M-08 Process — horizontal on desktop, vertical below 1024
-.process { display: grid; gap: $hair; background: var(--rule-soft); border: $hair solid var(--rule-soft); grid-template-columns: 1fr;
+// M-08 · Process — four stages
+.proc {
+  display: grid; grid-template-columns: 1fr; margin-top: 2.5rem; border-top: 1px solid var(--line);
+  @include up($bp-md) { grid-template-columns: repeat(2, 1fr); }
   @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
 }
-.process__step {
-  background: var(--paper); padding: clamp(1.25rem, 2.6vw, 2rem); display: flex; flex-direction: column; gap: .75rem;
-  b { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; color: var(--mute); }
-  h3 { font-size: 1.25rem; }
-  p { font-size: .875rem; color: var(--mute); }
-  .process__tick { height: 22px; border-left: $hair solid var(--rule); width: 100%; position: relative; }
-  .process__tick::after { content: ""; position: absolute; left: 0; top: 50%; width: 100%; border-top: $hair dashed var(--rule-soft); }
+.st {
+  padding: 1.375rem 1.375rem 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+  @include up($bp-md) { border-right: 1px solid var(--line); }
+  @include up($bp-lg) { border-bottom: 0; &:last-child { border-right: 0; } }
+  b  { font-family: $font-mono; font-size: .59375rem; letter-spacing: .16em; color: var(--hi); }
+  h3 { font-size: clamp(1.1875rem, 2vw, 1.4375rem); margin: .75rem 0 .5rem; }
+  p  { font-size: .8125rem; line-height: 1.55; color: var(--steel); }
 }
-// Timeline (project detail)
-.timeline { list-style: none; padding: 0; margin: 0; }
-.timeline li { display: grid; gap: .5rem 1.5rem; padding: 1rem 0; border-bottom: $hair dashed var(--rule-soft);
-  @include up($bp-md) { grid-template-columns: 8.5rem 1fr 6rem; align-items: center; }
-}
-.timeline__bar { height: 8px; background: var(--rule-soft); position: relative; }
-.timeline__bar span { position: absolute; inset: 0 auto 0 0; background: var(--ink); }
-.timeline__date, .timeline__pct { font-family: var(--font-mono); font-size: $fs-label; letter-spacing: $track-label; text-transform: uppercase; color: var(--mute); }
-.timeline__pct { text-align: right; }

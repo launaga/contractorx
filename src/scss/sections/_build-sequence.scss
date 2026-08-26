@@ -1,0 +1,195 @@
+// K-08 · Build sequence — the pinned programme.
+// Scroll scrubs the elevation on, phase by phase. Everything here has a
+// static fallback: with no JS, or under prefers-reduced-motion, the drawing
+// is simply already finished and the section is an ordinary block.
+
+.seq {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.seq__stage { padding-block: 0 var(--section-y); }
+
+.seq__in {
+  display: grid;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+
+  @include up($bp-lg) {
+    grid-template-columns: 13rem minmax(0, 1fr) 12.5rem;
+    align-items: center;
+  }
+}
+
+// --- phase list ---------------------------------------------------
+.seq__phases {
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  min-width: 0;
+
+  @include down($bp-lg) {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: .3125rem;
+    padding-bottom: .375rem;
+  }
+}
+
+.seq__phase {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .1875rem .625rem;
+  align-items: baseline;
+  padding: .5rem .625rem;
+  border-left: 2px solid var(--line);
+  min-width: 0;
+
+  .n {
+    font-family: $font-mono;
+    font-size: .625rem;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .nm {
+    font-family: $font-display;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--steel);
+  }
+  .wk {
+    grid-column: 2;
+    font-family: $font-mono;
+    font-size: .5625rem;
+    letter-spacing: .13em;
+    color: var(--dim);
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &.is-on {
+    border-left-color: var(--hi);
+    background: var(--ink);
+
+    .nm { color: var(--fg); }
+    .n  { color: var(--hi); }
+    .wk { opacity: 1; height: auto; margin-top: .125rem; }
+  }
+
+  @include down($bp-lg) {
+    flex: 0 0 auto;
+    border-left: 0;
+    border-top: 2px solid var(--line);
+    grid-template-columns: auto;
+
+    .wk { grid-column: 1; }
+    &.is-on { border-top-color: var(--hi); }
+  }
+}
+
+// --- the drawing ---------------------------------------------------
+.seq__draw {
+  position: relative;
+  min-width: 0;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  padding: .75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  // Blueprint grid, same device as the empty image plates.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: .75rem;
+    pointer-events: none;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--fg) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--fg) 5%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(240px, 52vh, 430px);
+  }
+}
+
+.seq__cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--dim);
+  margin-top: .5rem;
+}
+
+// --- readout -------------------------------------------------------
+.seq__read {
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+  min-width: 0;
+
+  dl { margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+}
+
+.seq__pct {
+  font-family: $font-display;
+  font-size: clamp(2.5rem, 6.5vw, 3.75rem);
+  line-height: .82;
+  color: var(--hi);
+  font-variant-numeric: tabular-nums;
+}
+
+.seq__kv {
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: .3125rem;
+
+  &:last-child { border-bottom: 0; }
+
+  dt {
+    color: var(--dim);
+    font-family: $font-mono;
+    font-size: .5625rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+  dd {
+    margin: 0;
+    font-family: $font-mono;
+    font-size: .75rem;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.seq__bar {
+  height: 5px;
+  background: var(--line);
+  position: relative;
+
+  i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    background: var(--hi);
+  }
+}
+
+// When the section is pinned it owns the viewport; until then it is an
+// ordinary block so the page reads correctly with no JS at all.
+.js .seq--pinned .seq__stage {
+  height: 100svh;
+  padding-block: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}

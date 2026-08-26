@@ -1,0 +1,17 @@
+// M-07c · Contact sheet — progress photography, slots empty
+.sheetgrid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin-top: 1.875rem;
+  @include up($bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+.frameimg {
+  aspect-ratio: 4 / 3; position: relative; overflow: hidden;
+  &::after { content: "IMAGE"; position: absolute; inset: 0; z-index: 2; display: grid;
+             place-items: center; font-family: $font-mono; font-size: .53125rem;
+             letter-spacing: .22em; color: var(--steel); opacity: .5; }
+  figcaption {
+    position: absolute; z-index: 3; inset: auto 0 0 0;
+    background: color-mix(in srgb, var(--doc-bg) 92%, transparent); color: var(--doc-fg);
+    font-family: $font-mono; font-size: .53125rem; letter-spacing: .13em;
+    text-transform: uppercase; padding: .375rem .5rem;
+  }
+}

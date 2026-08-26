@@ -1,0 +1,120 @@
+// Horizontal register — vertical input, horizontal output.
+// Used once, on Projects, for the six live sites. A fixed set, never
+// filtered, so the pinned track's length never changes underneath it.
+// Without JS it degrades to a normal swipeable overflow row.
+
+.hreg {
+  position: relative;
+  background: var(--ink);
+}
+
+.hreg__stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.js .hreg--pinned .hreg__stage {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hreg__track {
+  display: flex;
+  gap: 1rem;
+  padding-inline: var(--shell-x);
+
+  // Fallback: a plain horizontal scroller until the pin takes over.
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.js .hreg--pinned .hreg__track {
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+.hreg__sheet {
+  flex: 0 0 clamp(16rem, 74vw, 23.75rem);
+  border: 1px solid var(--line);
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  min-width: 0;
+
+  h3 { font-size: clamp(1rem, 1.6vw, 1.1875rem); margin: 0; }
+}
+
+// Empty image slot — identical treatment to every other plate in the kit.
+.hreg__plate {
+  aspect-ratio: 4 / 3;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel2);
+  display: grid;
+  place-items: center;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--fg) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fg) 5%, transparent) 1px, transparent 1px);
+  background-size: 26px 26px;
+
+  span {
+    color: var(--dim);
+    border: 1px dashed var(--line);
+    background: var(--ink);
+    padding: .3125rem .5rem;
+  }
+}
+
+.hreg__body {
+  padding: .875rem 1rem 1.0625rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  min-width: 0;
+}
+
+.hreg__pc {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+
+  b {
+    font-family: $font-mono;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--hi);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.hreg__meta {
+  color: var(--dim);
+  display: block;
+}
+
+.hreg__bar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding-inline: var(--shell-x);
+
+  .t {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    position: relative;
+  }
+  .t i {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--hi);
+  }
+}

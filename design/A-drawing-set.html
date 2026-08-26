@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Archivo+Narrow:wght@600;700&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--blue:#12305C;--blue-d:#0B1F3D;--paper:#EDE7DA;--paper2:#E2DACA;--ink:#101010;--orange:#F4652B;--line:rgba(237,231,218,.28)}
+body{width:1440px;background:var(--paper);font-family:Archivo,sans-serif;color:var(--ink);overflow-x:hidden}
+.mono{font-family:"IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10px}
+.hand{font-family:Caveat,cursive;font-size:24px;color:var(--orange);transform:rotate(-2.5deg)}
+.disp{font-family:"Archivo Narrow",sans-serif;font-weight:700;text-transform:uppercase;line-height:.86;letter-spacing:-.02em}
+
+/* ---------- HERO : blueprint sheet ---------- */
+.hero{position:relative;background:var(--blue);color:#EDE7DA;padding:0 0 0;overflow:hidden}
+.grid-bg{position:absolute;inset:0;opacity:.5;
+ background-image:linear-gradient(rgba(237,231,218,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(237,231,218,.09) 1px,transparent 1px),linear-gradient(rgba(237,231,218,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(237,231,218,.045) 1px,transparent 1px);
+ background-size:120px 120px,120px 120px,24px 24px,24px 24px}
+.sheetline{position:absolute;inset:26px;border:1px solid var(--line);pointer-events:none}
+.hero-in{position:relative;padding:64px 60px 0}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;color:#EDE7DA;opacity:.75}
+.brandrow{display:flex;align-items:baseline;gap:14px;margin-top:52px}
+.brand{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:19px;letter-spacing:.16em;text-transform:uppercase}
+h1{font-family:"Archivo Narrow",sans-serif;font-weight:700;text-transform:uppercase;font-size:172px;line-height:.82;letter-spacing:-.025em;margin:26px 0 0;max-width:1180px}
+h1 .o{color:var(--orange)}
+.sub{max-width:520px;margin-top:26px;font-size:16px;line-height:1.55;opacity:.82}
+.cta-row{display:flex;gap:12px;margin-top:34px;align-items:center}
+.btn{background:var(--orange);color:#0B1F3D;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding:15px 24px;display:inline-block}
+.btn.ghost{background:transparent;color:#EDE7DA;border:1px solid var(--line)}
+
+/* dimension string */
+.dim{position:relative;height:46px;margin:56px 0 0}
+.dim .l{position:absolute;top:22px;left:0;right:0;height:1px;background:var(--line)}
+.dim .t{position:absolute;top:14px;width:1px;height:17px;background:var(--line)}
+.dim .lbl{position:absolute;top:0;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:#EDE7DA;opacity:.75;transform:translateX(-50%)}
+
+/* photo + redline callouts */
+.plate{position:absolute;right:20px;top:150px;width:660px;height:520px}
+
+.callout{position:absolute;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.callout::before{content:"";position:absolute;left:-46px;top:6px;width:40px;height:1px;background:var(--orange)}
+.dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--orange)}
+
+/* title block */
+.titleblock{position:relative;margin:44px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr .9fr;color:#EDE7DA}
+.titleblock>div{padding:16px 18px;border-right:1px solid var(--line)}
+.titleblock>div:last-child{border-right:0;background:var(--orange);color:#0B1F3D}
+.tb-k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.tb-v{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.03em;margin-top:6px}
+
+/* ---------- SECTION : certifications on paper ---------- */
+.paper{position:relative;background:var(--paper);padding:70px 60px 90px}
+.torn{height:26px;background:var(--paper);
+ -webkit-mask:radial-gradient(14px 26px at 12px -6px,transparent 98%,#000) repeat-x;mask:radial-gradient(14px 26px at 12px -6px,transparent 98%,#000) repeat-x;mask-size:26px 26px;margin-top:-1px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.sec-title{font-family:"Archivo Narrow",sans-serif;font-weight:700;text-transform:uppercase;font-size:64px;line-height:.9;letter-spacing:-.02em;max-width:660px}
+.sec-title .o{color:var(--orange)}
+.sec-note{max-width:330px;font-size:14px;line-height:1.55;color:#4A4740}
+.certs{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:2px solid var(--ink)}
+.cert{padding:24px 22px 20px;border-right:1px solid rgba(16,16,16,.22);border-bottom:1px solid rgba(16,16,16,.22);position:relative;min-height:214px}
+.cert:nth-child(4n){border-right:0}
+.cert .no{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.16em;color:#8A857A}
+.cert h3{font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:24px;text-transform:uppercase;line-height:.95;margin:14px 0 8px}
+.cert p{font-size:12.5px;line-height:1.5;color:#55514A}
+.cert .val{position:absolute;left:22px;bottom:18px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:#8A857A}
+.stamp{position:absolute;right:14px;bottom:14px;border:2px solid var(--orange);color:var(--orange);font-family:"Archivo Narrow",sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;transform:rotate(-9deg);opacity:.9}
+.redline{position:absolute;font-family:Caveat,cursive;font-size:23px;color:var(--orange);transform:rotate(-3deg)}
+.arrow{position:absolute;stroke:var(--orange);fill:none;stroke-width:1.6}
+</style></head><body>
+
+<section class="hero">
+  <div class="grid-bg"></div><div class="sheetline"></div>
+  <div class="plate">
+    <svg viewBox="0 0 660 520" width="660" height="520" fill="none">
+      <defs>
+        <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#EDE7DA" stroke-width="1" opacity=".35"/>
+        </pattern>
+      </defs>
+      <!-- ground -->
+      <line x1="0" y1="440" x2="660" y2="440" stroke="#EDE7DA" stroke-width="1.5" opacity=".8"/>
+      <rect x="0" y="440" width="660" height="80" fill="url(#hatch)"/>
+      <!-- portal frame structure -->
+      <g stroke="#EDE7DA" stroke-width="1.4" opacity=".85">
+        <path d="M60 440 V150 M180 440 V150 M300 440 V150 M420 440 V150 M540 440 V150"/>
+        <path d="M40 150 H560 M40 220 H560 M40 290 H560 M40 360 H560"/>
+        <path d="M60 220 L180 150 M180 290 L300 220 M300 360 L420 290 M420 220 L540 150"/>
+      </g>
+      <!-- roof truss -->
+      <g stroke="#EDE7DA" stroke-width="1.6" opacity=".95">
+        <path d="M40 150 L300 92 L560 150"/>
+        <path d="M40 128 L300 70 L560 128"/>
+        <path d="M300 92 V70 M170 121 V99 M430 121 V99 M105 137 V115 M495 137 V115"/>
+      </g>
+      <!-- crane in orange -->
+      <g stroke="#F4652B" stroke-width="1.8">
+        <path d="M600 460 V60 M520 60 H660 M600 60 L520 88 M600 60 L660 88 M520 88 H660"/>
+        <path d="M636 60 V126 M626 126 h20 v16 h-20 z"/>
+        <path d="M594 440 l12 -8 M606 440 l-12 -8 M594 400 l12 -8 M606 400 l-12 -8 M594 360 l12 -8 M606 360 l-12 -8 M594 320 l12 -8 M606 320 l-12 -8 M594 280 l12 -8 M606 280 l-12 -8 M594 240 l12 -8 M606 240 l-12 -8 M594 200 l12 -8 M606 200 l-12 -8 M594 160 l12 -8 M606 160 l-12 -8 M594 120 l12 -8 M606 120 l-12 -8"/>
+      </g>
+      <!-- levels -->
+      <g stroke="#EDE7DA" stroke-width="1" opacity=".5" stroke-dasharray="5 5">
+        <path d="M0 150 H660 M0 290 H660"/>
+      </g>
+      <text x="8" y="145" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.4" fill="#EDE7DA" opacity=".7">RL +12.400</text>
+      <text x="8" y="285" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.4" fill="#EDE7DA" opacity=".7">RL +6.200</text>
+      <text x="8" y="435" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.4" fill="#EDE7DA" opacity=".7">RL ±0.000</text>
+    </svg>
+  </div>
+  <span class="dot" style="right:432px;top:212px"></span>
+  <span class="callout" style="right:172px;top:206px">GRID C-4 · TOWER CRANE T-02</span>
+  <span class="dot" style="right:96px;top:302px"></span>
+  
+
+  <div class="hero-in">
+    <div class="topbar">
+      <span class="mono">RANGGA KARYA UTAMA · GENERAL CONTRACTOR · EST. 2008</span>
+      <span class="mono">07°25'S 107°03'E · LPJK GRADE 7</span>
+    </div>
+    <div class="brandrow"><span class="mono" style="opacity:.7">SHEET A-101 · DRAWING SET 01/07</span></div>
+    <h1>Built<br>to last.<br><span class="o">Priced to bid.</span></h1>
+    <p class="sub">Full-service general contractor for commercial, industrial, and residential projects across Southeast Asia. 18 years, 240+ completed sites, zero missed deadlines.</p>
+    <div class="cta-row">
+      <a class="btn">Request a tender pack →</a>
+      <a class="btn ghost">See the work</a>
+      <span class="hand" style="margin-left:14px">we answer in 5 days.</span>
+    </div>
+
+    <div class="dim">
+      <div class="l"></div>
+      <span class="t" style="left:0"></span><span class="t" style="left:25%"></span><span class="t" style="left:50%"></span><span class="t" style="left:75%"></span><span class="t" style="left:100%"></span>
+      <span class="lbl" style="left:12.5%">18 YEARS</span>
+      <span class="lbl" style="left:37.5%">240+ PROJECTS</span>
+      <span class="lbl" style="left:62.5%">1.2M m² BUILT</span>
+      <span class="lbl" style="left:87.5%">0 LTI · 2025</span>
+    </div>
+
+    <div class="titleblock">
+      <div><div class="tb-k">Project</div><div class="tb-v">Meranti Logistics Hub</div></div>
+      <div><div class="tb-k">Scale</div><div class="tb-v">42,000 m²</div></div>
+      <div><div class="tb-k">Issued</div><div class="tb-v">24 · 08 · 2026</div></div>
+      <div><div class="tb-k">Revision</div><div class="tb-v">C</div></div>
+      <div><div class="tb-k">Status</div><div class="tb-v">As built</div></div>
+    </div>
+  </div>
+</section>
+<div class="torn"></div>
+
+<section class="paper">
+  <span class="redline" style="right:60px;top:44px">procurement reads this first ↓</span>
+  <div class="sec-head">
+    <h2 class="sec-title">Certifications,<br>current and <span class="o">countersigned.</span></h2>
+    <p class="sec-note">Copies of every certificate ship with the tender submission. Validity dates below are live — we do not list anything expired.</p>
+  </div>
+  <div class="certs">
+    <div class="cert"><div class="no">CERT 01</div><h3>ISO<br>9001:2015</h3><p>Quality management. Audited annually by TÜV across design coordination, procurement, and site execution.</p><div class="val">Valid to 03 / 2028</div></div>
+    <div class="cert"><div class="no">CERT 02</div><h3>ISO<br>45001:2018</h3><p>Occupational health &amp; safety. Whole-company scope including subcontracted trades and plant operators.</p><div class="val">Valid to 11 / 2027</div></div>
+    <div class="cert"><div class="no">CERT 03</div><h3>SMK3<br>PP 50/2012</h3><p>National safety system. Gold-level assessment, 168 of 166 criteria met at last Kemnaker audit.</p><div class="val">Valid to 09 / 2027</div></div>
+    <div class="cert"><div class="no">CERT 04</div><h3>LPJK<br>Grade 7</h3><p>Contractor qualification. Unlimited project value, four sub-classifications held.</p><div class="val">Valid to 02 / 2029</div><div class="stamp">Verified</div></div>
+  </div>
+</section>
+</body></html>

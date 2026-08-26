@@ -1,0 +1,16 @@
+// M-07b · Sector / year filter chips
+.chips {
+  display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;
+  margin-top: 1.875rem; padding-block: .875rem; border-block: 1px solid var(--line);
+}
+.chip {
+  font-family: $font-mono; font-size: .5625rem; letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--line); padding: .4375rem .6875rem; color: var(--steel); cursor: pointer;
+  &:hover { border-color: var(--hi); color: var(--hi); }
+  &[aria-pressed="true"] { background: var(--hi); border-color: var(--hi); color: #fff; }
+}
+.empty-note {
+  padding: 2.5rem 0; color: var(--dim);
+  font-family: $font-mono; font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase;
+}
+[data-project][hidden] { display: none; }

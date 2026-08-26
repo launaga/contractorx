@@ -1,0 +1,74 @@
+// About · the record — a sticky year that follows the list.
+// Pure `position: sticky` plus an IntersectionObserver for the active
+// entry, so it needs no animation library and works on every viewport.
+// With no JS the year simply reads 2008 and the list is unchanged.
+
+.tlwrap {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.125rem;
+
+  @include up($bp-lg) {
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  // The list already carries its own top rule from _timeline.scss.
+  .tl { margin-top: 0; min-width: 0; }
+}
+
+.tlyear {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  min-width: 0;
+  color: var(--dim);
+
+  b {
+    font-family: $font-display;
+    font-weight: 400;
+    font-size: clamp(2.75rem, 7vw, 4.25rem);
+    line-height: .82;
+    color: var(--hi);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @include up($bp-lg) {
+    position: sticky;
+    top: clamp(5rem, 9vw, 7rem);
+  }
+
+  // On narrow screens it sits above the list as a plain caption.
+  @include down($bp-lg) {
+    flex-direction: row;
+    align-items: baseline;
+    gap: .75rem;
+
+    b { font-size: 2.25rem; }
+    .tlyear__bar { display: none; }
+  }
+}
+
+.tlyear__bar {
+  height: 4px;
+  background: var(--line);
+  position: relative;
+  margin-top: .5rem;
+
+  i {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    background: var(--hi);
+  }
+}
+
+// The entry the readout is currently reporting.
+.tl li[data-tl-item] {
+  transition: none;
+
+  b { color: var(--steel); }
+
+  &.is-on b { color: var(--hi); }
+}

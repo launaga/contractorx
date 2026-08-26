@@ -18,18 +18,18 @@ contractorx/
 ├── dist/               ← the finished site. This is what you upload.
 ├── src/
 │   ├── html/           7 pages + docs, written with {{> partial}} includes
-│   ├── partials/       head · navbar · footer · certifications · clients · tender
+│   ├── partials/       head · nav · footer · tender
 │   ├── scss/
 │   │   ├── _variables.scss     all design tokens
 │   │   ├── _reset.scss
 │   │   ├── _typography.scss
 │   │   ├── _layout.scss
-│   │   ├── sections/           23 partials — one per section
+│   │   ├── sections/           26 partials — one per section
 │   │   └── main.scss
-│   ├── js/             nav.js · counters.js · main.js
-│   ├── img/            image plates (SVG)
-│   └── icons/          three SVG sprites — UI, certifications, equipment
-├── tools/              page assembler + asset generators
+│   ├── js/             nav.js · main.js
+│   ├── img/            favicon only — content image slots ship empty
+│   └── fonts/          self-hosted woff2 — Anton · Archivo · Caveat · JetBrains Mono
+├── tools/              page assembler + QA harnesses
 ├── docs/               documentation (also at dist/docs.html)
 ├── LICENSE
 └── README.md
@@ -63,75 +63,86 @@ npm run css:watch    # recompile SCSS on every save while you work
 
 ## 1 · Colours
 
-Everything routes through `src/scss/_variables.scss`. Change these seven values
-and the entire kit follows, dark mode included.
+Everything routes through `src/scss/_variables.scss`. The palette is
+light-dominant: **white and soft blue are the only section grounds** — navy is
+reserved for objects that sit on those grounds (the tender docket, the footer
+title block, stamps), never for a whole section.
 
 | Token | Default | Used for |
 | --- | --- | --- |
-| `$ink` | `#0A0A0A` | Text, dark surfaces |
-| `$paper` | `#FAFAF8` | Page ground (warm off-white) |
-| `$panel` | `#F2F2EE` | Cards and panels |
-| `$rule` | `#111111` | Strong rules and borders |
-| `$rule-soft` | `#D6D5D0` | Dividers, hairline grids |
-| `$mute` | `#6B6B66` | Captions, secondary text |
-| `$reverse-bg` / `$reverse-fg` | `#111111` / `#F6F6F0` | Reversal blocks — hero, stats, CTA |
+| `$white` | `#FFFFFF` | Primary page ground |
+| `$soft` | `#F7F8FD` | Second ground — alternates with white |
+| `$soft-2` | `#EDF1FA` | Panels, table stripes, inset blocks |
+| `$line` | `#DCE3F2` | Hairlines, table rules, plate borders |
+| `$ink` | `#0A1A2F` | Body text and headings |
+| `$steel` | `#5C6B82` | Secondary copy |
+| `$dim` | `#8A99AE` | Captions, mono labels, meta |
+| `$doc-bg` / `$doc-fg` | `#0C1D33` / `#EEF3FB` | Navy objects — docket, title block |
+| `$bright` | `#2E86FF` | The one accent: CTAs, key numbers, one word per headline |
+| `$sky` | `#7FB2E5` | Accent support — bars, ticker, chart fills |
+| `$deep` | `#0A2E6B` | Deep blue for emphasis rules and hover states |
+| `$ok` / `$warn` | `#2F7D5A` / `#A66A22` | Status only — certification and permit states |
 
 Then run `npm run css`.
 
-Adding a brand colour? Put it on `$reverse-bg` first and check contrast. The
-design is drawn around a maximum of three reversal blocks per page — past
-that, the emphasis stops meaning anything.
+Use `$bright` surgically. If more than three things on a screen are wearing the
+accent, none of them is emphasised any more.
 
-**Dark mode** works out of the box: it follows the visitor's OS setting and can
-be toggled with the "Invert" button in the footer (stored in `localStorage`).
-To ship light-only, delete the `@media (prefers-color-scheme: dark)` and
-`:root[data-theme="dark"]` blocks in `_variables.scss` and remove the toggle
-button from `src/partials/footer.html`.
+**Dark mode** ships as a toggle — the "Invert" button in the footer, stored in
+`localStorage`. Light is the default; the dark tokens are one `@mixin
+dark-tokens` block in `_variables.scss` applied through
+`:root[data-theme="dark"]`. To ship light-only, delete that block and remove
+the toggle button from `src/partials/footer.html`.
 
 ## 2 · Fonts
 
-Three roles, set in `_variables.scss`:
+Four roles, set in `_variables.scss` — each doing a different job:
 
 ```scss
-$font-display: "Instrument Serif", Georgia, serif;   // 48–104px, headings
-$font-body:    "Inter Tight", system-ui, sans-serif; // 16–18px, running copy
-$font-mono:    "JetBrains Mono", ui-monospace;       // 10–12px labels, data
+$font-display: "Anton", Impact, sans-serif;          // uppercase headlines
+$font-body:    "Archivo", system-ui, sans-serif;     // 16–18px running copy
+$font-mono:    "JetBrains Mono", ui-monospace;       // data, spec tables, labels
+$font-hand:    "Caveat", cursive;                    // margin notes, annotations
 ```
 
-The demo loads them from Google Fonts in `src/partials/head.html`. For
-production, self-host: drop woff2 files into `dist/fonts/`, replace that
-`<link>` with `@font-face` rules, and preload the two faces used above the
-fold. Keep the three roles even if you change the families — a display serif, a
-humanist sans, and a mono for data. Italic is reserved for exactly one
-highlighted word in the hero (`<em class="hilite">`).
+**The fonts ship with the kit.** The woff2 files live in `src/fonts/` (copied
+to `dist/fonts/` on build) and the `@font-face` rules are in
+`src/scss/_fonts.scss`. There is no Google Fonts request, no `preconnect`, and
+nothing external to block the first paint — the site renders correctly offline
+and over `file://`.
+
+To swap a family: drop its woff2 into `src/fonts/`, edit the matching
+`@font-face` block in `_fonts.scss`, and change the `$font-*` variable.
+
+Keep the four roles even if you swap the families — a condensed display face, a
+neutral sans for copy, a mono carrying every number and code on the site, and a
+handwriting face for the annotations. The handwriting is what stops the
+document texture from reading as machine output; do not drop it to three.
 
 ## 3 · Images
 
-The kit ships vector plates in `dist/img/` so it weighs almost nothing out of
-the box. Replace them with real photography using the same filenames and
-nothing else needs to change.
-
-For photographs, use a `<picture>` block so modern formats are served first:
+**The image slots ship empty on purpose.** Each one is a dashed plate with a
+blueprint grid and an `IMAGE` marker, sized to the aspect ratio the layout
+expects. Drop your own photography in and the plate disappears:
 
 ```html
-<picture>
-  <source srcset="img/hero.avif" type="image/avif">
-  <source srcset="img/hero.webp" type="image/webp">
-  <img src="img/hero.jpg" alt="Steel frame at sunset" width="2400" height="1350">
-</picture>
+<figure class="plate">
+  <picture>
+    <source srcset="img/hero.avif" type="image/avif">
+    <source srcset="img/hero.webp" type="image/webp">
+    <img src="img/hero.jpg" alt="Steel frame at sunset" width="2400" height="1350">
+  </picture>
+</figure>
 ```
-
-The black-and-white treatment is applied in CSS
-(`filter: grayscale(1) contrast(1.06)` on `.plate img`), so colour photos land
-in the palette automatically. For a true duotone, export at 100% black on
-`#FAFAF8` in your editor and remove that filter.
 
 Always keep `width` and `height` on images — that is what holds CLS under 0.05.
 
-**Icons** live in three sprites under `src/icons/` (UI, certification marks,
-equipment silhouettes) and are inlined into each page at build time, so they
-work over `file://` with no extra requests. Reference one with
-`<svg><use href="#i-arrow-right"></use></svg>`. All draw in `currentColor`.
+No filter is applied to photography, so what you export is what ships. If you
+want the whole site to sit in one tonal range, grade the photos before export
+rather than adding a CSS filter — the layout already carries the blue.
+
+There is no icon sprite. The kit draws its marks with type, rules, and CSS
+shapes, which is why `dist/` is under 400 KB with nothing to preload.
 
 ## 4 · Navigation
 
@@ -169,13 +180,19 @@ is. Copy the markup from any page and it brings its own styling.
 
 | Code | Section | Copy it from |
 | --- | --- | --- |
-| K-01 | Certifications wall | `src/partials/certifications.html` |
+| K-01 | Certifications wall | `index.html` → `06 · Certifications` |
 | K-02 | Equipment fleet | `services.html` → `#fleet` |
 | K-03 | Safety record | `about.html` → `#safety` |
-| K-04 | Ongoing projects + map | `projects.html` → `#ongoing` |
-| K-05 | Client logo strip | `src/partials/clients.html` |
+| K-04 | Live sites + map | `projects.html` → `#ongoing` |
+| K-05 | Client strip | `about.html` → clients row |
 | K-06 | Tender CTA | `src/partials/tender.html` |
-| K-07 | Awards & press | `about.html` → `#awards` |
+| K-07 | Awards & press | `about.html` → `05 · Earned` |
+| K-08 | Build sequence | `src/partials/build-sequence.html` |
+| K-09 | Horizontal site register | `projects.html` → `.hreg` |
+
+K-08 and K-09 are the two motion sections — see §8. Both are written so the
+static markup *is* the finished state, so you can drop either into a page that
+has no motion flag and it still reads correctly.
 
 The K-04 map is inline SVG, not a tile provider — no API key, no third-party
 script, no cookie banner. Move a pin by editing its `cx` / `cy`.
@@ -192,21 +209,69 @@ Bootstrap 5.3's grid and utilities load separately as
 `dist/css/bootstrap-grid.min.css`; the kit's own layer always loads after it,
 so your overrides win without `!important`.
 
-## 8 · GSAP and motion
+## 8 · Motion
 
-GSAP is loaded on the home page only and drives exactly two things: the hero
-reveal and the stats counter run-up. Delete
-`<script src="js/gsap.min.js">` from `index.html` and both fall back to a CSS
-transition and a `requestAnimationFrame` counter — nothing breaks and nothing
-looks missing.
+Scroll motion runs on **every page**. Each one gets the same baseline, plus at
+most one signature — so the site never does the same trick twice in a row.
 
-Scroll reveals use `IntersectionObserver` on any element with `class="reveal"`.
-Everything respects `prefers-reduced-motion`: with it on, content appears
-immediately and counters show their final value straight away.
+**Baseline, all 8 pages**
+
+| | |
+| --- | --- |
+| Reading-progress rail | Fixed 3 px bar plus a percentage readout, top right |
+| Page-head parallax | Blueprint ground at 0.5×, the sheet number at 1.3× |
+| Reveals | `class="reveal"` fades up once, `data-count` and `data-progress` run up once |
+
+**One signature per page**
+
+| Page | Signature | Needs |
+| --- | --- | --- |
+| Home | `02 · Programme` pins for about 2.5 screens; the elevation draws itself across five phases while the readout counts week 0 → 74 | GSAP |
+| Projects | Six live sites pulled sideways — vertical scroll, horizontal output | GSAP |
+| Project Detail | The contact sheet, week 05 → 59, pulled sideways | GSAP |
+| About | A sticky year that follows the record and reports the entry you're level with | `IntersectionObserver` |
+| Services | The rate card's column headings stay readable down the whole schedule | `position: sticky` |
+| Service Detail | The capability table holds its place while the six scope steps pass it | `position: sticky` |
+| Contact | The enquiry slip holds its place while the direct lines and offices pass it | `position: sticky` |
+| Docs | A corner strip reporting which of the twelve topics you are level with | `IntersectionObserver` |
+
+Contact and Docs get the quietest treatment of the eight — both are utility
+pages, so their signatures are reading aids rather than performances: the form
+stays reachable while you check an office number, and the docs strip tells you
+where you are in twelve topics without a table of contents in the way.
+
+**Turning it on or off** is one line. Each page's `<!--meta -->` block carries a
+flag:
+
+```json
+{ "title": "…", "description": "…", "sheet": "Home · 01 / 07", "motion": true }
+```
+
+Set it to `false`, or delete the line, and `tools/build.mjs` stops emitting the
+`motion.js` tag for that page. Everything that page contains still renders — it
+just renders static.
+
+**It costs mobile nothing.** `src/js/motion.js` fetches GSAP and ScrollTrigger
+itself, at runtime, and only when *all* of these hold:
+
+- the viewport is at least 900 px wide,
+- `prefers-reduced-motion` is not set,
+- the page actually contains a GSAP-driven section.
+
+Below that bar the two libraries are never downloaded. The sticky sections and
+the progress rail need no library at all, so they keep working there.
+
+**Everything degrades to the finished state**, which is why the fallback never
+looks broken:
+
+- No JS, reduced motion, or a phone → the elevation is *already drawn*, the
+  readout reads 100% / Handover / 11 days early, and both registers are
+  ordinary swipeable rows.
+- The sticky aids are CSS, so they survive JS being off entirely.
 
 GSAP's standard licence is free for most uses; if you charge end users for
-access to the site, check <https://gsap.com/licensing>. The kit is fully
-functional without it.
+access to the site, check <https://gsap.com/licensing>. Remove the `"motion"`
+flags and the kit is fully functional without it.
 
 ## 9 · Contact and tender forms
 

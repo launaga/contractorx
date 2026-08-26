@@ -1,0 +1,27 @@
+// Two-column editorial splits used on About, Service Detail, Project Detail
+.split {
+  display: grid; gap: 2rem;
+  @include up($bp-lg) { grid-template-columns: 1fr 1fr; gap: 3.25rem; }
+  &.wide  { @include up($bp-lg) { grid-template-columns: 1.15fr 1fr; } }
+  &.hero-split { @include up($bp-lg) { grid-template-columns: 1fr 420px; align-items: end; } }
+}
+.prose {
+  font-size: clamp(.875rem, 1.2vw, .96875rem); line-height: 1.62; color: var(--steel);
+  p + p { margin-top: .875rem; }
+}
+.scope-list {
+  list-style: none; padding: 0; margin: 1.625rem 0 0; border-top: 1px solid var(--line);
+  li { display: grid; grid-template-columns: 44px 1fr; gap: 1rem; padding: .9375rem 0;
+       border-bottom: 1px solid var(--line); }
+  .n { font-family: $font-mono; font-size: .8125rem; color: var(--hi); }
+  b { display: block; font-family: $font-body; font-weight: 600; font-size: .9375rem; }
+  p { font-size: .84375rem; line-height: 1.5; color: var(--steel); margin-top: .25rem; }
+}
+.doc-meta {
+  border: 1px solid var(--line); padding: 1.25rem; background: var(--panel);
+  .t { font-family: $font-display; text-transform: uppercase; font-size: 1.625rem; margin-top: .5rem; }
+  dl { display: grid; grid-template-columns: 1fr 1fr; gap: .625rem 1rem; margin-top: 1rem;
+       font-family: $font-mono; font-size: .6875rem; }
+  dt { font-size: .53125rem; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+  dd { margin: .1875rem 0 0; }
+}
