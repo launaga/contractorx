@@ -226,17 +226,19 @@ most one signature — so the site never does the same trick twice in a row.
 
 | Page | Signature | Needs |
 | --- | --- | --- |
-| Home | `02 · Programme` pins; the elevation draws itself across five phases while the readout counts week 0 → 74 | GSAP |
+| Home | `02 · Programme` pins for about 2.5 screens; the elevation draws itself across five phases while the readout counts week 0 → 74 | GSAP |
 | Projects | Six live sites pulled sideways — vertical scroll, horizontal output | GSAP |
 | Project Detail | The contact sheet, week 05 → 59, pulled sideways | GSAP |
 | About | A sticky year that follows the record and reports the entry you're level with | `IntersectionObserver` |
 | Services | The rate card's column headings stay readable down the whole schedule | `position: sticky` |
 | Service Detail | The capability table holds its place while the six scope steps pass it | `position: sticky` |
-| Contact · Docs | Baseline only — deliberately | — |
+| Contact | The enquiry slip holds its place while the direct lines and offices pass it | `position: sticky` |
+| Docs | A corner strip reporting which of the twelve topics you are level with | `IntersectionObserver` |
 
-Contact and Docs are quiet on purpose. A form you are filling in and a
-reference page you are searching should not perform; the rail and the head are
-enough.
+Contact and Docs get the quietest treatment of the eight — both are utility
+pages, so their signatures are reading aids rather than performances: the form
+stays reachable while you check an office number, and the docs strip tells you
+where you are in twelve topics without a table of contents in the way.
 
 **Turning it on or off** is one line. Each page's `<!--meta -->` block carries a
 flag:

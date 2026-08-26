@@ -82,8 +82,14 @@ Verified per-page with a scripted scan of `documentElement.scrollWidth`
 ## Motion (all 8 pages)
 
 Every page carries the same baseline — a reading-progress rail and a
-parallaxed page head — plus at most one signature, so no effect repeats twice
-in a row. Contact and Docs stay on the baseline deliberately.
+parallaxed page head — plus exactly one signature, so no effect repeats twice
+in a row. Contact and Docs get reading aids rather than performances: the
+enquiry slip stays put while its second column scrolls, and a corner strip
+names the current documentation topic.
+
+The Home build sequence was shortened from `+=420%` to `+=260%` after review —
+roughly 2.5 screens instead of 4. The drawing still reads phase by phase and
+the page is 1.5 screens shorter.
 
 Verified:
 
@@ -112,6 +118,11 @@ Defects found and fixed while wiring the motion up:
   was inserted; it now runs 01–07.
 - The progress rail was labelled "Programme" on every page; it now only says
   that where a programme is actually being shown, and reads "Read" elsewhere.
+- **The Contact two-column layout was broken.** A stray `</div>` closed
+  `.contact-split` immediately after the form, so the direct-lines column had
+  been rendering full-width outside the grid since the redesign. Removing it
+  restored the intended two columns; the contact table's inherited 640 px
+  min-width is now scoped off, since that was written for the wide spec tables.
 
 ## Images
 

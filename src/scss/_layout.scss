@@ -235,3 +235,44 @@
     border-bottom: 1px solid var(--line);
   }
 }
+
+// Documentation · the topic you are level with. Injected by motion.js so the
+// page markup stays untouched; hidden until the first topic is reached.
+.docstrip {
+  position: fixed;
+  left: var(--shell-x);
+  bottom: 1rem;
+  z-index: 60;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: .3125rem .5rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ink) 84%, transparent);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+
+  &.is-on { opacity: 1; }
+
+  .n {
+    font-family: $font-mono;
+    font-size: .625rem;
+    letter-spacing: .14em;
+    color: var(--hi);
+    font-variant-numeric: tabular-nums;
+  }
+  .t {
+    font-family: $font-mono;
+    font-size: .625rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  @include down($bp-md) { display: none; }
+}
+
+// The contact column is narrower than the spec tables this min-width was
+// written for — a two-column list does not need to scroll.
+.contact-split .table-scroll .tbl { min-width: 0; }

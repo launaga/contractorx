@@ -85,6 +85,34 @@
     list.forEach(function (el) { io.observe(el); });
   })();
 
+  /* ---- 2b · Docs · a strip reporting the topic you are level with ------
+     A reference page is searched, not read start to finish. The strip is
+     injected rather than authored so the page markup stays untouched, and
+     it uses the same observer as the record above — no library. */
+  (function docStrip() {
+    var topics = document.querySelectorAll("[data-topic]");
+    if (topics.length < 2 || !("IntersectionObserver" in window)) return;
+
+    var strip = document.createElement("div");
+    strip.className = "docstrip";
+    strip.setAttribute("aria-hidden", "true");
+    strip.innerHTML = '<span class="n"></span><span class="t"></span>';
+    document.body.appendChild(strip);
+
+    var n = strip.firstChild, t = strip.lastChild;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        n.textContent = e.target.getAttribute("data-topic-n");
+        t.textContent = e.target.getAttribute("data-topic");
+        strip.classList.add("is-on");
+      });
+    }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
+
+    Array.prototype.forEach.call(topics, function (el) { io.observe(el); });
+  })();
+
   /* Below 900px, or with reduced motion, we stop here. The static markup
      is already the finished state, so there is nothing to undo. */
   if (!wide || reduce) return;
@@ -189,7 +217,7 @@
 
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: sec, start: "top top", end: "+=420%",
+        trigger: sec, start: "top top", end: "+=260%",
         pin: true, scrub: 0.6, anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: function (self) { paint(self.progress); }
@@ -201,7 +229,7 @@
         strokeDashoffset: 0, duration: 1, stagger: 0.06, ease: "none"
       }, i);
     });
-    if (note) tl.to(note, { opacity: 1, duration: 0.4 }, 4.4);
+    if (note) tl.to(note, { opacity: 1, duration: 0.4 }, 4.45);
 
     paint(0);
   }
