@@ -1,26 +1,26 @@
-// Wanderlane Travel — design tokens
+// Ridgeline Builders — design tokens
 // Edit these first; everything else follows.
 
 // Brand
-$brand-900: #06231f;
-$brand-700: #0d443c;
-$brand-500: #12695d;
-$brand-300: #57a496;
-$brand-100: #d9ece7;
+$brand-900: #14181c;
+$brand-700: #202a32;
+$brand-500: #3c4a56;
+$brand-300: #8e9ba7;
+$brand-100: #e5e9ec;
 
-$accent-500: #e2683a;
-$accent-300: #f2a381;
+$accent-500: #e0951c;
+$accent-300: #f5c46a;
 
 // Neutrals
-$ink:        #14201d;
-$ink-muted:  #5c6b67;
-$line:       #dfe6e3;
+$ink:        #1a1d20;
+$ink-muted:  #626a72;
+$line:       #e0e4e7;
 $surface:    #ffffff;
-$surface-alt:#f5f8f7;
+$surface-alt:#f4f6f7;
 
 // Typography
 $font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-$font-display: "Fraunces", Georgia, "Times New Roman", serif;
+$font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
 
 $fs-base: 1rem;
 $lh-base: 1.65;
@@ -37,12 +37,12 @@ $sp-8: 4.5rem;
 $sp-9: 7rem;
 
 // Shape
-$radius-sm: 6px;
-$radius:    14px;
-$radius-lg: 24px;
+$radius-sm: 3px;
+$radius:    6px;
+$radius-lg: 10px;
 
-$shadow-sm: 0 1px 2px rgba(6, 35, 31, .06);
-$shadow:    0 12px 32px rgba(6, 35, 31, .10);
+$shadow-sm: 0 1px 2px rgba(20, 24, 28, .07);
+$shadow:    0 12px 32px rgba(20, 24, 28, .12);
 
 // Layout
 $container: 1180px;

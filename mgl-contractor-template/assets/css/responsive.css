@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
- * Wanderlane Travel — responsive overrides
+ * Ridgeline Builders — responsive overrides
  * Build: sass assets/scss/_responsive.scss assets/css/responsive.css
  * Loaded after style.css. Mobile-first base lives in main.scss.
  */
@@ -36,7 +36,7 @@
     position: absolute;
     inset: 100% 0 auto;
     background: #fff;
-    border-bottom: 1px solid #dfe6e3;
+    border-bottom: 1px solid #e0e4e7;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -47,7 +47,7 @@
     padding: 1rem 1.5rem;
   }
   .site-nav li {
-    border-bottom: 1px solid #dfe6e3;
+    border-bottom: 1px solid #e0e4e7;
   }
   .site-nav li:last-child {
     border-bottom: 0;

@@ -29,8 +29,8 @@
 }
 
 .brand-mark {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, $accent-300, $brand-500 70%);
+  width: 26px; height: 26px; border-radius: 2px;
+  background: linear-gradient(135deg, $accent-500 0 50%, $brand-700 50% 100%);
 }
 
 .site-nav {
@@ -147,6 +147,18 @@
 .feature {
   padding: $sp-5; border-radius: $radius; background: $surface; border: 1px solid $line;
   h3 { margin: $sp-4 0 $sp-2; }
+}
+
+/* numbered process step */
+.step {
+  border-top: 3px solid $accent-500;
+  h3 { margin-top: $sp-3; }
+}
+
+.step-no {
+  display: block;
+  font-family: $font-display; font-size: 2rem; font-weight: 700;
+  color: $brand-100; line-height: 1;
 }
 
 .feature-icon {

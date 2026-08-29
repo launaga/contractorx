@@ -1,7 +1,7 @@
-# Wanderlane Travel — HTML Template
+# Ridgeline Builders — Contractor HTML Template
 
-A six-page static template for small-group travel and tour operators. Hand-written
-SCSS, one vanilla JS file, no build step required to preview.
+A six-page static template for general contractors, remodelers and construction
+firms. Hand-written SCSS, one vanilla JS file, no build step required to preview.
 
 ## Quick start
 
@@ -16,17 +16,17 @@ npx http-server . -p 4321 -c-1 -o
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home — hero, stats, featured tours, testimonials, CTA |
-| `about.html` | Story, timeline, team |
-| `services.html` | Tour listing with chip filtering |
-| `service-details.html` | Single tour: itinerary accordion, pricing, departures |
-| `portfolio.html` | Photo gallery |
-| `contact.html` | Enquiry form and office details |
+| `index.html` | Home — hero, stats, services, process, testimonials, CTA |
+| `about.html` | Story, timeline, team, licence & insurance credentials |
+| `services.html` | Service listing with chip filtering |
+| `service-details.html` | Single service: phased scope accordion, bid range, availability |
+| `portfolio.html` | Completed projects gallery |
+| `contact.html` | Estimate request form with budget and start-date fields |
 
 ## Structure
 
 ```
-mgl-travel-template/
+mgl-contractor-template/
 ├── index.html  about.html  services.html
 ├── service-details.html  portfolio.html  contact.html
 ├── assets/
@@ -55,7 +55,8 @@ component code.
 
 Edit `assets/scss/_variables.scss` first — colours, fonts, spacing scale, radii,
 container width and breakpoints all live there. Recompile and the whole template
-follows.
+follows. The default palette is charcoal and safety amber; changing `$brand-700`
+and `$accent-500` rebrands it.
 
 ## JavaScript
 
@@ -68,14 +69,19 @@ CSS-transition fallback otherwise. All motion respects
 **Forms are front-end only.** They validate and show a confirmation message but
 submit nothing — wire `initForms()` to your endpoint.
 
+## Before you publish
+
+The demo copy is fictional. Replace the licence number (CCB #4471820), insurance
+figures, warranty terms and testimonials with your own — those claims are
+regulated in most jurisdictions.
+
 ## Browser support
 
-Current Chrome, Edge, Firefox and Safari. Uses `IntersectionObserver`,
-`aspect-ratio` and CSS custom-property-free SCSS output.
+Current Chrome, Edge, Firefox and Safari. Uses `IntersectionObserver` and
+`aspect-ratio`.
 
 ## Credits
 
-Bootstrap 5.3.3 (MIT) · GSAP 3.12.5 · Inter and Fraunces (SIL OFL).
-Demo copy, prices and departures are fictional.
+Bootstrap 5.3.3 (MIT) · GSAP 3.12.5 · Inter and Archivo (SIL OFL).
 
 Full documentation: [`documentation/index.html`](documentation/index.html).

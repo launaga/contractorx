@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Documentation &mdash; Wanderlane Travel Template</title>
+  <title>Documentation &mdash; Ridgeline Contractor Template</title>
   <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
@@ -25,7 +25,7 @@
 <body>
   <header class="site-header is-stuck">
     <div class="container header-inner">
-      <a class="brand" href="../index.html"><span class="brand-mark"></span><span class="brand-text">Wanderlane</span></a>
+      <a class="brand" href="../index.html"><span class="brand-mark"></span><span class="brand-text">Ridgeline</span></a>
       <nav class="site-nav"><ul><li><a href="../index.html">Back to template</a></li></ul></nav>
     </div>
   </header>
@@ -47,8 +47,8 @@
 
       <div>
         <p class="eyebrow">Version 1.0.0</p>
-        <h1>Wanderlane Travel &mdash; Documentation</h1>
-        <p class="lead">A static HTML travel template: six pages, hand-written SCSS, one vanilla JS file, Bootstrap and GSAP vendored locally. No build step is required to preview it.</p>
+        <h1>Ridgeline Builders &mdash; Documentation</h1>
+        <p class="lead">A static HTML template for general contractors and construction firms: six pages, hand-written SCSS, one vanilla JS file, Bootstrap and GSAP vendored locally. No build step is required to preview it.</p>
 
         <section class="doc-section" id="start">
           <h2>Getting started</h2>
@@ -59,13 +59,13 @@
 
         <section class="doc-section" id="structure">
           <h2>File structure</h2>
-          <pre><code>mgl-travel-template/
+          <pre><code>mgl-contractor-template/
 ├── index.html              Home
-├── about.html              About / team
-├── services.html           Tour listing (filterable)
-├── service-details.html    Single tour, itinerary + pricing
-├── portfolio.html          Photo gallery
-├── contact.html            Enquiry form
+├── about.html              About / team / credentials
+├── services.html           Service listing (filterable)
+├── service-details.html    Single service, phases + pricing
+├── portfolio.html          Completed projects gallery
+├── contact.html            Estimate request form
 ├── assets/
 │   ├── css/                Compiled output — do not edit by hand
 │   ├── scss/               Source of truth for styles
@@ -93,16 +93,16 @@ sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</cod
           <table>
             <thead><tr><th>Variable</th><th>Default</th><th>Used for</th></tr></thead>
             <tbody>
-              <tr><td><code>$brand-700</code></td><td>#0d443c</td><td>Headings, links, dark surfaces</td></tr>
-              <tr><td><code>$accent-500</code></td><td>#e2683a</td><td>Primary buttons, underlines, markers</td></tr>
-              <tr><td><code>$font-display</code></td><td>Fraunces</td><td>All headings</td></tr>
+              <tr><td><code>$brand-700</code></td><td>#202a32</td><td>Headings, links, dark surfaces</td></tr>
+              <tr><td><code>$accent-500</code></td><td>#e0951c</td><td>Primary buttons, underlines, step rules</td></tr>
+              <tr><td><code>$font-display</code></td><td>Archivo</td><td>All headings</td></tr>
               <tr><td><code>$font-sans</code></td><td>Inter</td><td>Body copy and UI</td></tr>
               <tr><td><code>$container</code></td><td>1180px</td><td>Max content width</td></tr>
             </tbody>
           </table>
           <p>Breakpoints (<code>$bp-sm</code> … <code>$bp-xl</code>) live in the same file and drive <code>_responsive.scss</code>.</p>
           <h3>Images</h3>
-          <p>Card and gallery media render as a labelled gradient until real photography is added &mdash; see <code>assets/images/README.txt</code> for the expected sizes and naming.</p>
+          <p>Card and gallery media render as a labelled panel until real photography is added &mdash; see <code>assets/images/README.txt</code> for the expected sizes and naming.</p>
         </section>
 
         <section class="doc-section" id="components">
@@ -111,12 +111,13 @@ sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</cod
             <thead><tr><th>Class</th><th>What it is</th></tr></thead>
             <tbody>
               <tr><td><code>.hero</code></td><td>Page opener with eyebrow, h1, lead and actions</td></tr>
-              <tr><td><code>.card.tour-card</code></td><td>Tour card: media, meta, title, price</td></tr>
+              <tr><td><code>.card.service-card</code></td><td>Service card: media, category, timeline, bid range</td></tr>
               <tr><td><code>.feature</code></td><td>Icon + heading + copy block</td></tr>
-              <tr><td><code>.quote</code></td><td>Testimonial with citation</td></tr>
-              <tr><td><code>.accordion</code></td><td>Day-by-day itinerary, one panel open at a time</td></tr>
-              <tr><td><code>.price-box</code> / <code>.spec</code></td><td>Sidebar pricing and key/value spec list</td></tr>
-              <tr><td><code>.gallery</code> / <code>.shot</code></td><td>Masonry-ish photo grid; add <code>.shot-wide</code> to span two columns</td></tr>
+              <tr><td><code>.quote</code></td><td>Client testimonial with citation</td></tr>
+              <tr><td><code>.feature.step</code></td><td>Numbered process step (<code>.step-no</code> holds the numeral)</td></tr>
+              <tr><td><code>.accordion</code></td><td>Phase-by-phase scope, one panel open at a time</td></tr>
+              <tr><td><code>.price-box</code> / <code>.spec</code></td><td>Sidebar bid range, draw schedule and key/value spec list</td></tr>
+              <tr><td><code>.gallery</code> / <code>.shot</code></td><td>Project photo grid; add <code>.shot-wide</code> to span two columns</td></tr>
               <tr><td><code>.cta-band</code></td><td>Full-width dark call to action</td></tr>
             </tbody>
           </table>
@@ -130,9 +131,9 @@ sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</cod
             <tbody>
               <tr><td><code>data-header</code></td><td>Adds <code>.is-stuck</code> once the page scrolls</td></tr>
               <tr><td><code>data-reveal</code> / <code>data-reveal-group</code></td><td>Fade-and-rise on scroll, staggered within a group (GSAP when present)</td></tr>
-              <tr><td><code>data-count="34"</code></td><td>Counts up to the value when scrolled into view</td></tr>
-              <tr><td><code>data-filters</code> + <code>data-grid</code> + <code>data-tag</code></td><td>Chip filtering of the tour grid</td></tr>
-              <tr><td><code>data-accordion</code></td><td>Itinerary accordion</td></tr>
+              <tr><td><code>data-count="34"</code></td><td>Counts up to the value when scrolled into view (stats band)</td></tr>
+              <tr><td><code>data-filters</code> + <code>data-grid</code> + <code>data-tag</code></td><td>Chip filtering of the service grid</td></tr>
+              <tr><td><code>data-accordion</code></td><td>Scope-of-work accordion</td></tr>
               <tr><td><code>data-contact</code> / <code>data-newsletter</code></td><td>Client-side validation and status message</td></tr>
             </tbody>
           </table>
@@ -145,9 +146,9 @@ sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</cod
           <ul>
             <li>Bootstrap 5.3.3 &mdash; MIT</li>
             <li>GSAP 3.12.5 &mdash; standard "no charge" licence for this use</li>
-            <li>Inter and Fraunces &mdash; SIL Open Font License</li>
+            <li>Inter and Archivo &mdash; SIL Open Font License</li>
           </ul>
-          <p>All copy, place names and prices in the demo are fictional placeholders.</p>
+          <p>All copy, company details, licence numbers, testimonials and prices in the demo are fictional placeholders. Replace the CCB number, insurance figures and warranty terms with your own before publishing &mdash; those claims are regulated in most jurisdictions.</p>
         </section>
       </div>
     </div>
@@ -155,7 +156,7 @@ sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</cod
 
   <footer class="site-footer">
     <div class="container footer-bottom">
-      <p>&copy; 2026 Wanderlane Travel Template</p>
+      <p>&copy; 2026 Ridgeline Contractor Template</p>
       <p><a href="../index.html">Back to the template</a></p>
     </div>
   </footer>

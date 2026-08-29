@@ -1,5 +1,5 @@
 /*!
- * Wanderlane Travel — main stylesheet
+ * Ridgeline Builders — main stylesheet
  * Build: sass assets/scss/main.scss assets/css/style.css
  */
 
@@ -26,7 +26,8 @@ h1, h2, h3 {
   line-height: 1.15;
   color: $brand-900;
   margin: 0 0 $sp-4;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -.01em;
 }
 
 h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }

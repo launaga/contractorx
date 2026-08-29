@@ -1,5 +1,5 @@
 /*!
- * Wanderlane Travel — main.js
+ * Ridgeline Builders — main.js
  * Vanilla ES2017. No build step. Every block is independent and no-ops
  * when its markup is absent from the page.
  */
@@ -117,7 +117,7 @@
     Array.prototype.forEach.call(counters, function (el) { io.observe(el); });
   }
 
-  /* ---------- tour filters ---------- */
+  /* ---------- service filters ---------- */
   function initFilters() {
     var bar = document.querySelector('[data-filters]');
     var grid = document.querySelector('[data-grid]');
