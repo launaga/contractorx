@@ -1,0 +1,25 @@
+Ridgeline Builders — Changelog
+=============================
+Format: Keep a Changelog. Versioning: SemVer.
+
+
+v1.0.0 — 2026-08-29
+-------------------
+Initial release.
+
+Added
+  - Six pages: index, about, services, service-details, portfolio, contact.
+  - SCSS source split into _variables, _components and _responsive,
+    compiling to assets/css/style.css and assets/css/responsive.css.
+  - assets/js/main.js: sticky header, mobile nav, scroll reveal with GSAP
+    fallback, animated counters, service filtering, scope accordion and
+    client-side form validation.
+  - Numbered process-step component (.feature.step / .step-no).
+  - Vendored Bootstrap 5.3.3 and GSAP 3.12.5 (with ScrollTrigger).
+  - documentation/index.html covering structure, build, tokens and JS hooks.
+  - Placeholder media system: labelled panels until real photography lands.
+
+Notes
+  - Forms are front-end only; wire initForms() to your own endpoint.
+  - Demo copy, licence number, insurance figures, warranty terms,
+    testimonials and prices are fictional. Replace them before publishing.

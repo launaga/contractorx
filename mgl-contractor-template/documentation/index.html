@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation &mdash; Ridgeline Contractor Template</title>
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <style>
+    .doc-layout { display: grid; grid-template-columns: 240px 1fr; gap: 3rem; align-items: start; }
+    .doc-nav { position: sticky; top: 2rem; }
+    .doc-nav ul { list-style: none; margin: 0 0 1.5rem; padding: 0; }
+    .doc-nav li { margin-bottom: .4rem; }
+    .doc-nav a { text-decoration: none; }
+    pre { background: #06231f; color: #d9ece7; padding: 1rem 1.25rem; border-radius: 10px; overflow-x: auto; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+    :not(pre) > code { background: #f5f8f7; padding: .1em .4em; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid #dfe6e3; vertical-align: top; }
+    .doc-section { padding-top: 2.5rem; }
+    @media (max-width: 992px) { .doc-layout { grid-template-columns: 1fr; } .doc-nav { position: static; } }
+  </style>
+</head>
+<body>
+  <header class="site-header is-stuck">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark"></span><span class="brand-text">Ridgeline</span></a>
+      <nav class="site-nav"><ul><li><a href="../index.html">Back to template</a></li></ul></nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container doc-layout">
+      <nav class="doc-nav" aria-label="Documentation">
+        <p class="eyebrow">Contents</p>
+        <ul>
+          <li><a href="#start">Getting started</a></li>
+          <li><a href="#structure">File structure</a></li>
+          <li><a href="#build">Building the CSS</a></li>
+          <li><a href="#customise">Customising</a></li>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#js">JavaScript hooks</a></li>
+          <li><a href="#credits">Credits &amp; support</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <p class="eyebrow">Version 1.0.0</p>
+        <h1>Ridgeline Builders &mdash; Documentation</h1>
+        <p class="lead">A static HTML template for general contractors and construction firms: six pages, hand-written SCSS, one vanilla JS file, Bootstrap and GSAP vendored locally. No build step is required to preview it.</p>
+
+        <section class="doc-section" id="start">
+          <h2>Getting started</h2>
+          <p>Unzip the package and open <code>index.html</code> in a browser. Everything is relative-linked, so it works straight off the filesystem or from any static host.</p>
+          <p>For local development with live reload, serve the folder:</p>
+          <pre><code>npx http-server . -p 4321 -c-1 -o</code></pre>
+        </section>
+
+        <section class="doc-section" id="structure">
+          <h2>File structure</h2>
+          <pre><code>mgl-contractor-template/
+├── index.html              Home
+├── about.html              About / team / credentials
+├── services.html           Service listing (filterable)
+├── service-details.html    Single service, phases + pricing
+├── portfolio.html          Completed projects gallery
+├── contact.html            Estimate request form
+├── assets/
+│   ├── css/                Compiled output — do not edit by hand
+│   ├── scss/               Source of truth for styles
+│   ├── js/main.js          All behaviour
+│   ├── images/  icons/  fonts/
+├── vendor/
+│   ├── bootstrap/          5.3.3 (grid + utilities + bundle JS)
+│   └── gsap/               3.12.5 (gsap + ScrollTrigger)
+├── documentation/index.html
+├── changelog.txt
+└── README.md</code></pre>
+        </section>
+
+        <section class="doc-section" id="build">
+          <h2>Building the CSS</h2>
+          <p>Two stylesheets are produced from the SCSS sources and loaded in order:</p>
+          <pre><code>sass assets/scss/main.scss        assets/css/style.css      --no-source-map
+sass assets/scss/_responsive.scss assets/css/responsive.css --no-source-map</code></pre>
+          <p>Add <code>--watch</code> while working, and <code>--style=compressed</code> for production. <code>main.scss</code> imports <code>_variables</code> and <code>_components</code>; <code>_responsive.scss</code> imports <code>_variables</code> only and holds every media query, so breakpoint changes never touch component code.</p>
+        </section>
+
+        <section class="doc-section" id="customise">
+          <h2>Customising</h2>
+          <p>Start in <code>assets/scss/_variables.scss</code>. Changing these five values rebrands the template:</p>
+          <table>
+            <thead><tr><th>Variable</th><th>Default</th><th>Used for</th></tr></thead>
+            <tbody>
+              <tr><td><code>$brand-700</code></td><td>#202a32</td><td>Headings, links, dark surfaces</td></tr>
+              <tr><td><code>$accent-500</code></td><td>#e0951c</td><td>Primary buttons, underlines, step rules</td></tr>
+              <tr><td><code>$font-display</code></td><td>Archivo</td><td>All headings</td></tr>
+              <tr><td><code>$font-sans</code></td><td>Inter</td><td>Body copy and UI</td></tr>
+              <tr><td><code>$container</code></td><td>1180px</td><td>Max content width</td></tr>
+            </tbody>
+          </table>
+          <p>Breakpoints (<code>$bp-sm</code> … <code>$bp-xl</code>) live in the same file and drive <code>_responsive.scss</code>.</p>
+          <h3>Images</h3>
+          <p>Card and gallery media render as a labelled panel until real photography is added &mdash; see <code>assets/images/README.txt</code> for the expected sizes and naming.</p>
+        </section>
+
+        <section class="doc-section" id="components">
+          <h2>Components</h2>
+          <table>
+            <thead><tr><th>Class</th><th>What it is</th></tr></thead>
+            <tbody>
+              <tr><td><code>.hero</code></td><td>Page opener with eyebrow, h1, lead and actions</td></tr>
+              <tr><td><code>.card.service-card</code></td><td>Service card: media, category, timeline, bid range</td></tr>
+              <tr><td><code>.feature</code></td><td>Icon + heading + copy block</td></tr>
+              <tr><td><code>.quote</code></td><td>Client testimonial with citation</td></tr>
+              <tr><td><code>.feature.step</code></td><td>Numbered process step (<code>.step-no</code> holds the numeral)</td></tr>
+              <tr><td><code>.accordion</code></td><td>Phase-by-phase scope, one panel open at a time</td></tr>
+              <tr><td><code>.price-box</code> / <code>.spec</code></td><td>Sidebar bid range, draw schedule and key/value spec list</td></tr>
+              <tr><td><code>.gallery</code> / <code>.shot</code></td><td>Project photo grid; add <code>.shot-wide</code> to span two columns</td></tr>
+              <tr><td><code>.cta-band</code></td><td>Full-width dark call to action</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="doc-section" id="js">
+          <h2>JavaScript hooks</h2>
+          <p><code>assets/js/main.js</code> is driven entirely by data attributes. Each feature no-ops if its markup is absent, so you can delete sections freely.</p>
+          <table>
+            <thead><tr><th>Attribute</th><th>Behaviour</th></tr></thead>
+            <tbody>
+              <tr><td><code>data-header</code></td><td>Adds <code>.is-stuck</code> once the page scrolls</td></tr>
+              <tr><td><code>data-reveal</code> / <code>data-reveal-group</code></td><td>Fade-and-rise on scroll, staggered within a group (GSAP when present)</td></tr>
+              <tr><td><code>data-count="34"</code></td><td>Counts up to the value when scrolled into view (stats band)</td></tr>
+              <tr><td><code>data-filters</code> + <code>data-grid</code> + <code>data-tag</code></td><td>Chip filtering of the service grid</td></tr>
+              <tr><td><code>data-accordion</code></td><td>Scope-of-work accordion</td></tr>
+              <tr><td><code>data-contact</code> / <code>data-newsletter</code></td><td>Client-side validation and status message</td></tr>
+            </tbody>
+          </table>
+          <p><strong>Forms are front-end only.</strong> They validate and show a confirmation but send nothing. Point the submit handler at your endpoint in <code>initForms()</code>.</p>
+          <p>Every animation is skipped when the visitor has <code>prefers-reduced-motion: reduce</code> set.</p>
+        </section>
+
+        <section class="doc-section" id="credits">
+          <h2>Credits &amp; support</h2>
+          <ul>
+            <li>Bootstrap 5.3.3 &mdash; MIT</li>
+            <li>GSAP 3.12.5 &mdash; standard "no charge" licence for this use</li>
+            <li>Inter and Archivo &mdash; SIL Open Font License</li>
+          </ul>
+          <p>All copy, company details, licence numbers, testimonials and prices in the demo are fictional placeholders. Replace the CCB number, insurance figures and warranty terms with your own before publishing &mdash; those claims are regulated in most jurisdictions.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ridgeline Contractor Template</p>
+      <p><a href="../index.html">Back to the template</a></p>
+    </div>
+  </footer>
+</body>
+</html>

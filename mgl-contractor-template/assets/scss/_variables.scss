@@ -1,0 +1,59 @@
+// Ridgeline Builders — design tokens
+// Edit these first; everything else follows.
+
+// Brand
+$brand-900: #14181c;
+$brand-700: #202a32;
+$brand-500: #3c4a56;
+$brand-300: #8e9ba7;
+$brand-100: #e5e9ec;
+
+$accent-500: #e0951c;
+$accent-300: #f5c46a;
+
+// Neutrals
+$ink:        #1a1d20;
+$ink-muted:  #626a72;
+$line:       #e0e4e7;
+$surface:    #ffffff;
+$surface-alt:#f4f6f7;
+
+// Typography
+$font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+$fs-base: 1rem;
+$lh-base: 1.65;
+
+// Space scale
+$sp-1: .25rem;
+$sp-2: .5rem;
+$sp-3: .75rem;
+$sp-4: 1rem;
+$sp-5: 1.5rem;
+$sp-6: 2rem;
+$sp-7: 3rem;
+$sp-8: 4.5rem;
+$sp-9: 7rem;
+
+// Shape
+$radius-sm: 3px;
+$radius:    6px;
+$radius-lg: 10px;
+
+$shadow-sm: 0 1px 2px rgba(20, 24, 28, .07);
+$shadow:    0 12px 32px rgba(20, 24, 28, .12);
+
+// Layout
+$container: 1180px;
+$gutter: $sp-5;
+
+// Breakpoints
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+
+// Motion
+$ease: cubic-bezier(.22, .61, .36, 1);
+$dur: .35s;

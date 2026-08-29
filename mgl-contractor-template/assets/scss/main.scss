@@ -1,0 +1,57 @@
+/*!
+ * Ridgeline Builders — main stylesheet
+ * Build: sass assets/scss/main.scss assets/css/style.css
+ */
+
+@import "variables";
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: $font-sans;
+  font-size: $fs-base;
+  line-height: $lh-base;
+  color: $ink;
+  background: $surface;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  font-family: $font-display;
+  line-height: 1.15;
+  color: $brand-900;
+  margin: 0 0 $sp-4;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 $sp-4; }
+.lead { font-size: 1.12rem; color: $ink-muted; }
+
+a { color: $brand-700; }
+
+:focus-visible { outline: 2px solid $accent-500; outline-offset: 2px; }
+
+.container {
+  width: 100%;
+  max-width: $container;
+  margin-inline: auto;
+  padding-inline: $gutter;
+}
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+@import "components";

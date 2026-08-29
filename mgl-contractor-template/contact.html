@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact &mdash; Ridgeline Builders</title>
+  <meta name="description" content="Request an estimate from Ridgeline Builders.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">Ridgeline</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Projects</a></li>
+          <li><a href="contact.html" class="is-active" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary header-cta" href="contact.html">Request an Estimate</a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" data-reveal-group>
+      <div class="container hero-inner">
+        <p class="eyebrow" data-reveal>Contact</p>
+        <h1 data-reveal>Tell us about the project</h1>
+        <p class="lead" data-reveal>We reply within one business day, usually with a few questions and a walkthrough date.</p>
+        <div class="hero-actions" data-reveal><a class="btn btn-ghost" href="services.html">See services first</a></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container contact-layout">
+        <form class="contact-form" data-contact novalidate data-reveal>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel">
+          </div>
+          <div class="field">
+            <label for="service">Type of work</label>
+            <select id="service" name="service">
+              <option>Not sure yet</option>
+              <option>Kitchen Remodels</option>
+              <option>Bathroom Renovation</option>
+              <option>Room Additions</option>
+              <option>Whole-Home Renovation</option>
+              <option>Decks & Outdoor Living</option>
+              <option>Roofing & Siding</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Rough budget</label>
+            <select id="budget" name="budget">
+              <option>Under $25k</option>
+              <option>$25k &ndash; $75k</option>
+              <option>$75k &ndash; $200k</option>
+              <option>$200k+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="start">Ideal start</label>
+            <input id="start" name="start" type="month">
+          </div>
+          <div class="field">
+            <label for="message">Describe the project</label>
+            <textarea id="message" name="message" rows="5"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Request estimate</button>
+          <p class="form-msg" data-msg role="status"></p>
+        </form>
+        <aside class="contact-aside" data-reveal>
+          <h2>Direct</h2>
+          <ul class="spec">
+            <li><span>Email</span><strong><a href="mailto:office@ridgelinebuilders.example">office@ridgelinebuilders.example</a></strong></li>
+            <li><span>Phone</span><strong><a href="tel:+15035550118">(503) 555-0118</a></strong></li>
+            <li><span>Hours</span><strong>Mon&ndash;Fri, 7:00&ndash;17:00</strong></li>
+            <li><span>Licence</span><strong>CCB #4471820</strong></li>
+          </ul>
+          <h2>Office &amp; shop</h2>
+          <p>2140 SE Foundry Street<br>Portland, OR 97214</p>
+          <div class="map-placeholder" data-img="Portland office & shop"></div>
+        </aside>
+      </div>
+    </section>  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">Ridgeline</span></a>
+        <p class="footer-note">Licensed general contractor. Residential builds, additions and full renovations since 2004.</p>
+        <p class="footer-note">License #GC-4471820 &middot; Fully insured</p>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="service-details.html">Service Details</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:office@ridgelinebuilders.example">office@ridgelinebuilders.example</a></li>
+          <li><a href="tel:+15035550118">(503) 555-0118</a></li>
+          <li>2140 SE Foundry Street, Portland, OR</li>
+          <li>Mon&ndash;Fri, 7:00&ndash;17:00</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Project updates</h3>
+        <form class="newsletter" data-newsletter novalidate>
+          <label class="visually-hidden" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" name="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+          <p class="form-msg" data-msg role="status"></p>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Ridgeline Builders. All rights reserved.</p>
+      <p><a href="documentation/index.html">Documentation</a> &middot; <a href="changelog.txt">Changelog</a></p>
+    </div>
+  </footer>
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
