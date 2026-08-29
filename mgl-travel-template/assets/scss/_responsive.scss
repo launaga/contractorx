@@ -1,0 +1,73 @@
+/*!
+ * Wanderlane Travel — responsive overrides
+ * Build: sass assets/scss/_responsive.scss assets/css/responsive.css
+ * Loaded after style.css. Mobile-first base lives in main.scss.
+ */
+
+@import "variables";
+
+/* ---------- large desktop ---------- */
+@media (max-width: $bp-xl) {
+  .section { padding: $sp-8 0; }
+}
+
+/* ---------- tablet landscape ---------- */
+@media (max-width: $bp-lg) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .detail-layout,
+  .contact-layout,
+  .split { grid-template-columns: 1fr; }
+  .detail-aside { position: static; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  .header-cta { display: none; }
+  .nav-toggle { display: flex; }
+
+  .site-nav {
+    position: absolute; inset: 100% 0 auto;
+    background: #fff; border-bottom: 1px solid $line;
+    max-height: 0; overflow: hidden;
+    transition: max-height $dur $ease;
+
+    ul { flex-direction: column; gap: 0; padding: $sp-4 $gutter; }
+    li { border-bottom: 1px solid $line; }
+    li:last-child { border-bottom: 0; }
+    a { display: block; padding: $sp-4 0; }
+
+    &.is-open { max-height: 60vh; }
+  }
+}
+
+/* ---------- tablet portrait ---------- */
+@media (max-width: $bp-md) {
+  .grid-3,
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .shot-wide { grid-column: span 2; }
+  .stats { grid-template-columns: repeat(2, 1fr); row-gap: $sp-6; }
+  .cta-inner { flex-direction: column; align-items: flex-start; }
+  .hero { padding: $sp-8 0 $sp-7; }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: $bp-sm) {
+  .section { padding: $sp-7 0; }
+  .grid-3,
+  .grid-4,
+  .gallery,
+  .footer-grid { grid-template-columns: 1fr; }
+  .shot-wide { grid-column: span 1; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stats strong { font-size: 2rem; }
+  .footer-bottom { flex-direction: column; gap: $sp-2; }
+  .newsletter { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .hero-actions .btn { width: auto; flex: 1 1 auto; }
+  .filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: $sp-2; }
+}
+
+/* ---------- print ---------- */
+@media print {
+  .site-header, .site-footer, .cta-band, .hero-actions, .nav-toggle { display: none !important; }
+  body { color: #000; }
+  .card, .price-box { break-inside: avoid; border-color: #999; }
+}

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tours &mdash; Wanderlane Travel</title>
+  <meta name="description" content="Every Wanderlane departure, by region and season.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">Wanderlane</span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html" class="is-active" aria-current="page">Tours</a></li>
+          <li><a href="portfolio.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary header-cta" href="contact.html">Plan a Trip</a>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" data-reveal-group>
+      <div class="container hero-inner">
+        <p class="eyebrow" data-reveal>Tours</p>
+        <h1 data-reveal>Every trip we run</h1>
+        <p class="lead" data-reveal>Filter by what you feel like doing. Each one caps at twelve travellers.</p>
+        <div class="hero-actions" data-reveal><a class="btn btn-primary" href="contact.html">Ask about a date</a></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="filters" data-filters role="group" aria-label="Filter tours">
+          <button class="chip is-active" data-filter="all" type="button">All</button>
+          <button class="chip" data-filter="walking" type="button">Walking</button>
+          <button class="chip" data-filter="snow" type="button">Snow</button>
+          <button class="chip" data-filter="slow" type="button">Slow travel</button>
+        </div>
+        <div class="grid grid-3" data-reveal-group data-grid>
+
+          <article class="card tour-card" data-tag="walking" data-reveal>
+            <div class="card-media" data-img="Azores Ridge Walk"></div>
+            <div class="card-body">
+              <p class="meta"><span>Portugal</span><span>7 days</span></p>
+              <h3><a href="service-details.html">Azores Ridge Walk</a></h3>
+              <p>Crater lakes, black-sand coves and a hot-spring dinner on the last night.</p>
+              <p class="price">from $1,890</p>
+            </div>
+          </article>
+          <article class="card tour-card" data-tag="snow" data-reveal>
+            <div class="card-media" data-img="Hokkaido Powder Line"></div>
+            <div class="card-body">
+              <p class="meta"><span>Japan</span><span>9 days</span></p>
+              <h3><a href="service-details.html">Hokkaido Powder Line</a></h3>
+              <p>Tree runs each morning, onsen each evening, and a guide who reads the snow.</p>
+              <p class="price">from $3,250</p>
+            </div>
+          </article>
+          <article class="card tour-card" data-tag="slow" data-reveal>
+            <div class="card-media" data-img="Atacama Night Skies"></div>
+            <div class="card-body">
+              <p class="meta"><span>Chile</span><span>6 days</span></p>
+              <h3><a href="service-details.html">Atacama Night Skies</a></h3>
+              <p>Salt flats at dawn, the clearest sky on the planet after dark.</p>
+              <p class="price">from $2,410</p>
+            </div>
+          </article>
+          <article class="card tour-card" data-tag="slow" data-reveal>
+            <div class="card-media" data-img="Faroe Slow Roads"></div>
+            <div class="card-body">
+              <p class="meta"><span>Faroe Islands</span><span>5 days</span></p>
+              <h3><a href="service-details.html">Faroe Slow Roads</a></h3>
+              <p>Ferries, grass roofs and eleven villages that never make the guidebooks.</p>
+              <p class="price">from $1,640</p>
+            </div>
+          </article>
+          <article class="card tour-card" data-tag="slow" data-reveal>
+            <div class="card-media" data-img="Kerala Backwater Drift"></div>
+            <div class="card-body">
+              <p class="meta"><span>India</span><span>8 days</span></p>
+              <h3><a href="service-details.html">Kerala Backwater Drift</a></h3>
+              <p>A converted rice barge, four cooks, and no fixed schedule after lunch.</p>
+              <p class="price">from $1,470</p>
+            </div>
+          </article>
+          <article class="card tour-card" data-tag="walking" data-reveal>
+            <div class="card-media" data-img="Dolomiti Rifugio Route"></div>
+            <div class="card-body">
+              <p class="meta"><span>Italy</span><span>6 days</span></p>
+              <h3><a href="service-details.html">Dolomiti Rifugio Route</a></h3>
+              <p>Hut to hut across the Alta Via, with your bags moved ahead each day.</p>
+              <p class="price">from $2,090</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <header class="section-head" data-reveal-group><p class="eyebrow" data-reveal>Included</p><h2 data-reveal>What the price covers</h2></header>
+        <div class="grid grid-3" data-reveal-group>
+          <div class="feature" data-reveal><span class="feature-icon" data-icon="bed"></span><h3>Every night</h3><p>Guesthouses, huts and the occasional very good hotel. Single rooms on request.</p></div>
+          <div class="feature" data-reveal><span class="feature-icon" data-icon="route"></span><h3>All transfers</h3><p>Airport to airport, including the ferries and the minibus nobody else books.</p></div>
+          <div class="feature" data-reveal><span class="feature-icon" data-icon="shield"></span><h3>Permits &amp; guiding</h3><p>National park fees, local guides and the paperwork done before you land.</p></div>
+        </div>
+      </div>
+    </section>  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">Wanderlane</span></a>
+        <p class="footer-note">Small-group journeys, planned by people who have actually walked the route.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Tours</a></li>
+          <li><a href="portfolio.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="service-details.html">Tour Details</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@wanderlane.example">hello@wanderlane.example</a></li>
+          <li><a href="tel:+18005550142">+1 (800) 555-0142</a></li>
+          <li>128 Harbour Road, Lisbon</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Newsletter</h3>
+        <form class="newsletter" data-newsletter novalidate>
+          <label class="visually-hidden" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" name="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Join</button>
+          <p class="form-msg" data-msg role="status"></p>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Wanderlane Travel. All rights reserved.</p>
+      <p><a href="documentation/index.html">Documentation</a> &middot; <a href="changelog.txt">Changelog</a></p>
+    </div>
+  </footer>
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

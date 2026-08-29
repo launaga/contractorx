@@ -1,0 +1,137 @@
+@charset "UTF-8";
+/*!
+ * Wanderlane Travel — responsive overrides
+ * Build: sass assets/scss/_responsive.scss assets/css/responsive.css
+ * Loaded after style.css. Mobile-first base lives in main.scss.
+ */
+/* ---------- large desktop ---------- */
+@media (max-width: 1200px) {
+  .section {
+    padding: 4.5rem 0;
+  }
+}
+/* ---------- tablet landscape ---------- */
+@media (max-width: 992px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .detail-layout,
+  .contact-layout,
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .detail-aside {
+    position: static;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .header-cta {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .site-nav {
+    position: absolute;
+    inset: 100% 0 auto;
+    background: #fff;
+    border-bottom: 1px solid #dfe6e3;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .site-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.5rem;
+  }
+  .site-nav li {
+    border-bottom: 1px solid #dfe6e3;
+  }
+  .site-nav li:last-child {
+    border-bottom: 0;
+  }
+  .site-nav a {
+    display: block;
+    padding: 1rem 0;
+  }
+  .site-nav.is-open {
+    max-height: 60vh;
+  }
+}
+/* ---------- tablet portrait ---------- */
+@media (max-width: 768px) {
+  .grid-3,
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .shot-wide {
+    grid-column: span 2;
+  }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+  }
+  .cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero {
+    padding: 4.5rem 0 3rem;
+  }
+}
+/* ---------- phone ---------- */
+@media (max-width: 576px) {
+  .section {
+    padding: 3rem 0;
+  }
+  .grid-3,
+  .grid-4,
+  .gallery,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .shot-wide {
+    grid-column: span 1;
+  }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stats strong {
+    font-size: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .newsletter {
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    width: 100%;
+  }
+  .hero-actions .btn {
+    width: auto;
+    flex: 1 1 auto;
+  }
+  .filters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+}
+/* ---------- print ---------- */
+@media print {
+  .site-header, .site-footer, .cta-band, .hero-actions, .nav-toggle {
+    display: none !important;
+  }
+  body {
+    color: #000;
+  }
+  .card, .price-box {
+    break-inside: avoid;
+    border-color: #999;
+  }
+}
